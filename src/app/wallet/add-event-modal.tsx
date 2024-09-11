@@ -29,9 +29,9 @@ export function AddEventModal() {
       setLoading(true);
       const result = await addEventAction(formData);
 
-      toast("Event has been created.");
+      toast("Event added successfully. You can close the form now.");
     } catch {
-      toast("Failed to create event.");
+      toast("Failed to add the event.");
     } finally {
       setLoading(false);
     }
