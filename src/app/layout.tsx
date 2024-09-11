@@ -11,7 +11,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { dark } from "@clerk/themes";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -52,19 +52,41 @@ export default function RootLayout({
         >
           <nav className="flex items-center justify-between">
             <Link href="/">
-              <h1 className="text-3xl font-extrabold">aura wallet.</h1>
+              <h1 className="text-2xl font-extrabold sm:text-3xl">
+                aura wallet.
+              </h1>
             </Link>
 
-            <SignedOut>
-              <SignInButton>
-                <Button size="sm">
-                  <LogIn className="mr-2 h-4 w-4" /> sign in
-                </Button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <div className="flex items-center gap-3">
+              <Link
+                className={cn(buttonVariants({ variant: "link" }), "px-0")}
+                href="/leaderboard"
+              >
+                top5
+              </Link>
+              <SignedOut>
+                <SignInButton>
+                  <Button size="sm">
+                    <LogIn className="mr-2 h-4 w-4" /> sign in
+                  </Button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <Link
+                  className={cn(buttonVariants({ variant: "link" }), "px-0")}
+                  href="/wallet"
+                >
+                  wallet
+                </Link>
+                <Link
+                  className={cn(buttonVariants({ variant: "link" }), "px-0")}
+                  href="/profile"
+                >
+                  profile
+                </Link>
+                <UserButton />
+              </SignedIn>
+            </div>
           </nav>
 
           <main className="flex-grow">{children}</main>
