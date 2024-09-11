@@ -10,6 +10,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus } from "lucide-react";
+import { addEventAction } from "./actions";
 
 export function AddEventModal() {
   return (
@@ -28,19 +29,13 @@ export function AddEventModal() {
             gain/loss for you.
           </DialogDescription>
         </DialogHeader>
-        <form
-          action={async (formData: FormData) => {
-            "use server";
-            // generate gpt-4o completion
-            console.log("got this content", formData.get("content"));
-          }}
-        >
+        <form action={addEventAction}>
           <div className="grid w-full gap-1.5">
             <Label htmlFor="content">
               Describe an event that happened to you.
             </Label>
             <Textarea
-              placeholder="Type your message here."
+              placeholder="Type your event details here."
               id="content"
               name="content"
             />
