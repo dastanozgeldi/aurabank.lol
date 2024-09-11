@@ -13,6 +13,7 @@ import Link from "next/link";
 import { LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { dark } from "@clerk/themes";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -65,7 +66,9 @@ export default function RootLayout({
               <UserButton />
             </SignedIn>
           </nav>
+
           <main className="flex-grow">{children}</main>
+
           <footer className="mt-auto text-center">
             brought to you by{" "}
             <a
@@ -75,6 +78,8 @@ export default function RootLayout({
               @dastanozgeldi
             </a>
           </footer>
+
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

@@ -33,17 +33,17 @@ export async function addEventAction(formData: FormData) {
       `Here is the event given by the user: ${content}`,
   });
 
-  try {
-    const { assessment } = object;
-    await db.insert(events).values({
+  const { assessment } = object;
+  const [result] = await db
+    .insert(events)
+    .values({
       userId,
       content,
       title: assessment.title,
       aura: assessment.aura,
       explanation: assessment.explanation,
-    });
-    console.log("Event added successfully");
-  } catch {
-    throw new Error("Failed to add event");
-  }
+    })
+    .returning();
+
+  return result;
 }
