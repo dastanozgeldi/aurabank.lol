@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Plus } from "lucide-react";
 
 export function AddEventModal() {
@@ -28,14 +28,25 @@ export function AddEventModal() {
             gain/loss for you.
           </DialogDescription>
         </DialogHeader>
-        <div>chat via vercel ai sdk will be here</div>
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+        <form
+          action={async (formData: FormData) => {
+            "use server";
+            // generate gpt-4o completion
+            console.log("got this content", formData.get("content"));
+          }}
+        >
+          <div className="grid w-full gap-1.5">
+            <Label htmlFor="content">
+              Describe an event that happened to you.
+            </Label>
+            <Textarea
+              placeholder="Type your message here."
+              id="content"
+              name="content"
+            />
+          </div>
+          <Button className="mt-3">Submit</Button>
+        </form>
       </DialogContent>
     </Dialog>
   );
