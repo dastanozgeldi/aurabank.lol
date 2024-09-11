@@ -10,7 +10,7 @@ import {
 export const profiles = pgTable("profiles_table", {
   userId: text("user_id").primaryKey(),
   totalAura: integer("total_aura").default(0),
-  username: varchar("username", { length: 20 }),
+  username: varchar("username", { length: 20 }).unique(),
 });
 
 export const events = pgTable("events_table", {
