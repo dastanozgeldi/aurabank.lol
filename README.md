@@ -3,8 +3,9 @@
 - [x] setup home page
 - [x] wallet page design
 - [x] setup clerk
-- [ ] setup drizzle and postgres
-- [ ] create events table
+- [ ] wallet page: redirect unauthorized users to sign in page 
+- [x] setup drizzle and postgres
+- [x] create events table
 - [ ] vercel ai sdk
 - [ ] structured outputs https://sdk.vercel.ai/docs/guides/llama-3_1#generating-structured-data
 - [ ] generate event title, aura gain/loss and objective explanation
