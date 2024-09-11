@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,9 +28,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(
+          geistSans.variable,
+          geistMono.variable,
+          "mx-auto flex min-h-screen max-w-xl flex-col p-6 antialiased",
+        )}
       >
-        {children}
+        <Link href="/">
+          <h1 className="text-3xl font-extrabold">aura wallet.</h1>
+        </Link>
+        <main className="flex-grow">{children}</main>
+        <footer className="mt-auto text-center">
+          brought to you by{" "}
+          <a
+            href="https://dastanozgeldi.me"
+            className="font-semibold underline"
+          >
+            @dastanozgeldi
+          </a>
+        </footer>
       </body>
     </html>
   );
