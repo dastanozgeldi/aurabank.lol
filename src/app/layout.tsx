@@ -57,7 +57,7 @@ export default function RootLayout({
               </h1>
             </Link>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 sm:gap-6">
               <Link
                 className={cn(buttonVariants({ variant: "link" }), "px-0 sm:text-lg")}
                 href="/leaderboard"

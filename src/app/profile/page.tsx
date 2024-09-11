@@ -38,11 +38,7 @@ export default function ProfilePage() {
         className="h-24 w-24 rounded-full"
       />
       <div className="mt-3 text-lg font-semibold">{user!.fullName}</div>
-      {/* <div>total aura: {profile.totalAura}</div> */}
 
-      {/* {profile.username ? (
-        <div className="mt-6">username: @{profile.username}</div>
-      ) : ( */}
       <form onSubmit={onSubmit} className="mt-6 flex items-center">
         <Input
           disabled={loading}
@@ -56,7 +52,6 @@ export default function ProfilePage() {
         />
         <Button disabled={loading}>set username</Button>
       </form>
-      {/* )} */}
     </div>
   );
 }
