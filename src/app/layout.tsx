@@ -1,8 +1,18 @@
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { LogIn } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { dark } from "@clerk/themes";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,28 +36,47 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          geistSans.variable,
-          geistMono.variable,
-          "mx-auto flex min-h-screen max-w-xl flex-col p-6 antialiased",
-        )}
-      >
-        <Link href="/">
-          <h1 className="text-3xl font-extrabold">aura wallet.</h1>
-        </Link>
-        <main className="flex-grow">{children}</main>
-        <footer className="mt-auto text-center">
-          brought to you by{" "}
-          <a
-            href="https://dastanozgeldi.me"
-            className="font-semibold underline"
-          >
-            @dastanozgeldi
-          </a>
-        </footer>
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
+      <html lang="en">
+        <body
+          className={cn(
+            geistSans.variable,
+            geistMono.variable,
+            "mx-auto flex min-h-screen max-w-xl flex-col p-6 antialiased",
+          )}
+        >
+          <nav className="flex items-center justify-between">
+            <Link href="/">
+              <h1 className="text-3xl font-extrabold">aura wallet.</h1>
+            </Link>
+
+            <SignedOut>
+              <SignInButton>
+                <Button size="sm">
+                  <LogIn className="mr-2 h-4 w-4" /> sign in
+                </Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </nav>
+          <main className="flex-grow">{children}</main>
+          <footer className="mt-auto text-center">
+            brought to you by{" "}
+            <a
+              href="https://dastanozgeldi.me"
+              className="font-semibold underline"
+            >
+              @dastanozgeldi
+            </a>
+          </footer>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

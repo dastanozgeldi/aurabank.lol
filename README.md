@@ -2,7 +2,7 @@
 
 - [x] setup home page
 - [x] wallet page design
-- [ ] setup clerk
+- [x] setup clerk
 - [ ] setup drizzle and postgres
 - [ ] create events table
 - [ ] vercel ai sdk
