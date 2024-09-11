@@ -1,3 +1,14 @@
+## TODO
+
+- [x] setup home page
+- [x] wallet page design
+- [ ] setup clerk
+- [ ] setup drizzle and postgres
+- [ ] create events table
+- [ ] vercel ai sdk
+- [ ] structured outputs https://sdk.vercel.ai/docs/guides/llama-3_1#generating-structured-data
+- [ ] generate event title, aura gain/loss and objective explanation
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
