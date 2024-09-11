@@ -1,6 +1,6 @@
 import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const profile = pgTable("profiles_table", {
+export const profiles = pgTable("profiles_table", {
   userId: text("user_id").primaryKey(),
   totalAura: integer("total_aura").default(0),
 });
@@ -15,8 +15,8 @@ export const events = pgTable("events_table", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export type InsertProfile = typeof profile.$inferInsert;
-export type SelectProfile = typeof profile.$inferSelect;
+export type InsertProfile = typeof profiles.$inferInsert;
+export type SelectProfile = typeof profiles.$inferSelect;
 
 export type InsertEvent = typeof events.$inferInsert;
 export type SelectEvent = typeof events.$inferSelect;

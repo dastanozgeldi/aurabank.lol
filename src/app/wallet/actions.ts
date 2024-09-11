@@ -1,10 +1,11 @@
 "use server";
 
-import { events } from "@/schema";
+import { events, profiles } from "@/schema";
 import { db } from "@/server/db";
 import { openai } from "@ai-sdk/openai";
 import { auth } from "@clerk/nextjs/server";
 import { generateObject } from "ai";
+import { eq, sql } from "drizzle-orm";
 import { z } from "zod";
 
 export async function addEventAction(formData: FormData) {
@@ -44,6 +45,11 @@ export async function addEventAction(formData: FormData) {
       explanation: assessment.explanation,
     })
     .returning();
+
+  await db
+    .update(profiles)
+    .set({ totalAura: sql`${profiles.totalAura} + ${assessment.aura}` })
+    .where(eq(profiles.userId, userId));
 
   return result;
 }
