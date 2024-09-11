@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Plus } from "lucide-react";
+import { Brain } from "lucide-react";
+import { AddEventModal } from "./add-event-modal";
 
 export default async function WalletPage() {
   return (
-    <div>
+    <div className="h-full">
       <Card className="mt-4">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Aura</CardTitle>
@@ -33,10 +33,7 @@ export default async function WalletPage() {
         </div>
       </div>
 
-      <Button size="lg" variant="outline" className="w-full">
-        <Plus className="mr-2 h-5 w-5" />
-        Add Event
-      </Button>
+      <AddEventModal />
     </div>
   );
 }
