@@ -28,8 +28,7 @@ export function LeaderboardTable({ profiles }: { profiles: SelectProfile[] }) {
                 className="h-8 w-8 rounded-full"
               /> */}
               <span className="ml-2">
-                {/* {user.firstName} {user.lastName} */}
-                {profile.userId}
+                {profile.username ? `@${profile.username}` : profile.userId}
               </span>
             </TableCell>
             <TableCell>{profile.totalAura}</TableCell>
