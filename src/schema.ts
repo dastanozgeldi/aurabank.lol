@@ -1,8 +1,16 @@
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
 export const profiles = pgTable("profiles_table", {
   userId: text("user_id").primaryKey(),
   totalAura: integer("total_aura").default(0),
+  username: varchar("username", { length: 20 }),
 });
 
 export const events = pgTable("events_table", {
