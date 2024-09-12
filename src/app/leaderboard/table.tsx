@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Table,
   TableBody,
@@ -12,16 +13,16 @@ import { SelectProfile } from "@/schema";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
-export function LeaderboardTable({ data }: { data: SelectProfile[] }) {
+export function LeaderboardTable({ profiles }: { profiles: SelectProfile[] }) {
   const { user } = useUser();
 
-  const profiles = data.map((profile, index) => ({
+  const leaderboard = profiles.map((profile, index) => ({
     ...profile,
     rank: index + 1,
   }));
 
   const me = user
-    ? profiles.find((profile) => profile.userId === user.id)
+    ? leaderboard.find((profile) => profile.userId === user.id)
     : null;
 
   return (

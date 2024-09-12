@@ -32,3 +32,7 @@ export async function getProfileByUsername(username: string) {
 
   return profile;
 }
+
+export async function getLeaderboard() {
+  return db.select().from(profiles).orderBy(desc(profiles.totalAura));
+}
