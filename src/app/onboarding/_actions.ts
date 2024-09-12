@@ -14,10 +14,18 @@ export const completeOnboarding = async (formData: FormData) => {
   try {
     const username = formData.get("username") as string;
 
-    await db.insert(profiles).values({
-      userId,
-      username,
-    });
+    await db
+      .insert(profiles)
+      .values({
+        userId,
+        username,
+      })
+      // there are existing users with hardcoded profiles,
+      // so we need to update the username if it already exists
+      .onConflictDoUpdate({
+        target: profiles.username,
+        set: { username },
+      });
 
     const res = await clerkClient().users.updateUser(userId, {
       publicMetadata: {
