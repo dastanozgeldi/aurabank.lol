@@ -72,6 +72,7 @@ export default function ProfilePage({
       ) : (
         user && (
           <div className="flex flex-col items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="avatar"
               src={user.imageUrl}

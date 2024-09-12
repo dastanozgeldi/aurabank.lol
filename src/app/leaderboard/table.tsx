@@ -59,7 +59,7 @@ export function LeaderboardTable({ data }: { data: SelectProfile[] }) {
                 me.userId
               )}
             </TableCell>
-            <TableCell>{me.totalAura}</TableCell>
+            <TableCell>{me.totalAura?.toLocaleString()}</TableCell>
           </TableRow>
         </TableFooter>
       )}
