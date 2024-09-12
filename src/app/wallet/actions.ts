@@ -31,6 +31,7 @@ export async function addEventAction(formData: FormData) {
       `It is your job to assess objectively how many aura points a certain event should get.` +
       `Along with deciding the amount of aura points for the event, ` +
       `you should also give it a brief title and provide explanation for the aura points.` +
+      `Take feasibility of the event into consideration. If the event is obviously fake, you need to punish the user with negative aura.` +
       `Here is the event given by the user: ${content}`,
   });
 
