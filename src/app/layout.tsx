@@ -1,3 +1,4 @@
+import PlausibleProvider from "next-plausible";
 import {
   ClerkProvider,
   SignedIn,
@@ -43,6 +44,9 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
+        <head>
+          <PlausibleProvider domain="aurawallet.lol" />
+        </head>
         <body
           className={cn(
             geistSans.variable,
