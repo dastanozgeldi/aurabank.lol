@@ -47,7 +47,7 @@ export function LeaderboardTable({ data }: { data: SelectProfile[] }) {
         <TableFooter>
           <TableRow>
             <TableCell>{me.rank}</TableCell>
-            <TableCell>{me.username}</TableCell>
+            <TableCell>{me.username ? `@${me.username}` : me.userId}</TableCell>
             <TableCell>{me.totalAura}</TableCell>
           </TableRow>
         </TableFooter>
