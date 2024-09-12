@@ -51,7 +51,7 @@ export function LeaderboardTable({ profiles }: { profiles: SelectProfile[] }) {
       </TableBody>
       {me && (
         <TableFooter>
-          <TableRow>
+          <TableRow className="h-14">
             <TableCell>{me.rank}</TableCell>
             <TableCell>
               {me.username ? (
