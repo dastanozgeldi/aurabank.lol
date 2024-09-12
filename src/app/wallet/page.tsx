@@ -1,14 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, User } from "lucide-react";
+import { Brain } from "lucide-react";
 import { AddEventModal } from "./add-event-modal";
-import { getMyEvents, getMyProfile } from "@/server/queries";
+import { getMyEvents } from "@/server/queries";
 
 export default async function WalletPage() {
   const events = await getMyEvents();
-  const profile = await getMyProfile();
+  // const profile = await getMyProfile();
   const lastEvent = events[0];
   const totalFromEvents = events.reduce((acc, event) => acc + event.aura, 0);
-  const totalProfileAura = profile.totalAura;
+  // const totalProfileAura = profile.totalAura;
 
   return (
     <div className="h-full">
@@ -30,7 +30,7 @@ export default async function WalletPage() {
           </CardContent>
         </Card>
 
-        <Card className="w-full">
+        {/* <Card className="w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Profile Total</CardTitle>
             <User className="h-4 w-4 text-muted-foreground" />
@@ -45,7 +45,7 @@ export default async function WalletPage() {
               donation
             </p>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
 
       <div className="my-4">
