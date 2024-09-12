@@ -1,31 +1,52 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain } from "lucide-react";
+import { Brain, User } from "lucide-react";
 import { AddEventModal } from "./add-event-modal";
-import { getMyEvents } from "@/server/queries";
+import { getMyEvents, getMyProfile } from "@/server/queries";
 
 export default async function WalletPage() {
   const events = await getMyEvents();
+  const profile = await getMyProfile();
   const lastEvent = events[0];
-  const total = events.reduce((acc, event) => acc + event.aura, 0);
+  const totalFromEvents = events.reduce((acc, event) => acc + event.aura, 0);
+  const totalProfileAura = profile.totalAura;
 
   return (
     <div className="h-full">
-      <Card className="mt-4">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Aura</CardTitle>
-          <Brain className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="font-sans text-2xl font-black">
-            {total.toLocaleString()}
-          </div>
-          {lastEvent && (
+      <div className="mt-4 space-y-3">
+        <Card className="w-full">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">From Events</CardTitle>
+            <Brain className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="font-sans text-2xl font-black">
+              {totalFromEvents.toLocaleString()}
+            </div>
+            {lastEvent && (
+              <p className="text-xs text-muted-foreground">
+                you got {lastEvent.aura} aura from last time.
+              </p>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card className="w-full">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Profile Total</CardTitle>
+            <User className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="font-sans text-2xl font-black">
+              {totalProfileAura!.toLocaleString()}
+            </div>
+
             <p className="text-xs text-muted-foreground">
-              you got {lastEvent.aura} aura from last time.
+              your profile aura may be different from events because you made a
+              donation
             </p>
-          )}
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
 
       <div className="my-4">
         <div className="flex items-center justify-between">
