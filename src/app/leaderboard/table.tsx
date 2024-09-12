@@ -31,7 +31,7 @@ export function LeaderboardTable({ profiles }: { profiles: SelectProfile[] }) {
                 {profile.username ? `@${profile.username}` : profile.userId}
               </span>
             </TableCell>
-            <TableCell>{profile.totalAura}</TableCell>
+            <TableCell>{profile.totalAura?.toLocaleString()}</TableCell>
           </TableRow>
         ))}
       </TableBody>
