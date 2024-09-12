@@ -38,12 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
-      <html lang="en">
+    <ClerkProvider appearance={{ baseTheme: dark }}>
+      <html lang="en" className="dark">
         <head>
           <PlausibleProvider domain="aurawallet.lol" />
         </head>
