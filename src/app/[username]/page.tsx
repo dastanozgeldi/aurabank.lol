@@ -10,7 +10,8 @@ import { SelectProfile } from "@/schema";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AuraCard } from "@/components/aura-card";
-import { User } from "lucide-react";
+import { User as UserIcon } from "lucide-react";
+import { User } from "@clerk/nextjs/server";
 
 export default function ProfilePage({
   params,
@@ -18,9 +19,10 @@ export default function ProfilePage({
   params: { username: string };
 }) {
   const username = params.username.slice(3);
-  const { isLoaded, user } = useUser();
+  const { user: me } = useUser();
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<SelectProfile | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -45,9 +47,10 @@ export default function ProfilePage({
       setLoading(true);
 
       const response = await fetch(`/api/${username}`);
-      const { profile } = await response.json();
+      const { profile, user } = await response.json();
 
       setProfile(profile);
+      setUser(user);
     } catch {
       toast.error("Failed to load profile.");
     } finally {
@@ -59,29 +62,50 @@ export default function ProfilePage({
     loadProfile();
   }, [loadProfile]);
 
-  if (!isLoaded) return null;
   return (
     <div className="my-4 flex flex-col items-center justify-center">
       {loading ? (
-        <div className="w-full">
-          <Skeleton className="h-8" />
-          <Skeleton className="mt-3 h-24" />
-        </div>
+        <>
+          <Skeleton className="h-24 w-24 rounded-full" />
+          <Skeleton className="mt-3 h-6 w-[200px]" />
+        </>
       ) : (
-        <div className="w-full">
-          <div className="text-lg font-semibold">@{profile?.username}</div>
-          <div className="mt-3">
-            <AuraCard
-              aura={profile!.totalAura!}
-              title="Profile Total"
-              icon={<User className="h-4 w-4 text-muted-foreground" />}
+        user && (
+          <div className="flex flex-col items-center">
+            <img
+              alt="avatar"
+              src={user.imageUrl}
+              className="h-24 w-24 rounded-full"
             />
+            <div className="mt-3 text-center text-lg font-semibold">
+              {user.firstName} {user.lastName}
+            </div>
           </div>
-        </div>
+        )
       )}
 
-      {user?.id === profile?.userId && (
-        <form onSubmit={onSubmit} className="mt-6">
+      {loading ? (
+        <>
+          <Skeleton className="mt-3 h-6 w-[200px]" />
+          <Skeleton className="mt-3 h-24 w-full" />
+        </>
+      ) : (
+        profile && (
+          <div className="w-full">
+            <div className="text-center text-lg">@{profile?.username}</div>
+            <div className="mt-3">
+              <AuraCard
+                aura={profile!.totalAura!}
+                title="Profile Total"
+                icon={<UserIcon className="h-4 w-4 text-muted-foreground" />}
+              />
+            </div>
+          </div>
+        )
+      )}
+
+      {me && profile && me?.id === profile?.userId && (
+        <form onSubmit={onSubmit} className="mt-6 w-full">
           <Label htmlFor="username">new username</Label>
           <div className="flex items-center">
             <Input
