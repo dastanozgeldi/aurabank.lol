@@ -1,4 +1,6 @@
 "use client";
+
+import { Loader2, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,33 +14,13 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Plus } from "lucide-react";
-import { addEventAction } from "./actions";
-import { FormEvent, useState } from "react";
-import { toast } from "sonner";
+import { useModal } from "./use-modal";
 
 export function AddEventModal() {
-  const [loading, setLoading] = useState(false);
-
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    try {
-      setLoading(true);
-      await addEventAction(formData);
-
-      toast("Event added successfully. You can close the form now.");
-    } catch {
-      toast("Failed to add the event.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { loading, open, setOpen, onSubmit } = useModal();
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="lg" variant="outline" className="w-full">
           <Plus className="mr-2 h-5 w-5" />

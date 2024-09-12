@@ -1,14 +1,12 @@
 import { Brain, User } from "lucide-react";
-import { AddEventModal } from "./add-event-modal";
 import { getMyEvents, getMyProfile } from "@/server/queries";
 import { AuraCard } from "@/components/aura-card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { AddEventModal } from "./add-event-modal";
 
 export default async function WalletPage() {
   const events = await getMyEvents();
   const profile = await getMyProfile();
-  const lastEvent = events[0];
-  const totalFromEvents = events.reduce((acc, event) => acc + event.aura, 0);
 
   return (
     <div className="h-full">
@@ -20,9 +18,9 @@ export default async function WalletPage() {
           </TabsList>
           <TabsContent value="from_events">
             <AuraCard
-              aura={totalFromEvents}
+              aura={events.reduce((acc, event) => acc + event.aura, 0)}
               title="From Events"
-              description={`you got ${lastEvent.aura > 0 && "+"}${lastEvent.aura} aura from last time.`}
+              description={`you got ${events[0].aura > 0 && "+"}${events[0].aura} aura from last time.`}
               icon={<Brain className="h-4 w-4 text-muted-foreground" />}
             />
           </TabsContent>
