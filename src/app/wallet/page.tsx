@@ -2,6 +2,13 @@ import { Brain, User } from "lucide-react";
 import { getMyEvents, getMyProfile } from "@/server/queries";
 import { AuraCard } from "@/components/aura-card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { AddEventModal } from "./add-event-modal";
 
 export default async function WalletPage() {
@@ -43,16 +50,15 @@ export default async function WalletPage() {
         <div className="mt-3 h-[300px] space-y-3 overflow-auto">
           {events.length > 0 ? (
             events.map((event) => (
-              <div key={event.id} className="rounded-lg border p-4">
-                <div className="mb-2 flex items-center justify-between font-bold">
-                  <h2 className="text-xl">{event.title}</h2>
-                  <span>
-                    {event.aura > 0 && "+"}
-                    {event.aura}
-                  </span>
-                </div>
-                <p className="text-muted-foreground">{event.explanation}</p>
-              </div>
+              <Card key={event.id}>
+                <CardHeader>
+                  <CardTitle>{event.title}</CardTitle>
+                  <CardDescription>
+                    {event.aura > 0 && "+"} {event.aura} aura points
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>{event.explanation}</CardContent>
+              </Card>
             ))
           ) : (
             <div className="flex h-full items-center justify-center rounded-lg border text-center text-muted-foreground">
