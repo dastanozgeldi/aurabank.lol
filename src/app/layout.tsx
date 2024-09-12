@@ -59,7 +59,10 @@ export default function RootLayout({
 
             <div className="flex items-center gap-3 sm:gap-6">
               <Link
-                className={cn(buttonVariants({ variant: "link" }), "px-0 sm:text-lg")}
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                  "px-0 sm:text-lg",
+                )}
                 href="/leaderboard"
               >
                 top5
@@ -73,16 +76,13 @@ export default function RootLayout({
               </SignedOut>
               <SignedIn>
                 <Link
-                  className={cn(buttonVariants({ variant: "link" }), "px-0 sm:text-lg")}
+                  className={cn(
+                    buttonVariants({ variant: "link" }),
+                    "px-0 sm:text-lg",
+                  )}
                   href="/wallet"
                 >
                   wallet
-                </Link>
-                <Link
-                  className={cn(buttonVariants({ variant: "link" }), "px-0 sm:text-lg")}
-                  href="/profile"
-                >
-                  profile
                 </Link>
                 <UserButton />
               </SignedIn>

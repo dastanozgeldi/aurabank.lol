@@ -23,3 +23,12 @@ export async function getMyProfile() {
 
   return profile;
 }
+
+export async function getProfileByUsername(username: string) {
+  const [profile] = await db
+    .select()
+    .from(profiles)
+    .where(eq(profiles.username, username));
+
+  return profile;
+}

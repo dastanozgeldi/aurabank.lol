@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { SelectProfile } from "@/schema";
 import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 export function LeaderboardTable({ data }: { data: SelectProfile[] }) {
   const { user } = useUser();
@@ -37,7 +38,11 @@ export function LeaderboardTable({ data }: { data: SelectProfile[] }) {
           <TableRow key={profile.userId}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>
-              {profile.username ? `@${profile.username}` : profile.userId}
+              {profile.username ? (
+                <Link href={`/@${profile.username}`}>@{profile.username}</Link>
+              ) : (
+                profile.userId
+              )}
             </TableCell>
             <TableCell>{profile.totalAura?.toLocaleString()}</TableCell>
           </TableRow>
