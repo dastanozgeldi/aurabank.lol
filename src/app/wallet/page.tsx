@@ -6,6 +6,7 @@ import { getMyEvents } from "@/server/queries";
 export default async function WalletPage() {
   const events = await getMyEvents();
   const lastEvent = events[0];
+  const total = events.reduce((acc, event) => acc + event.aura, 0);
 
   return (
     <div className="h-full">
@@ -16,7 +17,7 @@ export default async function WalletPage() {
         </CardHeader>
         <CardContent>
           <div className="font-sans text-2xl font-black">
-            {events.reduce((acc, event) => acc + event.aura, 0)}
+            {total.toLocaleString()}
           </div>
           {lastEvent && (
             <p className="text-xs text-muted-foreground">
