@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import { SelectProfile } from "@/schema";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AuraCard } from "@/components/aura-card";
+import { User } from "lucide-react";
 
 export default function ProfilePage({
   params,
@@ -61,15 +63,21 @@ export default function ProfilePage({
   return (
     <div className="my-4 flex flex-col items-center justify-center">
       {loading ? (
-        <>
-          <Skeleton className="mt-3 h-8 w-32" />
-          <Skeleton className="mt-3 h-6 w-32" />
-        </>
+        <div className="w-full">
+          <Skeleton className="h-8" />
+          <Skeleton className="mt-3 h-24" />
+        </div>
       ) : (
-        <>
-          <div className="mt-3 text-lg font-semibold">@{profile?.username}</div>
-          <div>total aura: {profile?.totalAura}</div>
-        </>
+        <div className="w-full">
+          <div className="text-lg font-semibold">@{profile?.username}</div>
+          <div className="mt-3">
+            <AuraCard
+              aura={profile!.totalAura!}
+              title="Profile Total"
+              icon={<User className="h-4 w-4 text-muted-foreground" />}
+            />
+          </div>
+        </div>
       )}
 
       {user?.id === profile?.userId && (
