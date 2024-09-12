@@ -2,6 +2,7 @@ import { Brain, User } from "lucide-react";
 import { AddEventModal } from "./add-event-modal";
 import { getMyEvents, getMyProfile } from "@/server/queries";
 import { AuraCard } from "@/components/aura-card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export default async function WalletPage() {
   const events = await getMyEvents();
@@ -12,21 +13,28 @@ export default async function WalletPage() {
   return (
     <div className="h-full">
       <div className="mt-4 space-y-3">
-        <AuraCard
-          aura={totalFromEvents}
-          title="From Events"
-          description={`you got ${lastEvent.aura} aura from last time.`}
-          icon={<Brain className="h-4 w-4 text-muted-foreground" />}
-        />
-
-        {profile && (
-          <AuraCard
-            aura={profile.totalAura!}
-            title="Profile Total"
-            description="your profile aura may be different from events because you made a donation"
-            icon={<User className="h-4 w-4 text-muted-foreground" />}
-          />
-        )}
+        <Tabs defaultValue="profile_total">
+          <TabsList>
+            <TabsTrigger value="from_events">From Events</TabsTrigger>
+            <TabsTrigger value="profile_total">Profile Total</TabsTrigger>
+          </TabsList>
+          <TabsContent value="from_events">
+            <AuraCard
+              aura={totalFromEvents}
+              title="From Events"
+              description={`you got ${lastEvent.aura > 0 && "+"}${lastEvent.aura} aura from last time.`}
+              icon={<Brain className="h-4 w-4 text-muted-foreground" />}
+            />
+          </TabsContent>
+          <TabsContent value="profile_total">
+            <AuraCard
+              aura={profile.totalAura!}
+              title="Profile Total"
+              description="your profile aura may be different from events because you made a donation"
+              icon={<User className="h-4 w-4 text-muted-foreground" />}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
 
       <div className="my-4">
