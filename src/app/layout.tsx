@@ -1,4 +1,8 @@
 import PlausibleProvider from "next-plausible";
+import type { Metadata } from "next";
+import { LogIn } from "lucide-react";
+import localFont from "next/font/local";
+import Link from "next/link";
 import {
   ClerkProvider,
   SignedIn,
@@ -6,15 +10,11 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { LogIn } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { dark } from "@clerk/themes";
 import { Toaster } from "@/components/ui/sonner";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -65,7 +65,7 @@ export default function RootLayout({
               <Link
                 className={cn(
                   buttonVariants({ variant: "link" }),
-                  "px-0 sm:text-lg",
+                  "px-0 text-base sm:text-lg",
                 )}
                 href="/leaderboard"
               >
@@ -82,7 +82,7 @@ export default function RootLayout({
                 <Link
                   className={cn(
                     buttonVariants({ variant: "link" }),
-                    "px-0 sm:text-lg",
+                    "px-0 text-base sm:text-lg",
                   )}
                   href="/wallet"
                 >
