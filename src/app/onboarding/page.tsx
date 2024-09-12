@@ -18,8 +18,9 @@ export default function OnboardingPage() {
     const res = await completeOnboarding(formData);
     if (res?.message) {
       // Reloads the user's data from Clerk's API
-      await user?.reload();
       router.push("/");
+      await user?.reload();
+      router.refresh();
 
       toast.success("Registration complete! Go to your wallet asap.");
     }
