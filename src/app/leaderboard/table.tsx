@@ -36,7 +36,7 @@ export function LeaderboardTable({ data }: { data: SelectProfile[] }) {
         {profiles.slice(0, 5).map((profile, index) => (
           <TableRow key={profile.userId}>
             <TableCell>{index + 1}</TableCell>
-            <TableCell className="flex items-center">
+            <TableCell>
               {profile.username ? `@${profile.username}` : profile.userId}
             </TableCell>
             <TableCell>{profile.totalAura?.toLocaleString()}</TableCell>
