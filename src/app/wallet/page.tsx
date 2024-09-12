@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { AddEventModal } from "./add-event-modal";
 
 export default async function WalletPage() {
@@ -47,14 +48,15 @@ export default async function WalletPage() {
           <h1 className="text-2xl font-extrabold">events</h1>
           <div>{events.length} in total</div>
         </div>
-        <div className="mt-3 h-[300px] space-y-3 overflow-auto">
+        <ScrollArea className="mt-3 h-[300px]">
           {events.length > 0 ? (
             events.map((event) => (
-              <Card key={event.id}>
+              <Card key={event.id} className="mb-3">
                 <CardHeader>
                   <CardTitle>{event.title}</CardTitle>
                   <CardDescription>
-                    {event.aura > 0 && "+"} {event.aura} aura points
+                    {event.aura > 0 && "+"}
+                    {event.aura} aura points
                   </CardDescription>
                 </CardHeader>
                 <CardContent>{event.explanation}</CardContent>
@@ -65,7 +67,7 @@ export default async function WalletPage() {
               your events will be displayed here.
             </div>
           )}
-        </div>
+        </ScrollArea>
       </div>
 
       <AddEventModal />
