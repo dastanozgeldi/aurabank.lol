@@ -89,7 +89,7 @@ export default function RootLayout({
             </div>
           </nav>
 
-          <main className="flex-grow">{children}</main>
+          <main className="mb-6 flex-grow">{children}</main>
 
           <footer className="mt-auto text-center">
             brought to you by{" "}
