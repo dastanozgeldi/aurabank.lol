@@ -23,7 +23,7 @@ export const completeOnboarding = async (formData: FormData) => {
       // there are existing users with hardcoded profiles,
       // so we need to update the username if it already exists
       .onConflictDoUpdate({
-        target: profiles.username,
+        target: profiles.userId,
         set: { username },
       });
 
