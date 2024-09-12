@@ -4,7 +4,6 @@ import { Loader2, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -27,7 +26,7 @@ export function AddEventModal() {
           Add Event
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="bg-black sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Aura AI</DialogTitle>
           <DialogDescription>
@@ -47,11 +46,6 @@ export function AddEventModal() {
             />
           </div>
           <DialogFooter className="mt-3 sm:justify-end">
-            <DialogClose asChild>
-              <Button disabled={loading} type="button" variant="secondary">
-                Close
-              </Button>
-            </DialogClose>
             <Button disabled={loading}>
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               Submit
