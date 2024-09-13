@@ -1,19 +1,11 @@
 import PlausibleProvider from "next-plausible";
 import type { Metadata } from "next";
-import { LogIn } from "lucide-react";
 import localFont from "next/font/local";
-import Link from "next/link";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { dark } from "@clerk/themes";
 import { Toaster } from "@/components/ui/sonner";
+import { Nav } from "@/components/nav";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -50,44 +42,7 @@ export default function RootLayout({
             "mx-auto flex min-h-screen max-w-xl flex-col p-6 antialiased",
           )}
         >
-          <nav className="flex items-center justify-between">
-            <Link href="/">
-              <h1 className="text-2xl font-extrabold sm:text-3xl">
-                aura wallet.
-              </h1>
-            </Link>
-
-            <div className="flex items-center gap-3 sm:gap-6">
-              <Link
-                className={cn(
-                  buttonVariants({ variant: "link" }),
-                  "px-0 text-base sm:text-lg",
-                )}
-                href="/leaderboard"
-              >
-                top5
-              </Link>
-              <SignedOut>
-                <SignInButton>
-                  <Button size="sm">
-                    <LogIn className="mr-2 h-4 w-4" /> sign in
-                  </Button>
-                </SignInButton>
-              </SignedOut>
-              <SignedIn>
-                <Link
-                  className={cn(
-                    buttonVariants({ variant: "link" }),
-                    "px-0 text-base sm:text-lg",
-                  )}
-                  href="/wallet"
-                >
-                  wallet
-                </Link>
-                <UserButton />
-              </SignedIn>
-            </div>
-          </nav>
+          <Nav />
 
           <main className="mb-6 flex-grow">{children}</main>
 
