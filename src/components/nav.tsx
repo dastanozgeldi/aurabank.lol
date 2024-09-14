@@ -38,6 +38,15 @@ export const Nav = () => {
           >
             wallet
           </Link>
+          <Link
+            className={cn(
+              buttonVariants({ variant: "link" }),
+              "px-0 text-base sm:text-lg",
+            )}
+            href="/teams"
+          >
+            teams
+          </Link>
           <UserButton />
         </SignedIn>
       </div>
