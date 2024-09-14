@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, Plus } from "lucide-react";
+import { Loader2, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,7 +22,7 @@ export function AddEventModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="lg" variant="outline" className="w-full">
-          <Plus className="mr-2 h-5 w-5" />
+          <User className="mr-2 h-5 w-5" />
           Add Event
         </Button>
       </DialogTrigger>

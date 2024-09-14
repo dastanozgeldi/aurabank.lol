@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AddEventModal } from "./add-event-modal";
+import { AddTeamEventModal } from "./add-team-event-modal";
 
 export default async function WalletPage() {
   const events = await getMyEvents();
@@ -70,7 +71,10 @@ export default async function WalletPage() {
         </ScrollArea>
       </div>
 
-      <AddEventModal />
+      <div className="flex items-center justify-between gap-3">
+        <AddEventModal />
+        <AddTeamEventModal />
+      </div>
     </div>
   );
 }
