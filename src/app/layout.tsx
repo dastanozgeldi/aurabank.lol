@@ -20,8 +20,36 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aurawallet.vercel.app"),
   title: "Aura Wallet",
-  description: "Calculate your aura using AI by @dastanozgeldi",
+  description:
+    "Track your daily aura in a wallet using AI and compete with others!",
+  keywords: ["Aura", "Wallet", "AI", "dastanozgeldi", "Next.js"],
+  authors: [
+    {
+      name: "Dastan Ozgeldi",
+      url: "https://dastanozgeldi.me",
+    },
+  ],
+  creator: "Dastan Ozgeldi",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    title: "Aura Wallet",
+    description:
+      "Track your daily aura in a wallet using AI and compete with others!",
+    siteName: "Aura Wallet",
+    url: "https://aurawallet.vercel.app",
+    images: "/og-image.png",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aura Wallet",
+    description:
+      "Track your daily aura in a wallet using AI and compete with others!",
+    images: "/og-image.png",
+    creator: "@dastanozgeldi",
+  },
 };
 
 export default function RootLayout({
