@@ -33,28 +33,26 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark">
         <head>
-          <PlausibleProvider domain="aurawallet.lol" />
+          <PlausibleProvider domain="aurawallet.vercel.app" />
         </head>
         <body
-          className={cn(
-            geistSans.variable,
-            geistMono.variable,
-            "mx-auto flex min-h-screen max-w-xl flex-col p-6 antialiased",
-          )}
+          className={cn(geistSans.variable, geistMono.variable, "antialiased")}
         >
-          <Nav />
+          <main className="mx-auto flex min-h-screen max-w-xl flex-col p-6">
+            <Nav />
 
-          <main className="mb-6 flex-grow">{children}</main>
+            <div className="mb-6 flex-grow">{children}</div>
 
-          <footer className="mt-auto text-center">
-            brought to you by{" "}
-            <a
-              href="https://dastanozgeldi.me"
-              className="font-semibold underline"
-            >
-              @dastanozgeldi
-            </a>
-          </footer>
+            <footer className="mt-auto text-center">
+              brought to you by{" "}
+              <a
+                href="https://dastanozgeldi.me"
+                className="font-semibold underline"
+              >
+                @dastanozgeldi
+              </a>
+            </footer>
+          </main>
 
           <Toaster />
         </body>
