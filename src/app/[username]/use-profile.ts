@@ -8,8 +8,10 @@ import { useRouter } from "next/navigation";
 export const useProfile = (username: string) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState<SelectProfile | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<SelectProfile | null | undefined>(
+    null,
+  );
+  const [user, setUser] = useState<User | null | undefined>(null);
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const loadProfile = useCallback(async () => {

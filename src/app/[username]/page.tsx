@@ -1,5 +1,6 @@
 "use client";
 
+import { notFound } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ export default function ProfilePage({
   const { loading, profile, user, isSubmitLoading, onSubmit } =
     useProfile(username);
 
+  if (profile === undefined) notFound();
   return (
     <div className="my-4 flex flex-col items-center justify-center">
       {loading ? (
