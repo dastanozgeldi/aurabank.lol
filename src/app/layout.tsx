@@ -20,7 +20,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aurawallet.vercel.app"),
+  metadataBase: new URL("https://aurawallet.netlify.app"),
   title: "Aura Wallet",
   description:
     "Track your daily aura in a wallet using AI and compete with others!",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Track your daily aura in a wallet using AI and compete with others!",
     siteName: "Aura Wallet",
-    url: "https://aurawallet.vercel.app",
+    url: "https://aurawallet.netlify.app",
     images: "/og-image.png",
   },
   twitter: {
@@ -61,7 +61,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark">
         <head>
-          <PlausibleProvider domain="aurawallet.vercel.app" />
+          <PlausibleProvider domain="aurawallet.netlify.app" />
         </head>
         <body
           className={cn(geistSans.variable, geistMono.variable, "antialiased")}
