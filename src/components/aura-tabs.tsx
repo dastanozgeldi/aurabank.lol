@@ -21,7 +21,7 @@ export const AuraTabs = ({ profile, events, wallet }: Props) => {
           aura={events.reduce((acc, event) => acc + event.aura, 0)}
           title="From Events"
           description={
-            wallet
+            wallet && events.length > 0
               ? `you got ${events[0].aura > 0 ? "+" : ""}${events[0].aura} aura from last time.`
               : undefined
           }

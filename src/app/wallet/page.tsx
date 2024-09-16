@@ -25,9 +25,10 @@ export default async function WalletPage() {
           <h1 className="text-2xl font-extrabold">events</h1>
           <div>{events.length} in total</div>
         </div>
-        <ScrollArea className="mt-3 h-[300px]">
-          {events.length > 0 ? (
-            events.map((event) => (
+
+        {events.length > 0 ? (
+          <ScrollArea className="mt-3 h-[300px]">
+            {events.map((event) => (
               <Card key={event.id} className="mb-3">
                 <CardHeader>
                   <CardTitle>{event.title}</CardTitle>
@@ -38,13 +39,13 @@ export default async function WalletPage() {
                 </CardHeader>
                 <CardContent>{event.explanation}</CardContent>
               </Card>
-            ))
-          ) : (
-            <div className="flex h-full items-center justify-center rounded-lg border text-center text-muted-foreground">
-              your events will be displayed here.
-            </div>
-          )}
-        </ScrollArea>
+            ))}
+          </ScrollArea>
+        ) : (
+          <div className="mt-3 flex h-[300px] items-center justify-center rounded-lg border text-center text-muted-foreground">
+            your events will be displayed here.
+          </div>
+        )}
       </div>
 
       <AddEventModal />
