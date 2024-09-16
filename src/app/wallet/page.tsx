@@ -1,7 +1,4 @@
-import { Brain, User } from "lucide-react";
-import { getMyEvents, getMyProfile } from "@/server/queries";
-import { AuraCard } from "@/components/aura-card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { getEvents, getMyProfile } from "@/server/queries";
 import {
   Card,
   CardContent,
@@ -10,37 +7,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { AuraTabs } from "@/components/aura-tabs";
 import { AddEventModal } from "./add-event-modal";
 
 export default async function WalletPage() {
-  const events = await getMyEvents();
   const profile = await getMyProfile();
+  const events = await getEvents(profile.userId);
 
   return (
     <div className="h-full">
       <div className="mt-4 space-y-3">
-        <Tabs defaultValue="profile_total">
-          <TabsList>
-            <TabsTrigger value="from_events">From Events</TabsTrigger>
-            <TabsTrigger value="profile_total">Profile Total</TabsTrigger>
-          </TabsList>
-          <TabsContent value="from_events">
-            <AuraCard
-              aura={events.reduce((acc, event) => acc + event.aura, 0)}
-              title="From Events"
-              description={`you got ${events[0].aura > 0 && "+"}${events[0].aura} aura from last time.`}
-              icon={<Brain className="h-4 w-4 text-muted-foreground" />}
-            />
-          </TabsContent>
-          <TabsContent value="profile_total">
-            <AuraCard
-              aura={profile.totalAura!}
-              title="Profile Total"
-              description="your profile aura may be different from events because you made a donation"
-              icon={<User className="h-4 w-4 text-muted-foreground" />}
-            />
-          </TabsContent>
-        </Tabs>
+        <AuraTabs wallet profile={profile} events={events} />
       </div>
 
       <div className="my-4">
