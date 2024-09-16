@@ -22,7 +22,7 @@ export function LeaderboardTable({
   me,
   profiles,
 }: {
-  me: Profile;
+  me: Profile | undefined;
   profiles: Profile[];
 }) {
   return (

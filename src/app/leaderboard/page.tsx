@@ -20,7 +20,7 @@ export default async function LeaderboardPage() {
     .from(profilesTable)
     .orderBy(desc(profilesTable.totalAura));
 
-  const me = profiles.find((profile) => profile.userId === userId)!;
+  const me = profiles.find((profile) => profile.userId === userId);
 
   return (
     <div>
