@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AuraTabs } from "@/components/aura-tabs";
 import { getEvents, getProfile } from "@/server/queries";
+import { ChangeUsernameModal } from "./change-username-modal";
 
 export default async function ProfilePage({
   params: { userId },
@@ -39,6 +40,11 @@ export default async function ProfilePage({
           <div className="mt-3 text-center text-lg font-semibold">
             {user.firstName} {user.lastName}
           </div>
+          <div className="text-center text-sm">@{profile.username}</div>
+        </div>
+
+        <div className="my-3 w-full">
+          <ChangeUsernameModal />
         </div>
 
         <div className="mt-3 w-full">
