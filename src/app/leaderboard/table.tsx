@@ -39,11 +39,7 @@ export function LeaderboardTable({
           <TableRow key={profile.userId}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>
-              {profile.username ? (
-                <Link href={`/${profile.userId}`}>@{profile.username}</Link>
-              ) : (
-                profile.userId
-              )}
+              <Link href={`/${profile.userId}`}>@{profile.username}</Link>
             </TableCell>
             <TableCell>{profile.totalAura?.toLocaleString()}</TableCell>
           </TableRow>
@@ -54,11 +50,7 @@ export function LeaderboardTable({
           <TableRow className="h-14">
             <TableCell>{me.rank}</TableCell>
             <TableCell>
-              {me.username ? (
-                <Link href={`/${me.userId}`}>@{me.username}</Link>
-              ) : (
-                me.userId
-              )}
+              <Link href={`/${me.userId}`}>@{me.username}</Link>
             </TableCell>
             <TableCell>{me.totalAura?.toLocaleString()}</TableCell>
           </TableRow>
