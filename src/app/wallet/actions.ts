@@ -1,6 +1,6 @@
 "use server";
 
-import { events, profiles } from "@/schema";
+import { eventsTable, profilesTable } from "@/schema";
 import { db } from "@/server/db";
 import { openai } from "@ai-sdk/openai";
 import { auth } from "@clerk/nextjs/server";
@@ -37,7 +37,7 @@ export async function addEventAction(formData: FormData) {
 
   const { assessment } = object;
   const [result] = await db
-    .insert(events)
+    .insert(eventsTable)
     .values({
       userId,
       content,
@@ -48,9 +48,9 @@ export async function addEventAction(formData: FormData) {
     .returning();
 
   await db
-    .update(profiles)
-    .set({ totalAura: sql`${profiles.totalAura} + ${assessment.aura}` })
-    .where(eq(profiles.userId, userId));
+    .update(profilesTable)
+    .set({ totalAura: sql`${profilesTable.totalAura} + ${assessment.aura}` })
+    .where(eq(profilesTable.userId, userId));
 
   return result;
 }

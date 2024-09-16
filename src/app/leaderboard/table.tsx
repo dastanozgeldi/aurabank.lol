@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -9,22 +10,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { SelectProfile } from "@/schema";
-import { useUser } from "@clerk/nextjs";
-import Link from "next/link";
 
-export function LeaderboardTable({ profiles }: { profiles: SelectProfile[] }) {
-  const { user } = useUser();
+type Profile = {
+  userId: string;
+  username: string | null;
+  totalAura: number | null;
+  rank: number;
+};
 
-  const leaderboard = profiles.map((profile, index) => ({
-    ...profile,
-    rank: index + 1,
-  }));
-
-  const me = user
-    ? leaderboard.find((profile) => profile.userId === user.id)
-    : null;
-
+export function LeaderboardTable({
+  me,
+  profiles,
+}: {
+  me: Profile;
+  profiles: Profile[];
+}) {
   return (
     <Table>
       <TableHeader>
@@ -40,7 +40,7 @@ export function LeaderboardTable({ profiles }: { profiles: SelectProfile[] }) {
             <TableCell>{index + 1}</TableCell>
             <TableCell>
               {profile.username ? (
-                <Link href={`/@${profile.username}`}>@{profile.username}</Link>
+                <Link href={`/${profile.userId}`}>@{profile.username}</Link>
               ) : (
                 profile.userId
               )}
@@ -55,7 +55,7 @@ export function LeaderboardTable({ profiles }: { profiles: SelectProfile[] }) {
             <TableCell>{me.rank}</TableCell>
             <TableCell>
               {me.username ? (
-                <Link href={`/@${me.username}`}>@{me.username}</Link>
+                <Link href={`/${me.userId}`}>@{me.username}</Link>
               ) : (
                 me.userId
               )}

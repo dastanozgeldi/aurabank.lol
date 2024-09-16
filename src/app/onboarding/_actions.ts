@@ -1,6 +1,6 @@
 "use server";
 
-import { profiles } from "@/schema";
+import { profilesTable } from "@/schema";
 import { db } from "@/server/db";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 
@@ -15,7 +15,7 @@ export const completeOnboarding = async (formData: FormData) => {
     const username = formData.get("username") as string;
 
     await db
-      .insert(profiles)
+      .insert(profilesTable)
       .values({
         userId,
         username,
@@ -23,7 +23,7 @@ export const completeOnboarding = async (formData: FormData) => {
       // there are existing users with hardcoded profiles,
       // so we need to update the username if it already exists
       .onConflictDoUpdate({
-        target: profiles.userId,
+        target: profilesTable.userId,
         set: { username },
       });
 

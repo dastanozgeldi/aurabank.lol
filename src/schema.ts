@@ -7,13 +7,13 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-export const profiles = pgTable("profiles_table", {
+export const profilesTable = pgTable("profiles_table", {
   userId: text("user_id").primaryKey(),
   totalAura: integer("total_aura").default(0),
   username: varchar("username", { length: 20 }).unique(),
 });
 
-export const events = pgTable("events_table", {
+export const eventsTable = pgTable("events_table", {
   id: serial("id").primaryKey(),
   content: text("content").notNull(),
   userId: text("user_id").notNull(),
@@ -23,8 +23,8 @@ export const events = pgTable("events_table", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export type InsertProfile = typeof profiles.$inferInsert;
-export type SelectProfile = typeof profiles.$inferSelect;
+export type InsertProfile = typeof profilesTable.$inferInsert;
+export type SelectProfile = typeof profilesTable.$inferSelect;
 
-export type InsertEvent = typeof events.$inferInsert;
-export type SelectEvent = typeof events.$inferSelect;
+export type InsertEvent = typeof eventsTable.$inferInsert;
+export type SelectEvent = typeof eventsTable.$inferSelect;
