@@ -8,7 +8,7 @@ export const Nav = () => {
   return (
     <nav className="flex items-center justify-between">
       <Link href="/">
-        <h1 className="text-2xl font-extrabold sm:text-3xl">aura wallet.</h1>
+        <h1 className="text-2xl font-extrabold sm:text-3xl">aura bank.</h1>
       </Link>
 
       <div className="flex items-center gap-3 sm:gap-6">

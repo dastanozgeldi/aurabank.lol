@@ -20,11 +20,11 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aurawallet.netlify.app"),
-  title: "Aura Wallet",
+  metadataBase: new URL("https://aurabank.lol"),
+  title: "Aura Bank",
   description:
     "Track your daily aura in a wallet using AI and compete with others!",
-  keywords: ["Aura", "Wallet", "AI", "dastanozgeldi", "Next.js"],
+  keywords: ["Aura", "Bank", "Wallet", "AI", "dastanozgeldi", "Next.js"],
   authors: [
     {
       name: "Dastan Ozgeldi",
@@ -35,16 +35,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Aura Wallet",
+    title: "Aura Bank",
     description:
       "Track your daily aura in a wallet using AI and compete with others!",
-    siteName: "Aura Wallet",
-    url: "https://aurawallet.netlify.app",
+    siteName: "Aura Bank",
+    url: "https://aurabank.lol",
     images: "/og-image.png",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aura Wallet",
+    title: "Aura Bank",
     description:
       "Track your daily aura in a wallet using AI and compete with others!",
     images: "/og-image.png",
