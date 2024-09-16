@@ -1,4 +1,4 @@
-import { clerkClient } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,6 +15,7 @@ export default async function ProfilePage({
   const profile = await getProfile(userId);
   if (!profile) notFound();
 
+  const { userId: myId } = auth();
   const user = await clerkClient().users.getUser(userId);
   const events = await getEvents(userId);
 
@@ -43,9 +44,11 @@ export default async function ProfilePage({
           <div className="text-center text-sm">@{profile.username}</div>
         </div>
 
-        <div className="my-3 w-full">
-          <ChangeUsernameModal />
-        </div>
+        {userId === myId && (
+          <div className="my-3 w-full">
+            <ChangeUsernameModal userId={userId} />
+          </div>
+        )}
 
         <div className="mt-3 w-full">
           <AuraTabs profile={profile} events={events} />

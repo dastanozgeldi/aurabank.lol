@@ -14,8 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useModal } from "./use-modal";
 
-export function ChangeUsernameModal() {
-  const { loading, open, setOpen, onSubmit } = useModal();
+export function ChangeUsernameModal({ userId }: { userId: string }) {
+  const { loading, open, setOpen, onSubmit } = useModal(userId);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

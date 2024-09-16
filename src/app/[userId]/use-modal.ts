@@ -1,10 +1,8 @@
-import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 import { setUsernameAction } from "./_actions";
 
-export const useModal = () => {
-  const router = useRouter();
+export const useModal = (userId: string) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -15,7 +13,7 @@ export const useModal = () => {
 
     try {
       setLoading(true);
-      await setUsernameAction(formData);
+      await setUsernameAction(formData, userId);
 
       toast.success("Username was changed.");
     } catch {
@@ -23,7 +21,6 @@ export const useModal = () => {
     } finally {
       setLoading(false);
       setOpen(false);
-      router.refresh();
     }
   };
 
