@@ -5,7 +5,7 @@ import { SelectProfile } from "@/schema";
 import { setUsernameAction } from "./_actions";
 import { useRouter } from "next/navigation";
 
-export const useProfile = (username: string) => {
+export const useProfile = (userId: string) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<SelectProfile | null | undefined>(
@@ -18,7 +18,7 @@ export const useProfile = (username: string) => {
     try {
       setLoading(true);
 
-      const response = await fetch(`/api/${username}`);
+      const response = await fetch(`/api/${userId}`);
       const { profile, user } = await response.json();
 
       setProfile(profile);
@@ -28,7 +28,7 @@ export const useProfile = (username: string) => {
     } finally {
       setLoading(false);
     }
-  }, [username]);
+  }, [userId]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -41,7 +41,7 @@ export const useProfile = (username: string) => {
 
       toast("Username set successfully.");
 
-      router.push(`/@${formData.get("username")}`);
+      router.refresh();
     } catch {
       toast("Username is already taken.");
     } finally {
