@@ -61,7 +61,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark">
         <head>
-          <PlausibleProvider domain="aurawallet.netlify.app" />
+          <PlausibleProvider domain="aurabank.lol" />
         </head>
         <body
           className={cn(geistSans.variable, geistMono.variable, "antialiased")}
