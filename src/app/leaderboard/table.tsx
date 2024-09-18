@@ -1,9 +1,8 @@
-"use client";
-
 import Link from "next/link";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -27,6 +26,7 @@ export function LeaderboardTable({
 }) {
   return (
     <Table>
+      <TableCaption>there are {profiles.length} users right now.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[50px]">Rank</TableHead>
