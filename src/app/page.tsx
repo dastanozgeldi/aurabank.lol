@@ -1,23 +1,47 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+"use client";
+
+import dynamic from "next/dynamic";
+import { globeConfig, sampleArcs } from "./globe-config";
+import { motion } from "framer-motion";
+
+const World = dynamic(
+  () => import("@/components/ui/globe").then((m) => m.World),
+  {
+    ssr: false,
+  },
+);
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <p className="my-2">
-        your aura changes everytime. sometimes you level it up, sometimes it
-        drops to the lowest point.
-      </p>
-      <p className="my-2">
-        we let you keep record of your aura and make the calculations fair with
-        the decision-making powers of GPT-4o.
-      </p>
-      <Link href="/wallet" className="max-w-max">
-        <Button size="lg" className="mt-4 text-lg font-semibold">
-          start tracking your aura <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
-      </Link>
+      <div className="relative mx-auto my-10 h-[36rem] w-full max-w-7xl overflow-hidden">
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+          }}
+          className="div"
+        >
+          <h2 className="text-center text-2xl font-bold text-black dark:text-white md:text-4xl">
+            track your aura.
+          </h2>
+          <p className="mx-auto mt-2 max-w-md text-center text-base font-normal text-neutral-700 dark:text-neutral-200 md:text-lg">
+            your friends say +100 aura, -200 aura everyday. might as well count
+            it.
+          </p>
+        </motion.div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 h-40 w-full select-none bg-gradient-to-b from-transparent to-white dark:to-black" />
+        <div className="mt-6 h-72 w-full md:h-full">
+          <World data={sampleArcs} globeConfig={globeConfig} />
+        </div>
+      </div>
     </div>
   );
 }
