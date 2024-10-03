@@ -2,7 +2,7 @@
 
 import { eventsTable, profilesTable } from "@/schema";
 import { db } from "@/server/db";
-import { openai } from "@ai-sdk/openai";
+import { azure } from "@ai-sdk/azure";
 import { auth } from "@clerk/nextjs/server";
 import { generateObject } from "ai";
 import { eq, sql } from "drizzle-orm";
@@ -15,7 +15,7 @@ export async function addEventAction(formData: FormData) {
   const content = formData.get("content") as string;
 
   const { object } = await generateObject({
-    model: openai("gpt-4o"),
+    model: azure("gpt-4o"),
     schema: z.object({
       assessment: z.object({
         title: z.string(),
