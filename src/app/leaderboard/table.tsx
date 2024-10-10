@@ -31,7 +31,7 @@ export function LeaderboardTable({
         <TableRow>
           <TableHead className="w-[50px]">Rank</TableHead>
           <TableHead>User</TableHead>
-          <TableHead>Aura</TableHead>
+          <TableHead className="text-right">Aura</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="h-[300px] overflow-auto">
@@ -41,7 +41,9 @@ export function LeaderboardTable({
             <TableCell>
               <Link href={`/${profile.userId}`}>@{profile.username}</Link>
             </TableCell>
-            <TableCell>{profile.totalAura?.toLocaleString()}</TableCell>
+            <TableCell className="text-right">
+              {profile.totalAura?.toLocaleString()}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -52,7 +54,9 @@ export function LeaderboardTable({
             <TableCell>
               <Link href={`/${me.userId}`}>@{me.username}</Link>
             </TableCell>
-            <TableCell>{me.totalAura?.toLocaleString()}</TableCell>
+            <TableCell className="text-right">
+              {me.totalAura?.toLocaleString()}
+            </TableCell>
           </TableRow>
         </TableFooter>
       )}
