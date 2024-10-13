@@ -1,5 +1,5 @@
-import PlausibleProvider from "next-plausible";
 import type { Metadata } from "next";
+import Script from "next/script";
 import localFont from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
@@ -60,9 +60,6 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark">
-        <head>
-          <PlausibleProvider domain="aurabank.lol" />
-        </head>
         <body
           className={cn(geistSans.variable, geistMono.variable, "antialiased")}
         >
@@ -84,6 +81,7 @@ export default function RootLayout({
 
           <Toaster />
         </body>
+        <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
       </html>
     </ClerkProvider>
   );
