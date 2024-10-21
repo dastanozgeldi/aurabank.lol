@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useState, FormEvent } from "react";
 import { toast } from "sonner";
+import { addSnitchAction } from "./actions";
 
 export const useSnitch = () => {
   const router = useRouter();
@@ -13,8 +14,7 @@ export const useSnitch = () => {
 
     try {
       setLoading(true);
-      console.log(formData);
-      // await addSnitchAction(formData);
+      await addSnitchAction(formData);
 
       toast.success("Snitch was added.");
     } catch {
