@@ -16,9 +16,11 @@ export default async function WalletPage() {
 
   return (
     <div className="h-full">
-      <div className="mt-4 space-y-3">
+      <div className="my-4 space-y-3">
         <AuraTabs wallet profile={profile} events={events} />
       </div>
+
+      <AddEventModal />
 
       <div className="my-4">
         <div className="flex items-center justify-between">
@@ -47,8 +49,6 @@ export default async function WalletPage() {
           </div>
         )}
       </div>
-
-      <AddEventModal />
     </div>
   );
 }
