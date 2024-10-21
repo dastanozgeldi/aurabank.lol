@@ -3,7 +3,7 @@
 ### Second Sprint
 
 - [ ] implement aura snitch feature
-  - [ ] create snitches table (id, culprit_id, victim_id, event, aura)
+  - [x] create snitches table (id, culprit_id, victim_id, event, aura)
   - [ ] form with user handle and story of what happened
     - [ ] take current user id as culprit_id
     - [ ] create action to submit snitch
