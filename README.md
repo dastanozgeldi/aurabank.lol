@@ -1,9 +1,20 @@
 ## TODO
 
+### Second Sprint
+
+- [ ] implement aura snitch feature
+  - [ ] create snitches table (id, culprit_id, victim_id, event, aura)
+  - [ ] form with user handle and story of what happened
+    - [ ] take current user id as culprit_id
+    - [ ] create action to submit snitch
+- [ ] work on design
+
+### First Sprint
+
 - [x] setup home page
 - [x] wallet page design
 - [x] setup clerk
-- [x] wallet page: redirect unauthorized users to sign in page 
+- [x] wallet page: redirect unauthorized users to sign in page
 - [x] setup drizzle and postgres
 - [x] create events table
 - [x] vercel ai sdk
