@@ -16,9 +16,9 @@ export const useSnitch = () => {
       console.log(formData);
       // await addSnitchAction(formData);
 
-      toast.success("Event was added.");
+      toast.success("Snitched was added.");
     } catch {
-      toast.error("Failed to add the event.");
+      toast.error("Failed to add the snitch.");
     } finally {
       setLoading(false);
       router.refresh();
