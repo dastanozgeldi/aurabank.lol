@@ -1,5 +1,5 @@
 import { Brain, User } from "lucide-react";
-import { SelectEvent, SelectProfile } from "@/schema";
+import { SelectEvent, SelectProfile } from "@/server/schema";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { AuraCard } from "./aura-card";
 

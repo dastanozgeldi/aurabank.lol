@@ -1,8 +1,9 @@
 "use server";
 
-import { profilesTable } from "@/schema";
+import { profilesTable } from "@/server/schema";
 import { db } from "@/server/db";
 import { auth, clerkClient } from "@clerk/nextjs/server";
+import { formatUsername } from "@/lib/utils";
 
 export const completeOnboarding = async (formData: FormData) => {
   const { userId } = auth();
@@ -12,7 +13,7 @@ export const completeOnboarding = async (formData: FormData) => {
   }
 
   try {
-    const username = formData.get("username") as string;
+    const username = formatUsername(formData.get("username") as string);
 
     await db
       .insert(profilesTable)

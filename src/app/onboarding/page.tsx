@@ -1,16 +1,16 @@
 "use client";
 
-import * as React from "react";
+import { toast } from "sonner";
+import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { completeOnboarding } from "./_actions";
-import { toast } from "sonner";
 
 export default function OnboardingPage() {
-  const [error, setError] = React.useState("");
+  const [error, setError] = useState("");
   const { user } = useUser();
   const router = useRouter();
 
