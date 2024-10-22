@@ -11,7 +11,12 @@ export default function Page() {
 
   return (
     <div className="my-4">
-      <h1 className="my-4 text-center text-2xl font-bold">snitch on someone</h1>
+      <div className="my-4 text-center">
+        <h1 className="text-2xl font-bold">snitch on someone</h1>
+        <p className="text-muted-foreground">
+          snitch events are displayed on user&apos;s profile.
+        </p>
+      </div>
 
       <form onSubmit={onSubmit} className="space-y-3">
         <div className="grid w-full gap-1.5">
