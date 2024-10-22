@@ -11,6 +11,8 @@ export default function Page() {
 
   return (
     <div className="my-4">
+      <h1 className="my-4 text-center text-2xl font-bold">snitch on someone</h1>
+
       <form onSubmit={onSubmit} className="space-y-3">
         <div className="grid w-full gap-1.5">
           <Label htmlFor="username">victim username</Label>
