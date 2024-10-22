@@ -1,6 +1,6 @@
 "use server";
 
-import { generateEventAssessment } from "@/lib/utils";
+import { formatUsername, generateEventAssessment } from "@/lib/utils";
 import { profilesTable, snitchesTable } from "@/server/schema";
 import { db } from "@/server/db";
 import { insertEvent } from "@/server/queries";
@@ -11,7 +11,7 @@ export async function addSnitchAction(formData: FormData) {
   const { userId: culpritId } = auth();
   if (!culpritId) throw new Error("Unauthorized");
 
-  const username = formData.get("username") as string;
+  const username = formatUsername(formData.get("username") as string);
   const victim = await db.query.profilesTable.findFirst({
     where: eq(profilesTable.username, username),
   });
