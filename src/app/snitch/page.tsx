@@ -13,11 +13,11 @@ export default function Page() {
     <div className="my-4">
       <form onSubmit={onSubmit} className="space-y-3">
         <div className="grid w-full gap-1.5">
-          <Label htmlFor="content">victim nickname</Label>
+          <Label htmlFor="username">victim username</Label>
           <Input
-            placeholder="type a user handle, e.g. @cristiano"
-            id="content"
-            name="content"
+            placeholder="type a username, e.g. @cristiano"
+            id="username"
+            name="username"
           />
         </div>
         <div className="grid w-full gap-1.5">
