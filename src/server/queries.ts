@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { db } from "./db";
-import { eventsTable, profilesTable } from "@/server/schema";
+import { eventsTable, profilesTable, snitchesTable } from "@/server/schema";
 import { desc, eq, sql } from "drizzle-orm";
 
 export async function getEvents(userId: string) {
@@ -9,6 +9,17 @@ export async function getEvents(userId: string) {
     .from(eventsTable)
     .where(eq(eventsTable.userId, userId))
     .orderBy(desc(eventsTable.createdAt));
+}
+
+export async function getSnitches(userId: string) {
+  return db.query.snitchesTable.findMany({
+    where: eq(snitchesTable.victimId, userId),
+    orderBy: [desc(snitchesTable.createdAt)],
+    with: {
+      event: true,
+      culprit: true,
+    },
+  });
 }
 
 export async function getProfile(userId: string) {
