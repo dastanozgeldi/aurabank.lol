@@ -1,6 +1,6 @@
 "use server";
 
-import { profilesTable } from "@/schema";
+import { profilesTable } from "@/server/schema";
 import { db } from "@/server/db";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 

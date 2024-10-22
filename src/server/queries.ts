@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { db } from "./db";
-import { eventsTable, profilesTable } from "@/schema";
+import { eventsTable, profilesTable } from "@/server/schema";
 import { desc, eq, sql } from "drizzle-orm";
 
 export async function getEvents(userId: string) {

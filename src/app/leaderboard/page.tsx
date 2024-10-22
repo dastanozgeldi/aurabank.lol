@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { desc, sql } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 import { Skeleton } from "@/components/ui/skeleton";
-import { profilesTable } from "@/schema";
+import { profilesTable } from "@/server/schema";
 import { db } from "@/server/db";
 import { LeaderboardTable } from "./table";
 
