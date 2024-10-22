@@ -1,11 +1,20 @@
+import { LogIn } from "lucide-react";
 import type { Metadata } from "next";
 import Script from "next/script";
 import localFont from "next/font/local";
-import { ClerkProvider } from "@clerk/nextjs";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { dark } from "@clerk/themes";
 import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/nav";
+import { MobileNav } from "@/components/mobile-nav";
+import { Button } from "@/components/ui/button";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -64,7 +73,22 @@ export default function RootLayout({
           className={cn(geistSans.variable, geistMono.variable, "antialiased")}
         >
           <main className="mx-auto flex min-h-screen max-w-xl flex-col p-6">
-            <Nav />
+            <div className="flex items-center justify-between">
+              <div className="w-full">
+                <Nav />
+                <MobileNav />
+              </div>
+              <SignedOut>
+                <SignInButton>
+                  <Button size="sm">
+                    <LogIn className="mr-2 h-4 w-4" /> sign in
+                  </Button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </div>
 
             <div className="mb-6 flex-grow">{children}</div>
 

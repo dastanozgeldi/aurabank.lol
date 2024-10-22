@@ -1,22 +1,19 @@
 import Link from "next/link";
-import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedOut, SignInButton, SignedIn } from "@clerk/nextjs";
 import { LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants, Button } from "./ui/button";
 
 export const Nav = () => {
   return (
-    <nav className="flex items-center justify-between">
+    <nav className="mr-6 hidden flex-grow items-center justify-between md:flex">
       <Link href="/">
-        <h1 className="text-2xl font-extrabold sm:text-3xl">aura bank.</h1>
+        <h1 className="text-3xl font-extrabold">aura bank.</h1>
       </Link>
 
-      <div className="flex items-center gap-3 sm:gap-6">
+      <div className="flex items-center gap-6">
         <Link
-          className={cn(
-            buttonVariants({ variant: "link" }),
-            "px-0 text-base sm:text-lg",
-          )}
+          className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
           href="/leaderboard"
         >
           top5
@@ -30,24 +27,17 @@ export const Nav = () => {
         </SignedOut>
         <SignedIn>
           <Link
-            className={cn(
-              buttonVariants({ variant: "link" }),
-              "px-0 text-base sm:text-lg",
-            )}
+            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
             href="/wallet"
           >
             wallet
           </Link>
           <Link
-            className={cn(
-              buttonVariants({ variant: "link" }),
-              "px-0 text-base sm:text-lg",
-            )}
+            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
             href="/profile"
           >
             profile
           </Link>
-          <UserButton />
         </SignedIn>
       </div>
     </nav>
