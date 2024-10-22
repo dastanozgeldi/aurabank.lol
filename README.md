@@ -4,9 +4,10 @@
 
 - [ ] implement aura snitch feature
   - [x] create snitches table (id, culprit_id, victim_id, event, aura)
-  - [ ] form with user handle and story of what happened
-    - [ ] take current user id as culprit_id
-    - [ ] create action to submit snitch
+  - [x] form with user handle and story of what happened
+    - [x] take current user id as culprit_id
+    - [x] create action to submit snitch
+  - [ ] display snitch events on user profile
 - [ ] work on design
 
 ### First Sprint
