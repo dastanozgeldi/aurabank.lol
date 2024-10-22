@@ -34,6 +34,8 @@ export async function generateEventAssessment(content: string) {
       `Along with deciding the amount of aura points for the event, ` +
       `you should also give it a brief title and provide explanation for the aura points.` +
       `Take feasibility of the event into consideration. If the event is obviously fake, you need to punish the user with negative aura.` +
+      `By the way, if the event content given by the user isn't written in first-person, ` +
+      `it means someone else has witnessed a story of that user.` +
       `Here is the event given by the user: ${content}`,
   });
 
