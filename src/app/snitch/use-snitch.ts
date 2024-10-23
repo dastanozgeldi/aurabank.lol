@@ -1,20 +1,22 @@
 import { useRouter } from "next/navigation";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useCallback, useEffect } from "react";
 import { toast } from "sonner";
 import { addSnitchAction } from "./actions";
+import { SelectProfile } from "@/server/schema";
 
 export const useSnitch = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [profiles, setProfiles] = useState<SelectProfile[]>([]);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>, username: string) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
 
     try {
       setLoading(true);
-      await addSnitchAction(formData);
+      await addSnitchAction(formData, username);
 
       toast.success("Snitch was added.");
     } catch {
@@ -25,8 +27,20 @@ export const useSnitch = () => {
     }
   }
 
+  const loadProfiles = useCallback(async () => {
+    const res = await fetch("/api/profiles");
+    const { profiles } = await res.json();
+
+    setProfiles(profiles);
+  }, []);
+
+  useEffect(() => {
+    loadProfiles();
+  }, [loadProfiles]);
+
   return {
     loading,
+    profiles,
     onSubmit,
   };
 };

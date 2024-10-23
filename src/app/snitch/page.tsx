@@ -1,13 +1,15 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import { useSnitch } from "./use-snitch";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import UsernameSelector from "./username-selector";
+import { useState } from "react";
 
 export default function Page() {
-  const { loading, onSubmit } = useSnitch();
+  const { loading, profiles, onSubmit } = useSnitch();
+  const [selectedUsername, setSelectedUsername] = useState("");
 
   return (
     <div className="my-4">
@@ -18,19 +20,19 @@ export default function Page() {
         </p>
       </div>
 
-      <form onSubmit={onSubmit} className="space-y-3">
+      <form
+        onSubmit={(event) => onSubmit(event, selectedUsername)}
+        className="space-y-3"
+      >
         <div className="grid w-full gap-1.5">
           <Label htmlFor="username">victim username</Label>
-          <Input
-            placeholder="type a username, e.g. @cristiano"
-            id="username"
-            name="username"
-            autoComplete="off"
-            required
-            minLength={3}
-            maxLength={20}
+          <UsernameSelector
+            profiles={profiles}
+            selectedUsername={selectedUsername}
+            setSelectedUsername={setSelectedUsername}
           />
         </div>
+
         <div className="grid w-full gap-1.5">
           <Label htmlFor="content">what happened</Label>
           <Textarea

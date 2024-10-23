@@ -22,11 +22,14 @@ import { useState } from "react";
 
 export default function UsernameSelector({
   profiles,
+  selectedUsername,
+  setSelectedUsername,
 }: {
   profiles: SelectProfile[];
+  selectedUsername: string;
+  setSelectedUsername: (value: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -37,10 +40,10 @@ export default function UsernameSelector({
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {value ? (
+          {selectedUsername ? (
             <span className="flex items-center">
               <AtSignIcon className="mr-2 h-4 w-4 text-muted-foreground" />
-              {value}
+              {selectedUsername}
             </span>
           ) : (
             "select username..."
@@ -64,7 +67,9 @@ export default function UsernameSelector({
                       key={username}
                       value={username}
                       onSelect={(currentValue: string) => {
-                        setValue(currentValue === value ? "" : currentValue);
+                        setSelectedUsername(
+                          currentValue === selectedUsername ? "" : currentValue,
+                        );
                         setOpen(false);
                       }}
                       className="flex w-full items-center gap-2 px-4 py-2"
@@ -73,7 +78,9 @@ export default function UsernameSelector({
                       <CheckIcon
                         className={cn(
                           "ml-auto h-4 w-4",
-                          value === username ? "opacity-100" : "opacity-0",
+                          selectedUsername === username
+                            ? "opacity-100"
+                            : "opacity-0",
                         )}
                       />
                     </CommandItem>
