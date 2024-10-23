@@ -32,6 +32,9 @@ export function MobileNav() {
         </div>
 
         <div className="flex flex-col space-y-3">
+          <MobileLink href="/" setOpen={setOpen}>
+            home
+          </MobileLink>
           <MobileLink href="/leaderboard" setOpen={setOpen}>
             top5
           </MobileLink>
