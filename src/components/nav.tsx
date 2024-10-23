@@ -34,6 +34,12 @@ export const Nav = () => {
           </Link>
           <Link
             className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
+            href="/snitch"
+          >
+            snitch
+          </Link>
+          <Link
+            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
             href="/profile"
           >
             profile
