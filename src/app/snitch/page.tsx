@@ -25,6 +25,10 @@ export default function Page() {
             placeholder="type a username, e.g. @cristiano"
             id="username"
             name="username"
+            autoComplete="off"
+            required
+            minLength={3}
+            maxLength={20}
           />
         </div>
         <div className="grid w-full gap-1.5">
