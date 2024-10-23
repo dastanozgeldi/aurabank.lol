@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { SignedOut, SignInButton, SignedIn } from "@clerk/nextjs";
-import { LogIn } from "lucide-react";
+import { SignedIn } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
-import { buttonVariants, Button } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 
 export const Nav = () => {
   return (
@@ -18,13 +17,6 @@ export const Nav = () => {
         >
           top5
         </Link>
-        <SignedOut>
-          <SignInButton>
-            <Button size="sm">
-              <LogIn className="mr-2 h-4 w-4" /> sign in
-            </Button>
-          </SignInButton>
-        </SignedOut>
         <SignedIn>
           <Link
             className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
