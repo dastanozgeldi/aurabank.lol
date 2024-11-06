@@ -61,7 +61,7 @@ export default function UsernameSelector({
             <CommandEmpty>No username found.</CommandEmpty>
             <CommandGroup>
               {profiles.map(
-                ({ username }) =>
+                ({ username, totalAura }) =>
                   username && (
                     <CommandItem
                       key={username}
@@ -74,7 +74,9 @@ export default function UsernameSelector({
                       }}
                       className="flex w-full items-center gap-2 px-4 py-2"
                     >
-                      @{username}
+                      <div>
+                        @{username} ({totalAura} aura)
+                      </div>
                       <CheckIcon
                         className={cn(
                           "ml-auto h-4 w-4",
