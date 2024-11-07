@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Skeleton } from "@/components/ui/skeleton";
 import { profilesTable } from "@/server/schema";
 import { db } from "@/server/db";
-import { LeaderboardTable } from "./table";
+import { LeaderboardTable } from "./leaderboard-table";
 
 export default async function LeaderboardPage() {
   const { userId } = auth();
