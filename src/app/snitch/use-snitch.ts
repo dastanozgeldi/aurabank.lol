@@ -28,7 +28,7 @@ export const useSnitch = () => {
   }
 
   const loadProfiles = useCallback(async () => {
-    const res = await fetch("/api/profiles");
+    const res = await fetch("/api/profiles", { cache: "no-store" });
     const { profiles } = await res.json();
 
     setProfiles(profiles);
