@@ -21,7 +21,9 @@ export default function Page() {
       </div>
 
       <form
-        onSubmit={(event) => onSubmit(event, selectedUsername)}
+        onSubmit={(event) =>
+          onSubmit(event, selectedUsername, setSelectedUsername)
+        }
         className="space-y-3"
       >
         <div className="grid w-full gap-1.5">
@@ -36,12 +38,14 @@ export default function Page() {
         <div className="grid w-full gap-1.5">
           <Label htmlFor="content">what happened</Label>
           <Textarea
+            required
+            minLength={10}
             placeholder="he farted during the class"
             id="content"
             name="content"
           />
         </div>
-        <Button disabled={loading} className="w-full">
+        <Button disabled={loading || !selectedUsername} className="w-full">
           {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
           Submit
           {!loading && <ArrowRight className="ml-2 h-4 w-4" />}

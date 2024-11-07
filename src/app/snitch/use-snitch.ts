@@ -9,7 +9,11 @@ export const useSnitch = () => {
   const [loading, setLoading] = useState(false);
   const [profiles, setProfiles] = useState<SelectProfile[]>([]);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>, username: string) {
+  async function onSubmit(
+    event: FormEvent<HTMLFormElement>,
+    username: string,
+    setSelectedUsername: (username: string) => void,
+  ) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -23,12 +27,16 @@ export const useSnitch = () => {
       toast.error("Failed to add the snitch.");
     } finally {
       setLoading(false);
+      setSelectedUsername("");
       router.refresh();
     }
   }
 
   const loadProfiles = useCallback(async () => {
-    const res = await fetch("/api/profiles", { cache: "no-store" });
+    const res = await fetch("/api/profiles", {
+      cache: "no-store",
+      next: { revalidate: 0 },
+    });
     const { profiles } = await res.json();
 
     setProfiles(profiles);
