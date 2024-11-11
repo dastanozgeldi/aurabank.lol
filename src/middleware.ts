@@ -2,7 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const isOnboardingRoute = createRouteMatcher(["/onboarding"]);
-const isProtectedRoute = createRouteMatcher(["/wallet", "/profile"]);
+const isProtectedRoute = createRouteMatcher(["/wallet", "/profile", "/snitch"]);
 
 export default clerkMiddleware((auth, req) => {
   const { userId, sessionClaims, redirectToSignIn } = auth();
