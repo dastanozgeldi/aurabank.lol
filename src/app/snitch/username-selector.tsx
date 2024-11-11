@@ -20,7 +20,7 @@ import {
 import { SelectProfile } from "@/server/schema";
 import { useState } from "react";
 
-export default function UsernameSelector({
+export const UsernameSelector = ({
   profiles,
   selectedUsername,
   setSelectedUsername,
@@ -28,7 +28,7 @@ export default function UsernameSelector({
   profiles: SelectProfile[];
   selectedUsername: string;
   setSelectedUsername: (value: string) => void;
-}) {
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -94,4 +94,4 @@ export default function UsernameSelector({
       </PopoverContent>
     </Popover>
   );
-}
+};

@@ -1,11 +1,7 @@
-import { db } from "@/server/db";
-import { profilesTable } from "@/server/schema";
-import { desc } from "drizzle-orm";
+import { getProfiles } from "@/server/queries";
 
 export async function GET() {
-  const profiles = await db.query.profilesTable.findMany({
-    orderBy: [desc(profilesTable.totalAura)],
-  });
+  const profiles = await getProfiles();
 
   return Response.json({ profiles });
 }

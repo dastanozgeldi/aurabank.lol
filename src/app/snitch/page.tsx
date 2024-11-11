@@ -1,11 +1,11 @@
 "use client";
-import { useSnitch } from "./use-snitch";
+import { useState } from "react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Loader2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
-import UsernameSelector from "./username-selector";
-import { useState } from "react";
+import { UsernameSelector } from "./username-selector";
+import { useSnitch } from "./use-snitch";
 
 export default function Page() {
   const { loading, profiles, onSubmit } = useSnitch();

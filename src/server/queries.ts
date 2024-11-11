@@ -3,6 +3,20 @@ import { db } from "./db";
 import { eventsTable, profilesTable, snitchesTable } from "@/server/schema";
 import { desc, eq, sql } from "drizzle-orm";
 
+export async function getLeaderboard() {
+  return db
+    .select({
+      userId: profilesTable.userId,
+      username: profilesTable.username,
+      totalAura: profilesTable.totalAura,
+      rank: sql<number>`rank() over (order by ${profilesTable.totalAura} desc)`.as(
+        "rank",
+      ),
+    })
+    .from(profilesTable)
+    .orderBy(desc(profilesTable.totalAura));
+}
+
 export async function getEvents(userId: string) {
   return db
     .select()
@@ -31,6 +45,18 @@ export async function getProfile(userId: string) {
   return profile;
 }
 
+export async function getProfileByUsername(username: string) {
+  return db.query.profilesTable.findFirst({
+    where: eq(profilesTable.username, username),
+  });
+}
+
+export async function getProfiles() {
+  return db.query.profilesTable.findMany({
+    orderBy: [desc(profilesTable.totalAura)],
+  });
+}
+
 export async function getMyProfile() {
   const { userId } = auth();
   if (!userId) throw new Error("Unauthorized");
@@ -41,6 +67,28 @@ export async function getMyProfile() {
     .where(eq(profilesTable.userId, userId));
 
   return profile;
+}
+
+export async function updateUsername(userId: string, username: string) {
+  await db
+    .update(profilesTable)
+    .set({ username })
+    .where(eq(profilesTable.userId, userId));
+}
+
+export async function insertProfile(userId: string, username: string) {
+  await db
+    .insert(profilesTable)
+    .values({
+      userId,
+      username,
+    })
+    // there are existing users with hardcoded profiles,
+    // so we need to update the username if it already exists
+    .onConflictDoUpdate({
+      target: profilesTable.userId,
+      set: { username },
+    });
 }
 
 export async function insertEvent({
@@ -73,4 +121,20 @@ export async function insertEvent({
     .where(eq(profilesTable.userId, userId));
 
   return { event: result };
+}
+
+export async function insertSnitch({
+  culpritId,
+  victimId,
+  eventId,
+}: {
+  culpritId: string;
+  victimId: string;
+  eventId: number;
+}) {
+  await db.insert(snitchesTable).values({
+    culpritId,
+    victimId,
+    eventId,
+  });
 }

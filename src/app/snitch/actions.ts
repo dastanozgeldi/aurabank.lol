@@ -1,19 +1,18 @@
 "use server";
 
 import { generateEventAssessment } from "@/lib/utils";
-import { profilesTable, snitchesTable } from "@/server/schema";
-import { db } from "@/server/db";
-import { insertEvent } from "@/server/queries";
+import {
+  getProfileByUsername,
+  insertEvent,
+  insertSnitch,
+} from "@/server/queries";
 import { auth } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm";
 
 export async function addSnitchAction(formData: FormData, username: string) {
   const { userId: culpritId } = auth();
   if (!culpritId) throw new Error("Unauthorized");
 
-  const victim = await db.query.profilesTable.findFirst({
-    where: eq(profilesTable.username, username),
-  });
+  const victim = await getProfileByUsername(username);
   if (!victim) throw new Error("Victim not found");
 
   const content = formData.get("content") as string;
@@ -25,7 +24,7 @@ export async function addSnitchAction(formData: FormData, username: string) {
     assessment,
   });
 
-  await db.insert(snitchesTable).values({
+  await insertSnitch({
     culpritId,
     victimId: victim.userId,
     eventId: event.id,
