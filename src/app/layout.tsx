@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Dastan Ozgeldi",
-      url: "https://dastanozgeldi.me",
+      url: "https://ozgeldi.tech",
     },
   ],
   creator: "Dastan Ozgeldi",
@@ -95,7 +95,7 @@ export default function RootLayout({
             <footer className="mt-auto text-center">
               brought to you by{" "}
               <a
-                href="https://dastanozgeldi.me"
+                href="https://ozgeldi.tech"
                 className="font-semibold underline"
               >
                 @dastanozgeldi
