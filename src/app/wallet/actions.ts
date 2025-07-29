@@ -1,8 +1,8 @@
 "use server";
 
-import { generateEventAssessment } from "@/lib/utils";
-import { insertEvent } from "@/server/queries";
 import { auth } from "@clerk/nextjs/server";
+import { insertEvent } from "@/drizzle/queries";
+import { generateEventAssessment } from "@/lib/generate-event-assessment";
 
 export async function addEventAction(formData: FormData) {
   const { userId } = await auth();

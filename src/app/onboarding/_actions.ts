@@ -1,8 +1,8 @@
 "use server";
 
 import { auth, clerkClient } from "@clerk/nextjs/server";
-import { formatUsername } from "@/lib/utils";
-import { insertProfile } from "@/server/queries";
+import { formatUsername } from "@/lib/formatters";
+import { insertProfile } from "@/drizzle/queries";
 
 export const completeOnboarding = async (formData: FormData) => {
   const { userId } = await auth();
@@ -16,11 +16,10 @@ export const completeOnboarding = async (formData: FormData) => {
 
     await insertProfile(userId, username);
 
-    const res = await clerkClient().users.updateUser(userId, {
-      publicMetadata: {
-        onboardingComplete: true,
-        username,
-      },
+    const res = await (
+      await clerkClient()
+    ).users.updateUser(userId, {
+      publicMetadata: { onboardingComplete: true, username },
     });
     return { message: res.publicMetadata };
   } catch (err) {

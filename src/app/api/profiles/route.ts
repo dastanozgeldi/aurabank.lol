@@ -1,4 +1,4 @@
-import { getProfiles } from "@/server/queries";
+import { getProfiles } from "@/drizzle/queries";
 
 export async function GET() {
   const profiles = await getProfiles();

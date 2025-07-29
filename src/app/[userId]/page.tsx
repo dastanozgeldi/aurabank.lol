@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AuraTabs } from "@/components/aura-tabs";
-import { getEvents, getProfile, getSnitches } from "@/server/queries";
+import { getEvents, getProfile, getSnitches } from "@/drizzle/queries";
 import { ChangeUsernameModal } from "./change-username-modal";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {

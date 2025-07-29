@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { db } from "./db";
-import { eventsTable, profilesTable, snitchesTable } from "@/server/schema";
+import { eventsTable, profilesTable, snitchesTable } from "@/drizzle/schema";
 import { desc, eq, sql } from "drizzle-orm";
 
 export async function getLeaderboard() {

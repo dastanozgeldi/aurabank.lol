@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useState, FormEvent, useCallback, useEffect } from "react";
 import { toast } from "sonner";
 import { addSnitchAction } from "./actions";
-import { SelectProfile } from "@/server/schema";
+import { SelectProfile } from "@/drizzle/schema";
 
 export const useSnitch = () => {
   const router = useRouter();

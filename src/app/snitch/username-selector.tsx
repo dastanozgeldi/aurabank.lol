@@ -17,7 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { SelectProfile } from "@/server/schema";
+import { SelectProfile } from "@/drizzle/schema";
 import { useState } from "react";
 
 export const UsernameSelector = ({

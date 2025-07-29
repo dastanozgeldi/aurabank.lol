@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LeaderboardTable } from "./leaderboard-table";
-import { getLeaderboard } from "@/server/queries";
+import { getLeaderboard } from "@/drizzle/queries";
 
 export default async function LeaderboardPage() {
   const { userId } = await auth();

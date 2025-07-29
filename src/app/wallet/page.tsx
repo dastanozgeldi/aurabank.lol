@@ -1,4 +1,4 @@
-import { getEvents, getMyProfile } from "@/server/queries";
+import { getEvents, getMyProfile } from "@/drizzle/queries";
 import {
   Card,
   CardContent,
