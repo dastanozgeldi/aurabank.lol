@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 const World = dynamic(
-  () => import("@/components/ui/globe").then((m) => m.World),
+  () => import("@/components/ui/custom/globe").then((m) => m.World),
   { ssr: false },
 );
 
