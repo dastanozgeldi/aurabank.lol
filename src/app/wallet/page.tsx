@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -15,14 +16,12 @@ export default async function WalletPage() {
   const events = await getEvents(profile.userId);
 
   return (
-    <div className="h-full">
-      <div className="my-4">
-        <AuraTabs wallet profile={profile} events={events} />
-      </div>
+    <div className="my-6 h-full space-y-6">
+      <AuraTabs wallet profile={profile} events={events} />
 
-      <div className="my-4">
+      <div>
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-extrabold">events</h1>
+          <h2 className="text-2xl font-semibold">events</h2>
           <div>{events.length} in total</div>
         </div>
 
@@ -38,6 +37,9 @@ export default async function WalletPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>{event.explanation}</CardContent>
+                <CardFooter className="text-muted-foreground">
+                  {event.content}
+                </CardFooter>
               </Card>
             ))}
           </ScrollArea>
