@@ -4,9 +4,8 @@ import { notFound } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AuraTabs } from "@/components/aura-tabs";
-import { getEvents, getProfile, getSnitches } from "@/drizzle/queries";
-import { ChangeUsernameModal } from "./change-username-modal";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ChangeUsernameModal } from "./change-username-modal";
 import {
   Card,
   CardContent,
@@ -15,6 +14,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getProfile } from "@/features/profile/db";
+import { getEvents } from "@/features/event/db";
+import { getSnitches } from "@/features/snitch/db";
 
 export default async function ProfilePage({
   params,
@@ -84,14 +86,14 @@ export default async function ProfilePage({
                     </CardDescription>
                   </CardHeader>
                   <CardContent>{event.content}</CardContent>
-                  <CardFooter className="text-right text-sm text-muted-foreground">
+                  <CardFooter className="text-muted-foreground text-right text-sm">
                     {createdAt.toLocaleString()}
                   </CardFooter>
                 </Card>
               ))}
             </ScrollArea>
           ) : (
-            <div className="mt-3 flex h-[300px] items-center justify-center rounded-lg border text-center text-muted-foreground">
+            <div className="text-muted-foreground mt-3 flex h-[300px] items-center justify-center rounded-lg border text-center">
               snitches to your name will be displayed here.
             </div>
           )}

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { completeOnboarding } from "./_actions";
+import { completeOnboardingAction } from "@/features/profile/actions";
 
 export default function OnboardingPage() {
   const [error, setError] = useState("");
@@ -15,7 +15,7 @@ export default function OnboardingPage() {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    const res = await completeOnboarding(formData);
+    const res = await completeOnboardingAction(formData);
     if (res?.message) {
       // Reloads the user's data from Clerk's API
       router.push("/");

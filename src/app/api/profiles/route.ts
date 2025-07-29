@@ -1,4 +1,4 @@
-import { getProfiles } from "@/drizzle/queries";
+import { getProfiles } from "@/features/profile/db";
 
 export async function GET() {
   const profiles = await getProfiles();

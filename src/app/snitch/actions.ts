@@ -1,12 +1,10 @@
 "use server";
 
-import {
-  getProfileByUsername,
-  insertEvent,
-  insertSnitch,
-} from "@/drizzle/queries";
 import { auth } from "@clerk/nextjs/server";
 import { generateEventAssessment } from "@/lib/generate-event-assessment";
+import { getProfileByUsername } from "@/features/profile/db";
+import { insertEvent } from "@/features/event/db";
+import { insertSnitch } from "@/features/snitch/db";
 
 export async function addSnitchAction(formData: FormData, username: string) {
   const { userId: culpritId } = await auth();
@@ -24,5 +22,9 @@ export async function addSnitchAction(formData: FormData, username: string) {
     assessment,
   });
 
-  await insertSnitch({ culpritId, victimId: victim.userId, eventId: event.id });
+  await insertSnitch({
+    culpritId,
+    victimId: victim.userId,
+    eventId: event.id,
+  });
 }

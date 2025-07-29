@@ -1,4 +1,3 @@
-import { getEvents, getMyProfile } from "@/drizzle/queries";
 import {
   Card,
   CardContent,
@@ -8,6 +7,8 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AuraTabs } from "@/components/aura-tabs";
+import { getEvents } from "@/features/event/db";
+import { getMyProfile } from "@/features/profile/db";
 
 export default async function WalletPage() {
   const profile = await getMyProfile();

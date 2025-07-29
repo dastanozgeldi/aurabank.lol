@@ -1,10 +1,19 @@
 "use server";
 
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 import { formatUsername } from "@/lib/formatters";
-import { insertProfile } from "@/drizzle/queries";
+import { insertProfile, updateUsername } from "@/features/profile/db";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
-export const completeOnboarding = async (formData: FormData) => {
+export async function updateUsernameAction(formData: FormData, userId: string) {
+  const username = formatUsername(formData.get("username") as string);
+
+  updateUsername(userId, username);
+
+  revalidatePath(`/${userId}`);
+}
+
+export const completeOnboardingAction = async (formData: FormData) => {
   const { userId } = await auth();
 
   if (!userId) {

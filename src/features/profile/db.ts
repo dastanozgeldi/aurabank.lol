@@ -1,6 +1,6 @@
+import { db } from "@/drizzle/db";
+import { profilesTable } from "@/drizzle/schema";
 import { auth } from "@clerk/nextjs/server";
-import { db } from "./db";
-import { eventsTable, profilesTable, snitchesTable } from "@/drizzle/schema";
 import { desc, eq, sql } from "drizzle-orm";
 
 export async function getLeaderboard() {
@@ -15,25 +15,6 @@ export async function getLeaderboard() {
     })
     .from(profilesTable)
     .orderBy(desc(profilesTable.totalAura));
-}
-
-export async function getEvents(userId: string) {
-  return db
-    .select()
-    .from(eventsTable)
-    .where(eq(eventsTable.userId, userId))
-    .orderBy(desc(eventsTable.createdAt));
-}
-
-export async function getSnitches(userId: string) {
-  return db.query.snitchesTable.findMany({
-    where: eq(snitchesTable.victimId, userId),
-    orderBy: [desc(snitchesTable.createdAt)],
-    with: {
-      event: true,
-      culprit: true,
-    },
-  });
 }
 
 export async function getProfile(userId: string) {
@@ -89,52 +70,4 @@ export async function insertProfile(userId: string, username: string) {
       target: profilesTable.userId,
       set: { username },
     });
-}
-
-export async function insertEvent({
-  userId,
-  content,
-  assessment,
-}: {
-  userId: string;
-  content: string;
-  assessment: {
-    title: string;
-    aura: number;
-    explanation: string;
-  };
-}) {
-  const [result] = await db
-    .insert(eventsTable)
-    .values({
-      userId,
-      content,
-      title: assessment.title,
-      aura: assessment.aura,
-      explanation: assessment.explanation,
-    })
-    .returning();
-
-  await db
-    .update(profilesTable)
-    .set({ totalAura: sql`${profilesTable.totalAura} + ${assessment.aura}` })
-    .where(eq(profilesTable.userId, userId));
-
-  return { event: result };
-}
-
-export async function insertSnitch({
-  culpritId,
-  victimId,
-  eventId,
-}: {
-  culpritId: string;
-  victimId: string;
-  eventId: number;
-}) {
-  await db.insert(snitchesTable).values({
-    culpritId,
-    victimId,
-    eventId,
-  });
 }

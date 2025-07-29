@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
-import { setUsernameAction } from "./_actions";
+import { updateUsernameAction } from "@/features/profile/actions";
 
 export const useModal = (userId: string) => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ export const useModal = (userId: string) => {
 
     try {
       setLoading(true);
-      await setUsernameAction(formData, userId);
+      await updateUsernameAction(formData, userId);
 
       toast.success("Username was updated.");
     } catch {
