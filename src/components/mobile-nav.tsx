@@ -26,7 +26,7 @@ export function MobileNav() {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="bg-black pr-0">
+      <SheetContent side="left" className="bg-black p-4">
         <div className="mb-4">
           <span className="text-2xl font-extrabold">aura bank.</span>
         </div>
