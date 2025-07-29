@@ -16,7 +16,7 @@ export async function createSnitchAction(formData: FormData, username: string) {
   const content = formData.get("content") as string;
   const assessment = await generateEventAssessment(content);
 
-  const { event } = await insertEvent({
+  const newEvent = await insertEvent({
     userId: victim.userId,
     content,
     assessment,
@@ -25,6 +25,6 @@ export async function createSnitchAction(formData: FormData, username: string) {
   await insertSnitch({
     culpritId,
     victimId: victim.userId,
-    eventId: event.id,
+    eventId: newEvent.id,
   });
 }

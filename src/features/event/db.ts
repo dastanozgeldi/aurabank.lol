@@ -23,7 +23,7 @@ export async function insertEvent({
     explanation: string;
   };
 }) {
-  const [result] = await db
+  const [newEvent] = await db
     .insert(eventsTable)
     .values({
       userId,
@@ -39,5 +39,5 @@ export async function insertEvent({
     .set({ totalAura: sql`${profilesTable.totalAura} + ${assessment.aura}` })
     .where(eq(profilesTable.userId, userId));
 
-  return { event: result };
+  return newEvent;
 }
