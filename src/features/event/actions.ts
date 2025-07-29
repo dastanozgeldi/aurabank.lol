@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { generateEventAssessment } from "@/lib/generate-event-assessment";
 import { insertEvent } from "./db";
 
-export async function addEventAction(formData: FormData) {
+export async function createEventAction(formData: FormData) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 

@@ -17,7 +17,7 @@ export const useModal = (userId: string) => {
 
       toast.success("Username was updated.");
     } catch {
-      toast.error("Failed to change the username.");
+      toast.error("Failed to update the username.");
     } finally {
       setLoading(false);
       setOpen(false);

@@ -49,7 +49,9 @@ export function MobileNav() {
               profile
             </MobileLink>
 
-            <p className="text-center">sign in to unlock wallet & profile.</p>
+            <p className="text-center">
+              sign in to unlock wallet & other pages.
+            </p>
           </SignedOut>
           <SignedIn>
             <MobileLink href="/wallet" setOpen={setOpen}>

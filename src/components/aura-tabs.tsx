@@ -2,7 +2,7 @@ import { Brain, User } from "lucide-react";
 import { SelectEvent, SelectProfile } from "@/drizzle/schema";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { AuraCard } from "./aura-card";
-import { AddEventModal } from "@/app/wallet/add-event-modal";
+import { CreateEventDialog } from "@/features/event/components/create-event-dialog";
 
 interface Props {
   profile: SelectProfile;
@@ -19,7 +19,7 @@ export const AuraTabs = ({ profile, events, wallet }: Props) => {
           <TabsTrigger value="profile_total">Profile Total</TabsTrigger>
         </TabsList>
 
-        {wallet && <AddEventModal />}
+        {wallet && <CreateEventDialog />}
       </div>
       <TabsContent value="from_events">
         <AuraCard

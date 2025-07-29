@@ -4,8 +4,8 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { UsernameSelector } from "./username-selector";
-import { useSnitch } from "./use-snitch";
+import { UsernameSelector } from "../../features/snitch/components/username-selector";
+import { useSnitch } from "../../features/snitch/hooks/use-snitch";
 
 export default function Page() {
   const { loading, profiles, onSubmit } = useSnitch();

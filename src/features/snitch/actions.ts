@@ -4,9 +4,9 @@ import { auth } from "@clerk/nextjs/server";
 import { generateEventAssessment } from "@/lib/generate-event-assessment";
 import { getProfileByUsername } from "@/features/profile/db";
 import { insertEvent } from "@/features/event/db";
-import { insertSnitch } from "@/features/snitch/db";
+import { insertSnitch } from "./db";
 
-export async function addSnitchAction(formData: FormData, username: string) {
+export async function createSnitchAction(formData: FormData, username: string) {
   const { userId: culpritId } = await auth();
   if (!culpritId) throw new Error("Unauthorized");
 

@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AuraTabs } from "@/components/aura-tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ChangeUsernameModal } from "./change-username-modal";
+import { UpdateUsernameModal } from "@/features/profile/components/update-username-modal";
 import {
   Card,
   CardContent,
@@ -60,7 +60,7 @@ export default async function ProfilePage({
 
         {userId === myId && (
           <div className="my-3 w-full">
-            <ChangeUsernameModal userId={userId} />
+            <UpdateUsernameModal userId={userId} />
           </div>
         )}
 

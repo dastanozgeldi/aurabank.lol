@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useState, FormEvent } from "react";
 import { toast } from "sonner";
-import { addEventAction } from "./actions";
+import { createEventAction } from "../actions";
 
 export const useModal = () => {
   const router = useRouter();
@@ -15,11 +15,11 @@ export const useModal = () => {
 
     try {
       setLoading(true);
-      await addEventAction(formData);
+      await createEventAction(formData);
 
-      toast.success("Event was added.");
+      toast.success("Event was created.");
     } catch {
-      toast.error("Failed to add the event.");
+      toast.error("Failed to create the event.");
     } finally {
       setLoading(false);
       setOpen(false);

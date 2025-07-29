@@ -15,6 +15,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { Button } from "@/components/ui/button";
+import Footer from "@/components/footer";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -81,15 +82,7 @@ export default function RootLayout({
 
             <div className="mb-6 grow">{children}</div>
 
-            <footer className="mt-auto text-center">
-              brought to you by{" "}
-              <a
-                href="https://ozgeldi.tech"
-                className="font-semibold underline"
-              >
-                @dastanozgeldi
-              </a>
-            </footer>
+            <Footer />
           </main>
 
           <Toaster />

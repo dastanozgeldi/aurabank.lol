@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LeaderboardTable } from "./leaderboard-table";
+import { LeaderboardTable } from "@/features/profile/components/leaderboard-table";
 import { getLeaderboard } from "@/features/profile/db";
 
 export default async function LeaderboardPage() {

@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useState, FormEvent, useCallback, useEffect } from "react";
 import { toast } from "sonner";
-import { addSnitchAction } from "./actions";
+import { createSnitchAction } from "../actions";
 import { SelectProfile } from "@/drizzle/schema";
 
 export const useSnitch = () => {
@@ -20,11 +20,11 @@ export const useSnitch = () => {
 
     try {
       setLoading(true);
-      await addSnitchAction(formData, username);
+      await createSnitchAction(formData, username);
 
-      toast.success("Snitch was added.");
+      toast.success("Snitch was created.");
     } catch {
-      toast.error("Failed to add the snitch.");
+      toast.error("Failed to create the snitch.");
     } finally {
       setLoading(false);
       setSelectedUsername("");
