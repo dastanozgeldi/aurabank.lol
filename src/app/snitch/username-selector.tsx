@@ -42,13 +42,13 @@ export const UsernameSelector = ({
         >
           {selectedUsername ? (
             <span className="flex items-center">
-              <AtSignIcon className="mr-2 h-4 w-4 text-muted-foreground" />
+              <AtSignIcon className="h-4 w-4 text-muted-foreground" />
               {selectedUsername}
             </span>
           ) : (
             "select username..."
           )}
-          <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronDownIcon className="h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="PopoverContent p-0">

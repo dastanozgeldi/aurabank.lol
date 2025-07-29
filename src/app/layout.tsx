@@ -70,7 +70,7 @@ export default function RootLayout({
               <SignedOut>
                 <SignInButton>
                   <Button size="sm">
-                    <LogIn className="mr-2 h-4 w-4" /> sign in
+                    <LogIn className="h-4 w-4" /> sign in
                   </Button>
                 </SignInButton>
               </SignedOut>

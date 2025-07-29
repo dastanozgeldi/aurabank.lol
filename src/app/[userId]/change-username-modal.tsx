@@ -21,7 +21,7 @@ export function ChangeUsernameModal({ userId }: { userId: string }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="lg" variant="outline" className="w-full">
-          <UserCog className="mr-2 h-5 w-5" />
+          <UserCog className="h-5 w-5" />
           Change Username
         </Button>
       </DialogTrigger>
@@ -43,7 +43,7 @@ export function ChangeUsernameModal({ userId }: { userId: string }) {
           </div>
           <DialogFooter className="mt-3 sm:justify-end">
             <Button disabled={loading}>
-              {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+              {loading && <Loader2 className="h-5 w-5 animate-spin" />}
               Submit
             </Button>
           </DialogFooter>

@@ -30,7 +30,7 @@ export default function Home() {
           </p>
           <Button asChild className="mt-3">
             <Link href="/wallet">
-              Get Started <ArrowRight className="ml-2 h-4 w-4" />
+              Get Started <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
         </motion.div>
