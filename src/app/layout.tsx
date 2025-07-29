@@ -79,7 +79,7 @@ export default function RootLayout({
               </SignedIn>
             </div>
 
-            <div className="mb-6 flex-grow">{children}</div>
+            <div className="mb-6 grow">{children}</div>
 
             <footer className="mt-auto text-center">
               brought to you by{" "}

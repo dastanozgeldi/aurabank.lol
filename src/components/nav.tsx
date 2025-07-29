@@ -5,7 +5,7 @@ import { buttonVariants } from "./ui/button";
 
 export const Nav = () => {
   return (
-    <nav className="mr-6 hidden flex-grow items-center justify-between md:flex">
+    <nav className="mr-6 hidden grow items-center justify-between md:flex">
       <Link href="/">
         <h1 className="text-3xl font-extrabold">aura bank.</h1>
       </Link>
