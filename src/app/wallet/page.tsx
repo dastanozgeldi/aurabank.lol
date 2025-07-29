@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AuraTabs } from "@/components/aura-tabs";
-import { AddEventModal } from "./add-event-modal";
 
 export default async function WalletPage() {
   const profile = await getMyProfile();
@@ -16,11 +15,9 @@ export default async function WalletPage() {
 
   return (
     <div className="h-full">
-      <div className="my-4 space-y-3">
+      <div className="my-4">
         <AuraTabs wallet profile={profile} events={events} />
       </div>
-
-      <AddEventModal />
 
       <div className="my-4">
         <div className="flex items-center justify-between">
@@ -44,7 +41,7 @@ export default async function WalletPage() {
             ))}
           </ScrollArea>
         ) : (
-          <div className="mt-3 flex h-[300px] items-center justify-center rounded-lg border text-center text-muted-foreground">
+          <div className="text-muted-foreground mt-3 flex h-[300px] items-center justify-center rounded-lg border text-center">
             your events will be displayed here.
           </div>
         )}

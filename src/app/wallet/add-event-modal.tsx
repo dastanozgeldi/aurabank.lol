@@ -21,7 +21,7 @@ export function AddEventModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" className="w-full">
+        <Button>
           <Plus className="h-5 w-5" />
           Add Event
         </Button>
