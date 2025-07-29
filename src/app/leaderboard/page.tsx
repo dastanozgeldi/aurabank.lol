@@ -5,7 +5,7 @@ import { LeaderboardTable } from "./leaderboard-table";
 import { getLeaderboard } from "@/server/queries";
 
 export default async function LeaderboardPage() {
-  const { userId } = auth();
+  const { userId } = await auth();
   const profiles = await getLeaderboard();
   const me = profiles.find((profile) => profile.userId === userId);
 

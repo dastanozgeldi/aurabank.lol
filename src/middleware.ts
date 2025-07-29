@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 const isOnboardingRoute = createRouteMatcher(["/onboarding"]);
 const isProtectedRoute = createRouteMatcher(["/wallet", "/profile", "/snitch"]);
 
-export default clerkMiddleware((auth, req) => {
-  const { userId, sessionClaims, redirectToSignIn } = auth();
+export default clerkMiddleware(async (auth, req) => {
+  const { userId, sessionClaims, redirectToSignIn } = await auth();
 
   // For users visiting /onboarding, don't try to redirect
   if (userId && isOnboardingRoute(req)) {

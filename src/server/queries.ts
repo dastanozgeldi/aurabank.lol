@@ -58,7 +58,7 @@ export async function getProfiles() {
 }
 
 export async function getMyProfile() {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
   const [profile] = await db

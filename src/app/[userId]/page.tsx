@@ -17,15 +17,17 @@ import {
 } from "@/components/ui/card";
 
 export default async function ProfilePage({
-  params: { userId },
+  params,
 }: {
-  params: { userId: string };
+  params: Promise<{ userId: string }>;
 }) {
+  const { userId } = await params;
+
   const profile = await getProfile(userId);
   if (!profile) notFound();
 
-  const { userId: myId } = auth();
-  const user = await clerkClient().users.getUser(userId);
+  const { userId: myId } = await auth();
+  const user = await (await clerkClient()).users.getUser(userId);
   const events = await getEvents(userId);
   const snitches = await getSnitches(userId);
 

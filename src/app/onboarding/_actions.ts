@@ -5,7 +5,7 @@ import { formatUsername } from "@/lib/utils";
 import { insertProfile } from "@/server/queries";
 
 export const completeOnboarding = async (formData: FormData) => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) {
     return { message: "No Logged In User" };

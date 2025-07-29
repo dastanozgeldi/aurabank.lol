@@ -5,7 +5,7 @@ import { insertEvent } from "@/server/queries";
 import { auth } from "@clerk/nextjs/server";
 
 export async function addEventAction(formData: FormData) {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
   const content = formData.get("content") as string;

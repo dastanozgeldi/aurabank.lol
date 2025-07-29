@@ -9,7 +9,7 @@ import {
 import { auth } from "@clerk/nextjs/server";
 
 export async function addSnitchAction(formData: FormData, username: string) {
-  const { userId: culpritId } = auth();
+  const { userId: culpritId } = await auth();
   if (!culpritId) throw new Error("Unauthorized");
 
   const victim = await getProfileByUsername(username);

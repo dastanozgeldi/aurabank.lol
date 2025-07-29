@@ -1,7 +1,7 @@
 import { LogIn } from "lucide-react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import localFont from "next/font/local";
+import { Geist, Geist_Mono } from "next/font/google";
 import {
   ClerkProvider,
   SignedIn,
@@ -17,15 +17,11 @@ import { MobileNav } from "@/components/mobile-nav";
 import { Button } from "@/components/ui/button";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+
+const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  weight: "100 900",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -34,12 +30,7 @@ export const metadata: Metadata = {
   description:
     "Track your daily aura in a wallet using AI and compete with others!",
   keywords: ["Aura", "Bank", "Wallet", "AI", "dastanozgeldi", "Next.js"],
-  authors: [
-    {
-      name: "Dastan Ozgeldi",
-      url: "https://ozgeldi.tech",
-    },
-  ],
+  authors: [{ name: "Dastan Ozgeldi", url: "https://ozgeldi.tech" }],
   creator: "Dastan Ozgeldi",
   openGraph: {
     type: "website",
@@ -63,9 +54,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark">

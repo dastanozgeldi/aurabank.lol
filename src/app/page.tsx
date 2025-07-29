@@ -2,16 +2,14 @@
 
 import dynamic from "next/dynamic";
 import { globeConfig, sampleArcs } from "./globe-config";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 const World = dynamic(
   () => import("@/components/ui/globe").then((m) => m.World),
-  {
-    ssr: false,
-  },
+  { ssr: false },
 );
 
 export default function Home() {
@@ -19,17 +17,9 @@ export default function Home() {
     <div className="flex flex-col">
       <div className="relative mx-auto my-10 h-[36rem] w-full max-w-7xl overflow-hidden">
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 1,
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
           className="div"
         >
           <h2 className="text-2xl font-bold text-black dark:text-white md:text-4xl">
