@@ -15,7 +15,7 @@ export const useModal = (userId: string) => {
       setLoading(true);
       await setUsernameAction(formData, userId);
 
-      toast.success("Username was changed.");
+      toast.success("Username was updated.");
     } catch {
       toast.error("Failed to change the username.");
     } finally {
