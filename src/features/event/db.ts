@@ -23,21 +23,32 @@ export async function insertEvent({
     explanation: string;
   };
 }) {
-  const [result] = await db
-    .insert(eventsTable)
-    .values({
-      userId,
-      content,
-      title: assessment.title,
-      aura: assessment.aura,
-      explanation: assessment.explanation,
-    })
-    .returning();
+  const newEvent = await db.transaction(async (trx) => {
+    const [newEvent] = await trx
+      .insert(eventsTable)
+      .values({
+        userId,
+        content,
+        title: assessment.title,
+        aura: assessment.aura,
+        explanation: assessment.explanation,
+      })
+      .returning();
 
-  await db
-    .update(profilesTable)
-    .set({ totalAura: sql`${profilesTable.totalAura} + ${assessment.aura}` })
-    .where(eq(profilesTable.userId, userId));
+    if (newEvent == null) {
+      trx.rollback();
+      throw new Error("Failed to create event");
+    }
 
-  return { event: result };
+    await trx
+      .update(profilesTable)
+      .set({
+        totalAura: sql`${profilesTable.totalAura} + ${assessment.aura}`,
+      })
+      .where(eq(profilesTable.userId, userId));
+
+    return newEvent;
+  });
+
+  return newEvent;
 }
