@@ -1,24 +1,24 @@
 "use client";
+
 import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { UsernameSelector } from "../../features/snitch/components/username-selector";
-import { useSnitch } from "../../features/snitch/hooks/use-snitch";
+import { UsernameSelector } from "@/features/snitch/components/username-selector";
+import { useSnitch } from "@/features/snitch/hooks/use-snitch";
+import PageHeader from "@/components/page-header";
 
-export default function Page() {
+export default function SnitchPage() {
   const { loading, profiles, onSubmit } = useSnitch();
   const [selectedUsername, setSelectedUsername] = useState("");
 
   return (
-    <div className="my-4">
-      <div className="my-6">
-        <h1 className="text-3xl font-bold">snitch on someone</h1>
-        <p className="text-muted-foreground">
-          snitch events will be displayed on user&apos;s profile.
-        </p>
-      </div>
+    <>
+      <PageHeader
+        title="snitch on someone"
+        description="snitch events will be displayed on user's profile."
+      />
 
       <form
         onSubmit={(event) =>
@@ -51,6 +51,6 @@ export default function Page() {
           {!loading && <ArrowRight className="h-4 w-4" />}
         </Button>
       </form>
-    </div>
+    </>
   );
 }

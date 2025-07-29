@@ -1,8 +1,7 @@
-import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
-import { Skeleton } from "@/components/ui/skeleton";
 import { LeaderboardTable } from "@/features/profile/components/leaderboard-table";
 import { getLeaderboard } from "@/features/profile/db";
+import PageHeader from "@/components/page-header";
 
 export default async function LeaderboardPage() {
   const { userId } = await auth();
@@ -10,12 +9,12 @@ export default async function LeaderboardPage() {
   const me = profiles.find((profile) => profile.userId === userId);
 
   return (
-    <div>
-      <h1 className="my-4 text-center text-2xl font-bold">Top 5 Aura</h1>
-
-      <Suspense fallback={<Skeleton className="h-[360px] w-full" />}>
-        <LeaderboardTable me={me} profiles={profiles} />
-      </Suspense>
-    </div>
+    <>
+      <PageHeader
+        title="top 5 by aura"
+        description="compete on who's more nonchalant."
+      />
+      <LeaderboardTable me={me} profiles={profiles} />
+    </>
   );
 }
