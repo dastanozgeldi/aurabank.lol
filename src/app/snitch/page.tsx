@@ -13,10 +13,10 @@ export default function Page() {
 
   return (
     <div className="my-4">
-      <div className="my-4 text-center">
-        <h1 className="text-2xl font-bold">snitch on someone</h1>
+      <div className="my-6">
+        <h1 className="text-3xl font-bold">snitch on someone</h1>
         <p className="text-muted-foreground">
-          snitch events are displayed on user&apos;s profile.
+          snitch events will be displayed on user&apos;s profile.
         </p>
       </div>
 
