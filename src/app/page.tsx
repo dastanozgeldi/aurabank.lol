@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { globeConfig, sampleArcs } from "./globe-config";
+import { globeConfig, sampleArcs } from "../data/globe-config";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
