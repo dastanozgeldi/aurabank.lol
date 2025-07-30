@@ -1,10 +1,8 @@
-import { getProfile } from "@/features/profile/db";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { getMyProfile } from "@/features/profile/db";
 
 export default async function ProfilePage() {
-  const { userId } = await auth();
-  const profile = await getProfile(userId!)
+  const profile = await getMyProfile();
 
   redirect(`/${profile.username}`);
 }
