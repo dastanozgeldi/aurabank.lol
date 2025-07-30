@@ -28,7 +28,7 @@ export default async function PremiumPage() {
           <CardContent className="space-y-6">
             {/* Pricing */}
             <div className="text-center">
-              <div className="text-4xl font-extrabold">$1</div>
+              <div className="text-4xl font-extrabold">$3</div>
               <div className="text-muted-foreground text-sm">per month</div>
             </div>
 
