@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { completeOnboardingAction } from "@/features/profile/actions";
+import PageHeader from "@/components/page-header";
+import { ArrowRight } from "lucide-react";
 
 export default function OnboardingPage() {
   const [error, setError] = useState("");
@@ -28,11 +30,16 @@ export default function OnboardingPage() {
       setError(res?.error);
     }
   };
+
   return (
-    <div>
-      <h1 className="my-4 text-center text-2xl font-bold">before we begin</h1>
+    <>
+      <PageHeader
+        title="before we begin"
+        description="think of an username with most aura."
+      />
+
       <form action={handleSubmit}>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="username">username</Label>
           <Input
             id="username"
@@ -45,8 +52,10 @@ export default function OnboardingPage() {
         </div>
 
         {error && <p className="text-red-600">Error: {error}</p>}
-        <Button className="mt-4 w-full">finish registration</Button>
+        <Button className="mt-3 w-full">
+          finish registration <ArrowRight />
+        </Button>
       </form>
-    </div>
+    </>
   );
 }
