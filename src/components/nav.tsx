@@ -33,7 +33,7 @@ export function Nav() {
               >
                 wallet
               </Link>
-              <Link
+              {/* <Link
                 className={cn(
                   buttonVariants({ variant: "link" }),
                   "px-0 text-lg",
@@ -41,7 +41,7 @@ export function Nav() {
                 href="/snitch"
               >
                 snitch
-              </Link>
+              </Link> */}
               <Link
                 className={cn(
                   buttonVariants({ variant: "link" }),
