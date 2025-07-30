@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { updateUsernameAction } from "@/features/profile/actions";
 import { useRouter } from "next/navigation";
 
-export const useModal = (userId: string) => {
+export const useDialog = (userId: string) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);

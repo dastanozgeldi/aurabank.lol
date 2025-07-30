@@ -12,10 +12,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useModal } from "../hooks/use-modal";
+import { useDialog } from "../hooks/use-dialog";
 
 export function UpdateUsernameModal({ userId }: { userId: string }) {
-  const { loading, open, setOpen, onSubmit } = useModal(userId);
+  const { loading, open, setOpen, onSubmit } = useDialog(userId);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

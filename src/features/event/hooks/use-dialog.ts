@@ -3,7 +3,7 @@ import { useState, FormEvent } from "react";
 import { toast } from "sonner";
 import { createEventAction } from "../actions";
 
-export const useModal = () => {
+export const useDialog = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);

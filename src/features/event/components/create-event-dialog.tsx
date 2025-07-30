@@ -13,10 +13,10 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useModal } from "../hooks/use-modal";
+import { useDialog } from "../hooks/use-dialog";
 
 export function CreateEventDialog() {
-  const { loading, open, setOpen, onSubmit } = useModal();
+  const { loading, open, setOpen, onSubmit } = useDialog();
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
