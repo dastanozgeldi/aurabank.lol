@@ -35,8 +35,7 @@ export default async function ProfilePage({
         fallback={
           <>
             <Skeleton className="h-24 w-24 rounded-full" />
-            <Skeleton className="mt-3 h-6 w-[200px]" />
-            <Skeleton className="mt-3 h-6 w-[200px]" />
+            <Skeleton className="my-2 h-6 w-[200px]" />
           </>
         }
       >
