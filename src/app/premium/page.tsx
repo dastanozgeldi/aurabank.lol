@@ -9,8 +9,11 @@ import { Crown, Sparkles, Zap } from "lucide-react";
 import { env } from "@/data/env/server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { currentUser } from "@clerk/nextjs/server";
 
 export default async function PremiumPage() {
+  const user = await currentUser();
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -60,7 +63,9 @@ export default async function PremiumPage() {
             </div>
 
             <Button asChild className="w-full" size="lg">
-              <Link href={`/api/checkout?products=${env.POLAR_PRODUCT_ID}`}>
+              <Link
+                href={`/api/checkout?products=${env.POLAR_PRODUCT_ID}&customerEmail=${user?.emailAddresses[0].emailAddress}`}
+              >
                 Upgrade to Premium
               </Link>
             </Button>
