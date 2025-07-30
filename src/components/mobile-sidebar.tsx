@@ -32,7 +32,7 @@ export default function MobileSidebar() {
       <SheetHeader className="sr-only">
         <SheetTitle>sidebar</SheetTitle>
       </SheetHeader>
-      <SheetContent className="bg-black p-4">
+      <SheetContent className="p-4">
         <div className="flex flex-col space-y-3">
           <MobileLink href="/leaderboard" setOpen={setOpen}>
             top5

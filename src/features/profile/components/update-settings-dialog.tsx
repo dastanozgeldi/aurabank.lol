@@ -1,10 +1,11 @@
 "use client";
 
-import { Loader2, UserCog } from "lucide-react";
+import { ArrowRightIcon, Loader2, UserCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -14,20 +15,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDialog } from "../hooks/use-dialog";
 
-export function UpdateUsernameDialog({ userId }: { userId: string }) {
+export function UpdateSettingsDialog({ userId }: { userId: string }) {
   const { loading, open, setOpen, onSubmit } = useDialog(userId);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" variant="outline" className="w-full">
+        <Button size="lg" variant="outline">
           <UserCog className="h-5 w-5" />
-          update username
+          update settings
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-black sm:max-w-md">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Update Username</DialogTitle>
+          <DialogTitle>Update Settings</DialogTitle>
+          <DialogDescription>
+            what you write here will be visible to everyone else.
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={onSubmit}>
           <div className="grid w-full gap-1.5">
@@ -45,6 +49,7 @@ export function UpdateUsernameDialog({ userId }: { userId: string }) {
             <Button disabled={loading}>
               {loading && <Loader2 className="h-5 w-5 animate-spin" />}
               Submit
+              {!loading && <ArrowRightIcon />}
             </Button>
           </DialogFooter>
         </form>

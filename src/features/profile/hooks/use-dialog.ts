@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
-import { updateUsernameAction } from "@/features/profile/actions";
+import { updateSettingsAction } from "@/features/profile/actions";
 import { useRouter } from "next/navigation";
 
 export const useDialog = (userId: string) => {
@@ -16,12 +16,12 @@ export const useDialog = (userId: string) => {
 
     try {
       setLoading(true);
-      await updateUsernameAction(username, userId);
+      await updateSettingsAction(userId, { username });
 
-      toast.success("Username was updated.");
+      toast.success("Settings were updated.");
       router.push(`/${username}`);
     } catch {
-      toast.error("Failed to update the username.");
+      toast.error("Failed to update the settings.");
     } finally {
       setLoading(false);
       setOpen(false);

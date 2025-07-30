@@ -51,15 +51,6 @@ export function Nav() {
               >
                 premium
               </Link>
-              <Link
-                className={cn(
-                  buttonVariants({ variant: "link" }),
-                  "px-0 text-lg",
-                )}
-                href="/profile"
-              >
-                profile
-              </Link>
             </SignedIn>
           </div>
         </nav>

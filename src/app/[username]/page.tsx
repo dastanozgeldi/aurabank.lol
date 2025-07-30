@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { UpdateUsernameDialog } from "@/features/profile/components/update-username-dialog";
+import { UpdateSettingsDialog } from "@/features/profile/components/update-settings-dialog";
 import {
   Card,
   CardContent,
@@ -17,6 +17,7 @@ import { getSnitches } from "@/features/snitch/db";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AuraTabs, { AuraTabsSkeleton } from "@/components/aura-tabs";
 import { getUser } from "@/services/clerk";
+import { Button } from "@/components/ui/button";
 
 export default async function ProfilePage({
   params,
@@ -47,8 +48,8 @@ export default async function ProfilePage({
       </p>
 
       {profile.userId === myId && (
-        <div className="my-3 w-full">
-          <UpdateUsernameDialog userId={profile.userId} />
+        <div className="my-3 self-center">
+          <UpdateSettingsDialog userId={profile.userId} />
         </div>
       )}
 

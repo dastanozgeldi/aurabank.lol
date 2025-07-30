@@ -1,12 +1,15 @@
 "use server";
 
 import { formatUsername } from "@/lib/formatters";
-import { insertProfile, updateUsername } from "@/features/profile/db";
+import { insertProfile, updateSettings } from "@/features/profile/db";
 import { auth } from "@clerk/nextjs/server";
 import { syncClerkUserMetadata } from "@/services/clerk";
 
-export async function updateUsernameAction(username: string, userId: string) {
-  updateUsername(userId, username);
+export async function updateSettingsAction(
+  userId: string,
+  { username }: { username: string },
+) {
+  await updateSettings(userId, { username });
   syncClerkUserMetadata({ userId, username });
 }
 

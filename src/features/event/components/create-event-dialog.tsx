@@ -26,18 +26,17 @@ export function CreateEventDialog() {
           Add Event
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-black sm:max-w-md">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Aura AI</DialogTitle>
           <DialogDescription>
-            AI will automatically generate a title and calculate the aura
-            gain/loss for you.
+            AI will automatically generate a title and calculate the aura.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={onSubmit}>
           <div className="grid w-full gap-1.5">
             <Label htmlFor="content">
-              Describe an event that happened to you.
+              Talk about an event that happened to you.
             </Label>
             <Textarea
               placeholder="Type your event details here."

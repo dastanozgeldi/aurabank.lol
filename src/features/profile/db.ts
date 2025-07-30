@@ -47,7 +47,10 @@ export async function getMyProfile() {
   });
 }
 
-export async function updateUsername(userId: string, username: string) {
+export async function updateSettings(
+  userId: string,
+  { username }: { username: string },
+) {
   await db
     .update(profilesTable)
     .set({ username })
