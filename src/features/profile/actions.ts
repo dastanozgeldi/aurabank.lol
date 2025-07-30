@@ -1,16 +1,13 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { formatUsername } from "@/lib/formatters";
 import { insertProfile, updateUsername } from "@/features/profile/db";
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
+import { syncClerkUserMetadata } from "@/services/clerk";
 
-export async function updateUsernameAction(formData: FormData, userId: string) {
-  const username = formatUsername(formData.get("username") as string);
-
+export async function updateUsernameAction(username: string, userId: string) {
   updateUsername(userId, username);
-
-  revalidatePath(`/${username}`);
+  syncClerkUserMetadata({ userId, username });
 }
 
 export const completeOnboardingAction = async (formData: FormData) => {
@@ -25,12 +22,9 @@ export const completeOnboardingAction = async (formData: FormData) => {
 
     await insertProfile(userId, username);
 
-    const res = await (
-      await clerkClient()
-    ).users.updateUser(userId, {
-      publicMetadata: { onboardingComplete: true, username },
-    });
-    return { message: res.publicMetadata };
+    syncClerkUserMetadata({ userId, username, onboardingComplete: true });
+
+    return { message: "Onboarding complete!" };
   } catch {
     return { error: "There was an error updating the user metadata." };
   }

@@ -1,4 +1,4 @@
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,6 +16,7 @@ import { getProfileByUsername } from "@/features/profile/db";
 import { getSnitches } from "@/features/snitch/db";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AuraTabs, { AuraTabsSkeleton } from "@/components/aura-tabs";
+import { getUser } from "@/services/clerk";
 
 export default async function ProfilePage({
   params,
@@ -70,8 +71,7 @@ export default async function ProfilePage({
 }
 
 async function UserInfo({ userId }: { userId: string }) {
-  const client = await clerkClient();
-  const user = await client.users.getUser(userId);
+  const user = await getUser(userId);
 
   return (
     <>
