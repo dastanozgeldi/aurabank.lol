@@ -69,7 +69,7 @@ export default async function PremiumPage() {
 
             <Button asChild className="w-full" size="lg">
               <Link
-                href={`/checkout?products=${env.POLAR_PRODUCT_ID}&customerEmail=${user?.emailAddresses[0].emailAddress}&metadata=${encodedMetadata}`}
+                href={`/api/checkout?products=${env.POLAR_PRODUCT_ID}&customerEmail=${user?.emailAddresses[0].emailAddress}&metadata=${encodedMetadata}`}
               >
                 Upgrade to Premium
               </Link>
