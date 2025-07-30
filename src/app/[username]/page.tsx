@@ -17,7 +17,6 @@ import { getSnitches } from "@/features/snitch/db";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AuraTabs, { AuraTabsSkeleton } from "@/components/aura-tabs";
 import { getUser } from "@/services/clerk";
-import { Button } from "@/components/ui/button";
 
 export default async function ProfilePage({
   params,

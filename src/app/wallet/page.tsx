@@ -11,9 +11,11 @@ import AuraTabs, { AuraTabsSkeleton } from "@/components/aura-tabs";
 import { getEvents } from "@/features/event/db";
 import { getMyProfile } from "@/features/profile/db";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 export default async function WalletPage() {
   const profile = await getMyProfile();
+  if (!profile) notFound();
 
   return (
     <Suspense
