@@ -42,9 +42,9 @@ export default function MobileSidebar() {
             <MobileLink disabled href="/wallet">
               wallet
             </MobileLink>
-            {/* <MobileLink disabled href="/snitch">
+            <MobileLink disabled href="/snitch">
               snitch
-            </MobileLink> */}
+            </MobileLink>
 
             <p className="text-center">
               sign in to unlock wallet & other pages.
@@ -54,9 +54,9 @@ export default function MobileSidebar() {
             <MobileLink href="/wallet" setOpen={setOpen}>
               wallet
             </MobileLink>
-            {/* <MobileLink href="/snitch" setOpen={setOpen}>
+            <MobileLink href="/snitch" setOpen={setOpen}>
               snitch
-            </MobileLink> */}
+            </MobileLink>
           </SignedIn>
 
           <MobileLink href="/premium" setOpen={setOpen}>
