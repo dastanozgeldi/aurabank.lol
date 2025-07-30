@@ -63,22 +63,8 @@ export default function RootLayout({
           className={cn(geistSans.variable, geistMono.variable, "antialiased")}
         >
           <main className="mx-auto flex min-h-screen max-w-2xl flex-col p-6">
-            <div className="flex items-center justify-between">
-              <div className="w-full">
-                <Nav />
-                <MobileNav />
-              </div>
-              <SignedOut>
-                <SignInButton>
-                  <Button size="sm">
-                    <LogIn className="h-4 w-4" /> sign in
-                  </Button>
-                </SignInButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </div>
+            <Nav />
+            <MobileNav />
 
             <div className="mb-6 grow">{children}</div>
 

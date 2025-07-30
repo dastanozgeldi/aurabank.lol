@@ -1,49 +1,78 @@
 import Link from "next/link";
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
+import Logo from "./logo";
+import { LogIn } from "lucide-react";
 
-export const Nav = () => {
+export function Nav() {
   return (
-    <nav className="mr-6 hidden grow items-center justify-between md:flex">
-      <Link href="/">
-        <h1 className="text-3xl font-extrabold">aura bank.</h1>
-      </Link>
+    <div className="hidden items-center justify-between md:flex gap-4">
+      <div className="w-full">
+        <nav className="hidden grow items-center justify-between md:flex">
+          <Logo />
 
-      <div className="flex items-center gap-6">
-        <Link
-          className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
-          href="/leaderboard"
-        >
-          top5
-        </Link>
-        <SignedIn>
-          <Link
-            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
-            href="/wallet"
-          >
-            wallet
-          </Link>
-          <Link
-            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
-            href="/snitch"
-          >
-            snitch
-          </Link>
-          <Link
-            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
-            href="/profile"
-          >
-            profile
-          </Link>
-          <Link
-            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
-            href="/premium"
-          >
-            premium
-          </Link>
-        </SignedIn>
+          <div className="flex items-center gap-4">
+            <Link
+              className={cn(
+                buttonVariants({ variant: "link" }),
+                "px-0 text-lg",
+              )}
+              href="/leaderboard"
+            >
+              top5
+            </Link>
+            <SignedIn>
+              <Link
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                  "px-0 text-lg",
+                )}
+                href="/wallet"
+              >
+                wallet
+              </Link>
+              <Link
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                  "px-0 text-lg",
+                )}
+                href="/snitch"
+              >
+                snitch
+              </Link>
+              <Link
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                  "px-0 text-lg",
+                )}
+                href="/profile"
+              >
+                profile
+              </Link>
+              <Link
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                  "px-0 text-lg",
+                )}
+                href="/premium"
+              >
+                premium
+              </Link>
+            </SignedIn>
+          </div>
+        </nav>
       </div>
-    </nav>
+      <SignedOut>
+        <SignInButton>
+          <Button size="sm">
+            <LogIn className="h-4 w-4" /> sign in
+          </Button>
+        </SignInButton>
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </div>
   );
-};
+}
