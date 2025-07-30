@@ -18,11 +18,16 @@ import { Button } from "@/components/ui/button";
 import Footer from "@/components/footer";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -60,7 +65,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark">
         <body
-          className={cn(geistSans.variable, geistMono.variable, "antialiased")}
+          className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
         >
           <main className="mx-auto flex min-h-screen max-w-2xl flex-col p-6">
             <Nav />
