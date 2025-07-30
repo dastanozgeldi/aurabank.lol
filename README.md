@@ -1,5 +1,13 @@
 ## TODO
 
+### Third Sprint
+- [ ] polar webhook: insert to subscriptions table on subscription active event
+- [ ] make /snitch a paid feature
+- [ ] "formula for aura points"
+- [ ] isolate clerk dev accounts from prod in the db
+- [ ] update [logo](public/logo.png) and favicon
+- [ ] update [og image](public/og-image.png)
+
 ### Second Sprint
 
 - [x] implement aura snitch feature
