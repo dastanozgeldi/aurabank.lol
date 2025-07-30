@@ -36,6 +36,12 @@ export const Nav = () => {
           >
             profile
           </Link>
+          <Link
+            className={cn(buttonVariants({ variant: "link" }), "px-0 text-lg")}
+            href="/premium"
+          >
+            premium
+          </Link>
         </SignedIn>
       </div>
     </nav>

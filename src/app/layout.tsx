@@ -62,7 +62,7 @@ export default function RootLayout({
         <body
           className={cn(geistSans.variable, geistMono.variable, "antialiased")}
         >
-          <main className="mx-auto flex min-h-screen max-w-xl flex-col p-6">
+          <main className="mx-auto flex min-h-screen max-w-2xl flex-col p-6">
             <div className="flex items-center justify-between">
               <div className="w-full">
                 <Nav />
