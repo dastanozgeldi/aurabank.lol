@@ -18,7 +18,7 @@ export default async function WalletPage() {
   return (
     <Suspense
       fallback={
-        <div className="my-6 flex h-full flex-col gap-6">
+        <div className="flex h-full flex-col gap-6">
           <AuraTabsSkeleton />
           <AuraTabsSkeleton />
         </div>
