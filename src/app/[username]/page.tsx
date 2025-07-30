@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { UpdateUsernameModal } from "@/features/profile/components/update-username-modal";
+import { UpdateUsernameDialog } from "@/features/profile/components/update-username-dialog";
 import {
   Card,
   CardContent,
@@ -48,7 +48,7 @@ export default async function ProfilePage({
 
       {profile.userId === myId && (
         <div className="my-3 w-full">
-          <UpdateUsernameModal userId={profile.userId} />
+          <UpdateUsernameDialog userId={profile.userId} />
         </div>
       )}
 

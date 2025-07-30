@@ -42,12 +42,9 @@ export async function getMyProfile() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
-  const [profile] = await db
-    .select()
-    .from(profilesTable)
-    .where(eq(profilesTable.userId, userId));
-
-  return profile;
+  return await db.query.profilesTable.findFirst({
+    where: eq(profilesTable.userId, userId),
+  });
 }
 
 export async function updateUsername(userId: string, username: string) {

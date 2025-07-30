@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDialog } from "../hooks/use-dialog";
 
-export function UpdateUsernameModal({ userId }: { userId: string }) {
+export function UpdateUsernameDialog({ userId }: { userId: string }) {
   const { loading, open, setOpen, onSubmit } = useDialog(userId);
 
   return (
@@ -22,7 +22,7 @@ export function UpdateUsernameModal({ userId }: { userId: string }) {
       <DialogTrigger asChild>
         <Button size="lg" variant="outline" className="w-full">
           <UserCog className="h-5 w-5" />
-          Update Username
+          update username
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-black sm:max-w-md">
