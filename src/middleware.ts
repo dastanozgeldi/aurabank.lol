@@ -12,15 +12,16 @@ const isPublicRoute = createRouteMatcher([
 export default clerkMiddleware(async (auth, req) => {
   const { userId, sessionClaims } = await auth();
 
-  // Catch users who do not have `onboardingComplete: true` in their publicMetadata
-  // Redirect them to the /onboading route to complete onboarding
-  if (userId && !sessionClaims?.metadata?.onboardingComplete) {
-    const onboardingUrl = new URL("/onboarding", req.url);
-    return NextResponse.redirect(onboardingUrl);
-  }
-
+  // Check if it's a public route first
   if (!isPublicRoute(req)) {
     await auth.protect();
+  }
+
+  // Only check onboarding for authenticated users on non-public routes
+  // This prevents API routes and other public routes from being redirected
+  if (userId && !isPublicRoute(req) && !sessionClaims?.metadata?.onboardingComplete) {
+    const onboardingUrl = new URL("/onboarding", req.url);
+    return NextResponse.redirect(onboardingUrl);
   }
 });
 
