@@ -23,6 +23,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aurabank.lol"),
+  icons: "icon.svg",
   title: "Aura Bank",
   description:
     "Track your daily aura in a wallet using AI and compete with others!",
