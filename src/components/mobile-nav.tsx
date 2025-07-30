@@ -1,8 +1,9 @@
 import { Button } from "./ui/button";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { LogIn } from "lucide-react";
 import Logo from "./logo";
 import MobileSidebar from "./mobile-sidebar";
+import CustomUserButton from "./custom-user-button";
 
 export async function MobileNav() {
   return (
@@ -18,7 +19,7 @@ export async function MobileNav() {
           </SignInButton>
         </SignedOut>
         <SignedIn>
-          <UserButton />
+          <CustomUserButton />
         </SignedIn>
 
         <MobileSidebar />

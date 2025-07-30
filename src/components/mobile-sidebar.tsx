@@ -37,18 +37,13 @@ export default function MobileSidebar() {
           <MobileLink href="/leaderboard" setOpen={setOpen}>
             top5
           </MobileLink>
-          <MobileLink href="/premium" setOpen={setOpen}>
-            premium
-          </MobileLink>
+
           <SignedOut>
             <MobileLink disabled href="/wallet">
               wallet
             </MobileLink>
             <MobileLink disabled href="/snitch">
               snitch
-            </MobileLink>
-            <MobileLink disabled href="/profile">
-              profile
             </MobileLink>
 
             <p className="text-center">
@@ -62,10 +57,11 @@ export default function MobileSidebar() {
             <MobileLink href="/snitch" setOpen={setOpen}>
               snitch
             </MobileLink>
-            <MobileLink href="/profile" setOpen={setOpen}>
-              profile
-            </MobileLink>
           </SignedIn>
+
+          <MobileLink href="/premium" setOpen={setOpen}>
+            premium
+          </MobileLink>
         </div>
       </SheetContent>
     </Sheet>

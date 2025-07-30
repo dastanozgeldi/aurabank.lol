@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "./ui/button";
 import Logo from "./logo";
-import { LogIn } from "lucide-react";
+import { LogInIcon } from "lucide-react";
+import CustomUserButton from "./custom-user-button";
 
 export function Nav() {
   return (
-    <div className="hidden items-center justify-between md:flex gap-4">
+    <div className="hidden items-center justify-between gap-4 md:flex">
       <div className="w-full">
         <nav className="hidden grow items-center justify-between md:flex">
           <Logo />
@@ -46,18 +47,18 @@ export function Nav() {
                   buttonVariants({ variant: "link" }),
                   "px-0 text-lg",
                 )}
-                href="/profile"
+                href="/premium"
               >
-                profile
+                premium
               </Link>
               <Link
                 className={cn(
                   buttonVariants({ variant: "link" }),
                   "px-0 text-lg",
                 )}
-                href="/premium"
+                href="/profile"
               >
-                premium
+                profile
               </Link>
             </SignedIn>
           </div>
@@ -66,12 +67,12 @@ export function Nav() {
       <SignedOut>
         <SignInButton>
           <Button size="sm">
-            <LogIn className="h-4 w-4" /> sign in
+            <LogInIcon className="h-4 w-4" /> sign in
           </Button>
         </SignInButton>
       </SignedOut>
       <SignedIn>
-        <UserButton />
+        <CustomUserButton />
       </SignedIn>
     </div>
   );
