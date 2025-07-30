@@ -41,7 +41,7 @@ const columns: ColumnDef<Profile>[] = [
     accessorKey: "username",
     header: "User",
     cell: ({ row }) => (
-      <Link href={`/${row.original.userId}`}>@{row.getValue("username")}</Link>
+      <Link href={`/${row.original.username}`}>@{row.getValue("username")}</Link>
     ),
   },
   {
@@ -138,7 +138,7 @@ export function LeaderboardTable({
             <TableRow>
               <TableCell>{me.rank}</TableCell>
               <TableCell>
-                <Link href={`/${me.userId}`}>@{me.username}</Link>
+                <Link href={`/${me.username}`}>@{me.username}</Link>
               </TableCell>
               <TableCell className="text-right">
                 {me.totalAura?.toLocaleString()}

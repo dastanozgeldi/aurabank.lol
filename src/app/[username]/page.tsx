@@ -14,24 +14,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getProfile } from "@/features/profile/db";
+import { getProfileByUsername } from "@/features/profile/db";
 import { getEvents } from "@/features/event/db";
 import { getSnitches } from "@/features/snitch/db";
 
 export default async function ProfilePage({
   params,
 }: {
-  params: Promise<{ userId: string }>;
+  params: Promise<{ username: string }>;
 }) {
-  const { userId } = await params;
+  const { username } = await params;
 
-  const profile = await getProfile(userId);
+  const profile = await getProfileByUsername(username);
   if (!profile) notFound();
 
   const { userId: myId } = await auth();
-  const user = await (await clerkClient()).users.getUser(userId);
-  const events = await getEvents(userId);
-  const snitches = await getSnitches(userId);
+  // const user = await (await clerkClient()).users.getUser(profile.userId);
+  const events = await getEvents(profile.userId);
+  const snitches = await getSnitches(profile.userId);
 
   return (
     <div className="my-4 flex flex-col items-center justify-center">
@@ -46,7 +46,7 @@ export default async function ProfilePage({
         }
       >
         <div className="flex flex-col items-center">
-          <Avatar className="h-24 w-24">
+          {/* <Avatar className="h-24 w-24">
             <AvatarImage src={user.imageUrl} />
             <AvatarFallback>
               {profile.username?.slice(0, 2).toUpperCase()}
@@ -54,13 +54,13 @@ export default async function ProfilePage({
           </Avatar>
           <div className="mt-3 text-center text-lg font-semibold">
             {user.firstName} {user.lastName}
-          </div>
+          </div> */}
           <div className="text-center text-sm">@{profile.username}</div>
         </div>
 
-        {userId === myId && (
+        {profile.userId === myId && (
           <div className="my-3 w-full">
-            <UpdateUsernameModal userId={userId} />
+            <UpdateUsernameModal userId={profile.userId} />
           </div>
         )}
 

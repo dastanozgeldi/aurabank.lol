@@ -10,7 +10,7 @@ export async function updateUsernameAction(formData: FormData, userId: string) {
 
   updateUsername(userId, username);
 
-  revalidatePath(`/${userId}`);
+  revalidatePath(`/${username}`);
 }
 
 export const completeOnboardingAction = async (formData: FormData) => {
