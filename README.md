@@ -1,7 +1,7 @@
 ## TODO
 
 ### Third Sprint
-- [ ] polar webhook: insert to subscriptions table on subscription active event
+- [x] polar webhook: insert to subscriptions table on subscription active event
 - [ ] make /snitch a paid feature
 - [ ] "formula for aura points"
 - [ ] update [logo](public/logo.png) and favicon
