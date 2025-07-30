@@ -1,20 +1,11 @@
-import { LogIn } from "lucide-react";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
-import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/nav";
 import { MobileNav } from "@/components/mobile-nav";
-import { Button } from "@/components/ui/button";
 import Footer from "@/components/footer";
 import "./globals.css";
 
