@@ -6,21 +6,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Crown, Sparkles, Zap } from "lucide-react";
-import { CheckoutButton } from "@/components/checkout-button";
 import { env } from "@/data/env/server";
-import { Polar } from "@polar-sh/sdk";
-
-const polar = new Polar({
-  accessToken: env.POLAR_ACCESS_TOKEN,
-  server: "sandbox",
-});
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function PremiumPage() {
-  const checkout = await polar.checkouts.create({
-    products: [env.POLAR_PRODUCT_ID],
-    successUrl: env.POLAR_SUCCESS_URL,
-  });
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -69,8 +59,11 @@ export default async function PremiumPage() {
               </div>
             </div>
 
-            {/* CTA Button */}
-            <CheckoutButton checkoutUrl={checkout.url} />
+            <Button asChild className="w-full" size="lg">
+              <Link href={`/api/checkout?products=${env.POLAR_PRODUCT_ID}`}>
+                Upgrade to Premium
+              </Link>
+            </Button>
 
             <p className="text-muted-foreground text-center text-xs">
               Cancel anytime. No hidden fees.

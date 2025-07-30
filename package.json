@@ -14,7 +14,6 @@
     "@clerk/themes": "^2.4.3",
     "@neondatabase/serverless": "^0.9.5",
     "@polar-sh/nextjs": "^0.4.4",
-    "@polar-sh/sdk": "^0.34.8",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
