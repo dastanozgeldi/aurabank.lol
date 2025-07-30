@@ -2,10 +2,10 @@
 
 ### Third Sprint
 - [x] polar webhook: insert to subscriptions table on subscription active event
-- [ ] make /snitch a paid feature
-- [ ] "formula for aura points"
-- [ ] update [logo](public/logo.png) and favicon
-- [ ] update [og image](public/og-image.png)
+- [ ] put /snitch in a paywall
+- [x] "formula for aura points"
+- [x] update [logo](public/logo.png) and favicon
+- [x] update [og image](public/og-image.png)
 
 ### Second Sprint
 
