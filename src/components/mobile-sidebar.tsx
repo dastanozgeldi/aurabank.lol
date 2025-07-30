@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
@@ -23,11 +29,11 @@ export default function MobileSidebar() {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
+      <SheetHeader className="sr-only">
+        <SheetTitle>sidebar</SheetTitle>
+      </SheetHeader>
       <SheetContent className="bg-black p-4">
         <div className="flex flex-col space-y-3">
-          <MobileLink href="/" setOpen={setOpen}>
-            home
-          </MobileLink>
           <MobileLink href="/leaderboard" setOpen={setOpen}>
             top5
           </MobileLink>
