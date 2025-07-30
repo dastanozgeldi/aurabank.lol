@@ -14,6 +14,11 @@ import { currentUser } from "@clerk/nextjs/server";
 export default async function PremiumPage() {
   const user = await currentUser();
 
+  const metadata = JSON.stringify({
+    clerk_user_id: user?.id,
+  });
+  const encodedMetadata = encodeURIComponent(metadata);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -64,7 +69,7 @@ export default async function PremiumPage() {
 
             <Button asChild className="w-full" size="lg">
               <Link
-                href={`/api/checkout?products=${env.POLAR_PRODUCT_ID}&customerEmail=${user?.emailAddresses[0].emailAddress}`}
+                href={`/checkout?products=${env.POLAR_PRODUCT_ID}&customerEmail=${user?.emailAddresses[0].emailAddress}&metadata=${encodedMetadata}`}
               >
                 Upgrade to Premium
               </Link>
