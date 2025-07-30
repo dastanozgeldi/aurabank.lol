@@ -38,6 +38,9 @@ export function MobileNav() {
           <MobileLink href="/leaderboard" setOpen={setOpen}>
             top5
           </MobileLink>
+          <MobileLink href="/premium" setOpen={setOpen}>
+            premium
+          </MobileLink>
           <SignedOut>
             <MobileLink disabled href="/wallet">
               wallet
