@@ -13,13 +13,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getProfileByUsername } from "@/features/profile/db";
-import { getEvents } from "@/features/event/db";
 import { getSnitches } from "@/features/snitch/db";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreateEventDialog } from "@/features/event/components/create-event-dialog";
-import { AuraCard } from "@/components/aura-card";
-import { Brain, User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import AuraTabs, { AuraTabsSkeleton } from "@/components/aura-tabs";
 
 export default async function ProfilePage({
   params,
@@ -56,14 +52,7 @@ export default async function ProfilePage({
         </div>
       )}
 
-      <Suspense
-        fallback={
-          <div className="my-3 w-full">
-            <Skeleton className="mt-3 h-6 w-[200px]" />
-            <Skeleton className="mt-3 h-24 w-full" />
-          </div>
-        }
-      >
+      <Suspense fallback={<AuraTabsSkeleton />}>
         <AuraTabs userId={profile.userId} totalAura={profile.totalAura!} />
       </Suspense>
 
@@ -97,55 +86,6 @@ async function UserInfo({ userId }: { userId: string }) {
         {user.fullName}
       </div>
     </>
-  );
-}
-
-async function AuraTabs({
-  userId,
-  totalAura,
-  wallet = false,
-}: {
-  userId: string;
-  totalAura: number;
-  wallet?: boolean;
-}) {
-  const events = await getEvents(userId);
-
-  return (
-    <Tabs defaultValue="from_events" className="mt-3 w-full">
-      <div className="flex items-center justify-between">
-        <TabsList>
-          <TabsTrigger value="from_events">From Events</TabsTrigger>
-          <TabsTrigger value="profile_total">Profile Total</TabsTrigger>
-        </TabsList>
-
-        {wallet && <CreateEventDialog />}
-      </div>
-      <TabsContent value="from_events">
-        <AuraCard
-          aura={events.reduce((acc, event) => acc + event.aura, 0)}
-          title="From Events"
-          description={
-            wallet && events.length > 0
-              ? `you got ${events[0].aura > 0 ? "+" : ""}${events[0].aura} aura from last time.`
-              : undefined
-          }
-          icon={<Brain className="text-muted-foreground h-4 w-4" />}
-        />
-      </TabsContent>
-      <TabsContent value="profile_total">
-        <AuraCard
-          aura={totalAura}
-          title="Profile Total"
-          description={
-            wallet
-              ? "your profile aura may be different from events because you made a donation"
-              : undefined
-          }
-          icon={<User className="text-muted-foreground h-4 w-4" />}
-        />
-      </TabsContent>
-    </Tabs>
   );
 }
 

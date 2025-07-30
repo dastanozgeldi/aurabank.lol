@@ -1,18 +1,23 @@
-import { Brain, User } from "lucide-react";
-import { SelectEvent, SelectProfile } from "@/drizzle/schema";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { AuraCard } from "./aura-card";
+import { getEvents } from "@/features/event/db";
 import { CreateEventDialog } from "@/features/event/components/create-event-dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { BrainIcon, UserIcon } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Skeleton } from "./ui/skeleton";
 
-interface Props {
-  profile: SelectProfile;
-  events: SelectEvent[];
+export default async function AuraTabs({
+  userId,
+  totalAura,
+  wallet = false,
+}: {
+  userId: string;
+  totalAura: number;
   wallet?: boolean;
-}
+}) {
+  const events = await getEvents(userId);
 
-export const AuraTabs = ({ profile, events, wallet }: Props) => {
   return (
-    <Tabs defaultValue="from_events">
+    <Tabs defaultValue="from_events" className="mt-3 w-full">
       <div className="flex items-center justify-between">
         <TabsList>
           <TabsTrigger value="from_events">From Events</TabsTrigger>
@@ -30,21 +35,60 @@ export const AuraTabs = ({ profile, events, wallet }: Props) => {
               ? `you got ${events[0].aura > 0 ? "+" : ""}${events[0].aura} aura from last time.`
               : undefined
           }
-          icon={<Brain className="text-muted-foreground h-4 w-4" />}
+          icon={<BrainIcon className="text-muted-foreground h-4 w-4" />}
         />
       </TabsContent>
       <TabsContent value="profile_total">
         <AuraCard
-          aura={profile.totalAura!}
+          aura={totalAura}
           title="Profile Total"
           description={
             wallet
               ? "your profile aura may be different from events because you made a donation"
               : undefined
           }
-          icon={<User className="text-muted-foreground h-4 w-4" />}
+          icon={<UserIcon className="text-muted-foreground h-4 w-4" />}
         />
       </TabsContent>
     </Tabs>
   );
-};
+}
+
+export function AuraTabsSkeleton() {
+  return (
+    <div className="my-3 w-full">
+      <Skeleton className="mt-3 h-6 w-[200px]" />
+      <Skeleton className="mt-3 h-24 w-full" />
+    </div>
+  );
+}
+
+function AuraCard({
+  aura,
+  title,
+  description,
+  icon,
+}: {
+  aura: number;
+  title: string;
+  description?: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <Card className="w-full">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        {icon}
+      </CardHeader>
+      <CardContent>
+        <div className="font-sans text-2xl font-black">
+          {aura.toLocaleString()}
+        </div>
+
+        {description && (
+          <p className="text-muted-foreground text-xs">{description}</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
