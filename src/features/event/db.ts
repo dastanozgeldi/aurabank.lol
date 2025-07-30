@@ -25,7 +25,7 @@ export async function insertEvent({
   };
 }) {
   const isPremium = await hasActiveSubscription(userId);
-  const aura = isPremium ? assessment.aura * 2 : assessment.aura;
+  const aura = isPremium && assessment.aura >= 0 ? assessment.aura * 2 : assessment.aura;
 
   const [newEvent] = await db
     .insert(eventsTable)
