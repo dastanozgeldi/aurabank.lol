@@ -1,6 +1,7 @@
 import { eventsTable, profilesTable } from "@/drizzle/schema";
 import { db } from "@/drizzle/db";
 import { desc, eq, sql } from "drizzle-orm";
+import { hasActiveSubscription } from "../subscription/db";
 
 export async function getEvents(userId: string) {
   return db
@@ -19,24 +20,27 @@ export async function insertEvent({
   content: string;
   assessment: {
     title: string;
-    aura: number;
     explanation: string;
+    aura: number;
   };
 }) {
+  const isPremium = await hasActiveSubscription(userId);
+  const aura = isPremium ? assessment.aura * 2 : assessment.aura;
+
   const [newEvent] = await db
     .insert(eventsTable)
     .values({
       userId,
       content,
       title: assessment.title,
-      aura: assessment.aura,
       explanation: assessment.explanation,
+      aura,
     })
     .returning();
 
   await db
     .update(profilesTable)
-    .set({ totalAura: sql`${profilesTable.totalAura} + ${assessment.aura}` })
+    .set({ totalAura: sql`${profilesTable.totalAura} + ${aura}` })
     .where(eq(profilesTable.userId, userId));
 
   return newEvent;
