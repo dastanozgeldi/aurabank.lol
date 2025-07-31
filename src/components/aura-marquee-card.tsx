@@ -40,7 +40,7 @@ export function AuraMarqueeCard({
         <div className="flex flex-row items-center gap-2">
           <p className="text-muted-foreground text-xs">
             {aura > 0 && "+"}
-            {aura} aura
+            {aura.toLocaleString()} aura
           </p>
         </div>
       </div>
