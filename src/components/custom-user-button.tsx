@@ -8,7 +8,7 @@ export default function CustomUserButton() {
     <UserButton>
       <UserButton.MenuItems>
         <UserButton.Link
-          label="Profile page"
+          label="Profile"
           labelIcon={<UserIcon className="size-4" />}
           href="/profile"
         />
