@@ -17,7 +17,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { SelectProfile } from "@/drizzle/schema";
 import { useState } from "react";
 
 export const UsernameSelector = ({
@@ -25,7 +24,10 @@ export const UsernameSelector = ({
   selectedUsername,
   setSelectedUsername,
 }: {
-  profiles: SelectProfile[];
+  profiles: {
+    username: string;
+    totalAura: number;
+  }[];
   selectedUsername: string;
   setSelectedUsername: (value: string) => void;
 }) => {
@@ -41,14 +43,14 @@ export const UsernameSelector = ({
           className="w-full justify-between"
         >
           {selectedUsername ? (
-            <span className="flex items-center">
-              <AtSignIcon className="h-4 w-4 text-muted-foreground" />
+            <span className="flex items-center gap-1.5">
+              <AtSignIcon className="text-muted-foreground size-4" />
               {selectedUsername}
             </span>
           ) : (
             "select username..."
           )}
-          <ChevronDownIcon className="h-4 w-4 shrink-0 opacity-50" />
+          <ChevronDownIcon className="size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="PopoverContent p-0">
