@@ -1,0 +1,1 @@
+ALTER TABLE "profiles_table" DROP COLUMN IF EXISTS "total_aura";
