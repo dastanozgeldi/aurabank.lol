@@ -15,8 +15,8 @@ import {
 import { getProfileByUsername } from "@/features/profile/db";
 import { getSnitches } from "@/features/snitch/db";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import AuraTabs, { AuraTabsSkeleton } from "@/components/aura-tabs";
 import { getUser } from "@/services/clerk";
+import { AuraCard, AuraCardSkeleton } from "@/components/aura-card";
 
 export default async function ProfilePage({
   params,
@@ -52,8 +52,8 @@ export default async function ProfilePage({
         </div>
       )}
 
-      <Suspense fallback={<AuraTabsSkeleton />}>
-        <AuraTabs userId={profile.userId} totalAura={profile.totalAura!} />
+      <Suspense fallback={<AuraCardSkeleton />}>
+        <AuraCard totalAura={profile.totalAura} />
       </Suspense>
 
       <Suspense
