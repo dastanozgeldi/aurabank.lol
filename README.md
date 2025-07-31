@@ -8,6 +8,7 @@
 - [x] update [og image](public/og-image.png)
 - [x] improve db logic (profile events relationship)
 - [ ] match skeletons to real content
+- [ ] rewrite snitch page with use action state (replaces hook)
 
 ### Second Sprint
 
