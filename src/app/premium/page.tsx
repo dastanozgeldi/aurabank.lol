@@ -19,7 +19,7 @@ const benefits = [
   },
   {
     title: "Snitching on someone",
-    description: "Snitch on someone to get their aura points",
+    description: "Snitch on someone to drop their aura points",
     icon: <SwordsIcon className="text-primary h-4 w-4" />,
   },
 ];
@@ -49,7 +49,7 @@ export default async function PremiumPage() {
           <CardContent className="space-y-6">
             {/* Pricing */}
             <div className="text-center">
-              <div className="text-4xl font-extrabold">$3</div>
+              <div className="text-4xl font-extrabold">$2.49</div>
               <div className="text-muted-foreground text-sm">per month</div>
             </div>
 
@@ -70,18 +70,6 @@ export default async function PremiumPage() {
                   </div>
                 </div>
               ))}
-            </div>
-
-            {/* Additional Benefits */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <SparklesIcon className="text-primary h-4 w-4" />
-                <span className="text-sm">Premium badge on profile</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <SparklesIcon className="text-primary h-4 w-4" />
-                <span className="text-sm">Priority leaderboard placement</span>
-              </div>
             </div>
 
             <Button asChild className="w-full" size="lg">
