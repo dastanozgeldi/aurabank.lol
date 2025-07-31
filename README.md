@@ -9,6 +9,7 @@
 - [x] improve db logic (profile events relationship)
 - [ ] match skeletons to real content
 - [ ] rewrite snitch page with use action state (replaces hook)
+- [ ] add a marquee to home page displaying random events
 
 ### Second Sprint
 
