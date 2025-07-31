@@ -11,7 +11,7 @@ import { relations } from "drizzle-orm";
 export const profilesTable = pgTable("profiles_table", {
   userId: text("user_id").primaryKey(),
   totalAura: integer("total_aura").default(0),
-  username: varchar("username", { length: 20 }).unique(),
+  username: varchar("username", { length: 20 }).unique().notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
