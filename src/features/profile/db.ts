@@ -60,6 +60,21 @@ export async function getProfiles() {
     .groupBy(profilesTable.userId, profilesTable.username);
 }
 
+export async function getMyProfileUsername() {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const profile = await db.query.profilesTable.findFirst({
+    where: eq(profilesTable.userId, userId),
+    columns: {
+      username: true,
+    },
+  });
+
+  if (!profile) throw new Error("Profile not found");
+  return profile;
+}
+
 export async function getMyProfile() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
@@ -80,19 +95,19 @@ export async function getMyProfile() {
           explanation: string;
         }>
       >`
-      COALESCE(
-        json_agg(
-          json_build_object(
-            'id', ${eventsTable.id},
-            'aura', ${eventsTable.aura},
-            'title', ${eventsTable.title},
-            'content', ${eventsTable.content},
-            'explanation', ${eventsTable.explanation}
-          )
-        ) FILTER (WHERE ${eventsTable.id} IS NOT NULL),
-        '[]'::json
-      )
-    `.as("events"),
+        COALESCE(
+          json_agg(
+            json_build_object(
+              'id', ${eventsTable.id},
+              'aura', ${eventsTable.aura},
+              'title', ${eventsTable.title},
+              'content', ${eventsTable.content},
+              'explanation', ${eventsTable.explanation}
+            )
+          ) FILTER (WHERE ${eventsTable.id} IS NOT NULL),
+          '[]'::json
+        )
+      `.as("events"),
     })
     .from(profilesTable)
     .where(eq(profilesTable.userId, userId))

@@ -42,7 +42,7 @@ export default async function ProfilePage({
       >
         <UserInfo userId={profile.userId} />
       </Suspense>
-      <p className="text-muted-foreground text-center text-sm">
+      <p className="text-muted-foreground mb-3 text-center text-sm">
         @{profile.username}
       </p>
 
@@ -95,7 +95,9 @@ async function Snitches({ userId }: { userId: string }) {
     <div className="my-4 w-full">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-extrabold">snitches</h1>
-        <div>{snitches.length} in total</div>
+        <span className="text-muted-foreground">
+          {snitches.length} in total
+        </span>
       </div>
 
       {snitches.length > 0 ? (
@@ -103,7 +105,7 @@ async function Snitches({ userId }: { userId: string }) {
           {snitches.map(({ event, culprit, createdAt }) => (
             <Card key={event.id} className="mb-3">
               <CardHeader>
-                <CardTitle>@{culprit?.username ?? "unknown"}</CardTitle>
+                <CardTitle>@{culprit?.username}</CardTitle>
                 <CardDescription className="flex items-center justify-between">
                   {event.aura > 0 && "+"}
                   {event.aura} aura points
