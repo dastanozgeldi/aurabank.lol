@@ -151,7 +151,7 @@ export function LeaderboardTable({
         <div className="text-sm text-muted-foreground">
           there are {profiles.length} users right now.
         </div>
-        <div className="space-x-2">
+        <div className="flex space-x-2">
           <Button
             variant="outline"
             size="sm"
