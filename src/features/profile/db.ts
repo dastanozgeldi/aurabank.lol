@@ -1,5 +1,5 @@
 import { db } from "@/drizzle/db";
-import { profilesTable } from "@/drizzle/schema";
+import { profilesTable, eventsTable } from "@/drizzle/schema";
 import { auth } from "@clerk/nextjs/server";
 import { desc, eq, sql } from "drizzle-orm";
 
@@ -8,13 +8,17 @@ export async function getLeaderboard() {
     .select({
       userId: profilesTable.userId,
       username: profilesTable.username,
-      totalAura: profilesTable.totalAura,
-      rank: sql<number>`rank() over (order by ${profilesTable.totalAura} desc)`.as(
+      totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
+        "totalAura",
+      ),
+      rank: sql<number>`rank() over (order by COALESCE(SUM(${eventsTable.aura}), 0) desc)`.as(
         "rank",
       ),
     })
     .from(profilesTable)
-    .orderBy(desc(profilesTable.totalAura));
+    .leftJoin(eventsTable, sql`${profilesTable.userId} = ${eventsTable.userId}`)
+    .groupBy(profilesTable.userId, profilesTable.username)
+    .orderBy(desc(sql`COALESCE(SUM(${eventsTable.aura}), 0)`));
 }
 
 export async function getProfile(userId: string) {
@@ -27,24 +31,92 @@ export async function getProfile(userId: string) {
 }
 
 export async function getProfileByUsername(username: string) {
-  return db.query.profilesTable.findFirst({
-    where: eq(profilesTable.username, username),
-  });
+  const [profile] = await db
+    .select({
+      userId: profilesTable.userId,
+      username: profilesTable.username,
+      totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
+        "totalAura",
+      ),
+    })
+    .from(profilesTable)
+    .where(eq(profilesTable.username, username))
+    .leftJoin(eventsTable, sql`${profilesTable.userId} = ${eventsTable.userId}`)
+    .groupBy(profilesTable.userId, profilesTable.username);
+
+  return profile;
 }
 
 export async function getProfiles() {
-  return db.query.profilesTable.findMany({
-    orderBy: [desc(profilesTable.totalAura)],
+  return db
+    .select({
+      username: profilesTable.username,
+      totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
+        "totalAura",
+      ),
+    })
+    .from(profilesTable)
+    .leftJoin(eventsTable, sql`${profilesTable.userId} = ${eventsTable.userId}`)
+    .groupBy(profilesTable.userId, profilesTable.username);
+}
+
+export async function getMyProfileUsername() {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const profile = await db.query.profilesTable.findFirst({
+    where: eq(profilesTable.userId, userId),
+    columns: {
+      username: true,
+    },
   });
+
+  if (!profile) throw new Error("Profile not found");
+  return profile;
 }
 
 export async function getMyProfile() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
-  return await db.query.profilesTable.findFirst({
-    where: eq(profilesTable.userId, userId),
-  });
+  const [profile] = await db
+    .select({
+      userId: profilesTable.userId,
+      username: profilesTable.username,
+      totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
+        "totalAura",
+      ),
+      events: sql<
+        Array<{
+          id: number;
+          aura: number;
+          title: string;
+          content: string;
+          explanation: string;
+        }>
+      >`
+        COALESCE(
+          json_agg(
+            json_build_object(
+              'id', ${eventsTable.id},
+              'aura', ${eventsTable.aura},
+              'title', ${eventsTable.title},
+              'content', ${eventsTable.content},
+              'explanation', ${eventsTable.explanation}
+            )
+          ) FILTER (WHERE ${eventsTable.id} IS NOT NULL),
+          '[]'::json
+        )
+      `.as("events"),
+    })
+    .from(profilesTable)
+    .where(eq(profilesTable.userId, userId))
+    .leftJoin(eventsTable, sql`${profilesTable.userId} = ${eventsTable.userId}`)
+    .groupBy(profilesTable.userId, profilesTable.username);
+
+  if (!profile) throw new Error("Profile not found");
+
+  return profile;
 }
 
 export async function updateSettings(

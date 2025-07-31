@@ -2,12 +2,13 @@ import { useRouter } from "next/navigation";
 import { useState, FormEvent, useCallback, useEffect } from "react";
 import { toast } from "sonner";
 import { createSnitchAction } from "../actions";
-import { SelectProfile } from "@/drizzle/schema";
 
 export const useSnitch = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [profiles, setProfiles] = useState<SelectProfile[]>([]);
+  const [profiles, setProfiles] = useState<
+    { username: string; totalAura: number }[]
+  >([]);
 
   async function onSubmit(
     event: FormEvent<HTMLFormElement>,

@@ -7,54 +7,51 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import AuraTabs, { AuraTabsSkeleton } from "@/components/aura-tabs";
-import { getEvents } from "@/features/event/db";
+import { AuraCard, AuraCardSkeleton } from "@/components/aura-card";
 import { getMyProfile } from "@/features/profile/db";
 import { Suspense } from "react";
-import { notFound } from "next/navigation";
+import { CreateEventDialog } from "@/features/event/components/create-event-dialog";
+import PageHeader from "@/components/page-header";
 
 export default async function WalletPage() {
-  const profile = await getMyProfile();
-  if (!profile) notFound();
-
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-full flex-col gap-6">
-          <AuraTabsSkeleton />
-          <AuraTabsSkeleton />
-        </div>
-      }
-    >
-      <SuspenseBoundary
-        userId={profile.userId}
-        totalAura={profile.totalAura!}
+    <>
+      <PageHeader
+        title="wallet"
+        description="describe what happened to ai."
+        button={<CreateEventDialog />}
       />
-    </Suspense>
+      <Suspense
+        fallback={
+          <div className="flex h-full flex-col gap-6">
+            <AuraCardSkeleton />
+            <AuraCardSkeleton />
+          </div>
+        }
+      >
+        <SuspenseBoundary />
+      </Suspense>
+    </>
   );
 }
 
-async function SuspenseBoundary({
-  userId,
-  totalAura,
-}: {
-  userId: string;
-  totalAura: number;
-}) {
-  const events = await getEvents(userId);
+async function SuspenseBoundary() {
+  const profile = await getMyProfile();
 
   return (
-    <div className="my-6 h-full space-y-6">
-      <AuraTabs userId={userId} totalAura={totalAura} wallet />
+    <div className="my-6 h-full">
+      <AuraCard totalAura={profile.totalAura} />
 
-      <div className="flex items-center justify-between">
+      <div className="mt-6 flex items-center justify-between">
         <h2 className="text-2xl font-semibold">events</h2>
-        <div>{events.length} in total</div>
+        <span className="text-muted-foreground">
+          {profile.events.length} in total
+        </span>
       </div>
 
-      {events.length > 0 ? (
+      {profile.events.length ? (
         <ScrollArea className="mt-3 h-[300px]">
-          {events.map((event) => (
+          {profile.events.map((event) => (
             <Card key={event.id} className="mb-3">
               <CardHeader>
                 <CardTitle>{event.title}</CardTitle>
