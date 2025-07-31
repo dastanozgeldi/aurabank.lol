@@ -2,10 +2,12 @@
 
 ### Third Sprint
 - [x] polar webhook: insert to subscriptions table on subscription active event
-- [ ] put /snitch in a paywall
+- [x] put /snitch in a paywall
 - [x] "formula for aura points"
 - [x] update [logo](public/logo.png) and favicon
 - [x] update [og image](public/og-image.png)
+- [x] improve db logic (profile events relationship)
+- [ ] match skeletons to real content
 
 ### Second Sprint
 
