@@ -7,10 +7,10 @@
 - [x] update [logo](public/logo.png) and favicon
 - [x] update [og image](public/og-image.png)
 - [x] improve db logic (profile events relationship)
-- [ ] match skeletons to real content
+- [x] match skeletons to real content
 - [x] add a marquee to home page displaying random events
 - [x] clerk webhooks
-- [ ] do something with clerk user metadata
+- [x] do something with clerk user metadata (removed completely)
 - [x] get rid of onboarding (replaced by clerk webhooks)
 
 ### Second Sprint
