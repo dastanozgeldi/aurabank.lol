@@ -1,27 +1,15 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/onboarding(.*)",
   "/api(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId, sessionClaims } = await auth();
-
-  // Check if it's a public route first
   if (!isPublicRoute(req)) {
     await auth.protect();
-  }
-
-  // Only check onboarding for authenticated users on non-public routes
-  // This prevents API routes and other public routes from being redirected
-  if (userId && !isPublicRoute(req) && !sessionClaims?.metadata?.onboardingComplete) {
-    const onboardingUrl = new URL("/onboarding", req.url);
-    return NextResponse.redirect(onboardingUrl);
   }
 });
 

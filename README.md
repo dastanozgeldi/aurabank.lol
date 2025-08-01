@@ -9,9 +9,9 @@
 - [x] improve db logic (profile events relationship)
 - [ ] match skeletons to real content
 - [x] add a marquee to home page displaying random events
-- [ ] clerk webhooks
+- [x] clerk webhooks
 - [ ] do something with clerk user metadata
-- [ ] get rid of onboarding (replaced by clerk webhooks)
+- [x] get rid of onboarding (replaced by clerk webhooks)
 
 ### Second Sprint
 
