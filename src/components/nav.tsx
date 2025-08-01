@@ -1,70 +1,38 @@
 import Link from "next/link";
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "./ui/button";
-import Logo from "./logo";
-import { LogInIcon } from "lucide-react";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { links } from "@/data/config";
+import { Button } from "./ui/button";
 import CustomUserButton from "./custom-user-button";
+import CustomSignInButton from "./custom-sign-in-button";
+import Logo from "./logo";
 
 export function Nav() {
   return (
-    <div className="hidden items-center justify-between gap-4 md:flex">
-      <div className="w-full">
-        <nav className="hidden grow items-center justify-between md:flex">
-          <Logo />
+    <nav className="hidden items-center justify-between md:flex">
+      <Logo />
 
+      <div className="flex items-center gap-4">
+        <SignedIn>
           <div className="flex items-center gap-4">
-            <Link
-              className={cn(
-                buttonVariants({ variant: "link" }),
-                "px-0 text-lg",
-              )}
-              href="/leaderboard"
-            >
-              top5
-            </Link>
-            <SignedIn>
-              <Link
-                className={cn(
-                  buttonVariants({ variant: "link" }),
-                  "px-0 text-lg",
-                )}
-                href="/wallet"
+            {links.map((link) => (
+              <Button
+                key={link.label}
+                asChild
+                className="px-0 text-lg"
+                variant="link"
               >
-                wallet
-              </Link>
-              <Link
-                className={cn(
-                  buttonVariants({ variant: "link" }),
-                  "px-0 text-lg",
-                )}
-                href="/snitch"
-              >
-                snitch
-              </Link>
-              <Link
-                className={cn(
-                  buttonVariants({ variant: "link" }),
-                  "px-0 text-lg",
-                )}
-                href="/premium"
-              >
-                premium
-              </Link>
-            </SignedIn>
+                <Link href={link.href}>{link.label}</Link>
+              </Button>
+            ))}
           </div>
-        </nav>
+        </SignedIn>
+        <SignedOut>
+          <CustomSignInButton />
+        </SignedOut>
+        <SignedIn>
+          <CustomUserButton />
+        </SignedIn>
       </div>
-      <SignedOut>
-        <SignInButton>
-          <Button size="sm">
-            <LogInIcon className="h-4 w-4" /> sign in
-          </Button>
-        </SignInButton>
-      </SignedOut>
-      <SignedIn>
-        <CustomUserButton />
-      </SignedIn>
-    </div>
+    </nav>
   );
 }

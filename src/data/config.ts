@@ -1,0 +1,18 @@
+export const links = [
+  {
+    href: "/leaderboard",
+    label: "leaderboard",
+  },
+  {
+    href: "/wallet",
+    label: "wallet",
+  },
+  {
+    href: "/snitch",
+    label: "snitch",
+  },
+  {
+    href: "/premium",
+    label: "premium",
+  },
+];
