@@ -34,7 +34,9 @@ export async function getProfileByUsername(username: string) {
   const [profile] = await db
     .select({
       userId: profilesTable.userId,
+      name: profilesTable.name,
       username: profilesTable.username,
+      imageUrl: profilesTable.imageUrl,
       totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
         "totalAura",
       ),
