@@ -8,8 +8,10 @@
 - [x] update [og image](public/og-image.png)
 - [x] improve db logic (profile events relationship)
 - [ ] match skeletons to real content
-- [ ] rewrite snitch page with use action state (replaces hook)
-- [ ] add a marquee to home page displaying random events
+- [x] add a marquee to home page displaying random events
+- [ ] clerk webhooks
+- [ ] do something with clerk user metadata
+- [ ] get rid of onboarding (replaced by clerk webhooks)
 
 ### Second Sprint
 
