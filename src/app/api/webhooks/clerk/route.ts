@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   const payload = await req.json();
   const body = JSON.stringify(payload);
 
-  const wh = new Webhook(env.CLERK_WEBHOOK_SECRET);
+  const wh = new Webhook(env.CLERK_WEBHOOK_SIGNING_SECRET);
   let event: WebhookEvent;
 
   try {
