@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
 export function AuraMarqueeCard({
-  // img,
+  imageUrl,
   username,
   content,
   aura,
 }: {
-  // img: string;
+  imageUrl: string | null;
   username: string;
   content: string;
   aura: number;
@@ -29,7 +29,7 @@ export function AuraMarqueeCard({
             width="32"
             height="32"
             alt=""
-            src={`https://avatar.vercel.sh/${username}`}
+            src={imageUrl ?? `https://avatar.vercel.sh/${username}`}
           />
           <div className="flex flex-col">
             <figcaption className="text-sm font-medium dark:text-white">
