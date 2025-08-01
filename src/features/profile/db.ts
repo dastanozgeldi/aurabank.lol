@@ -165,7 +165,6 @@ export async function deleteProfile({ userId }: { userId: string }) {
     .set({
       deletedAt: new Date(),
       name: "Deleted User",
-      userId: "deleted-user",
       imageUrl: null,
     })
     .where(eq(profilesTable.userId, userId))
