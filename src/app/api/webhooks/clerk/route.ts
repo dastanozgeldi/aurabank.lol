@@ -5,7 +5,6 @@ import {
   updateProfile,
   deleteProfile,
 } from "@/features/profile/db";
-import { syncClerkUserMetadata } from "@/services/clerk";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { env } from "@/data/env/server";
 
@@ -49,14 +48,12 @@ export async function POST(req: Request) {
       if (name === "") return new Response("No name", { status: 400 });
 
       if (event.type === "user.created") {
-        const user = await insertProfile({
+        await insertProfile({
           userId: event.data.id,
           username,
           name,
           imageUrl: event.data.image_url,
         });
-
-        syncClerkUserMetadata(user);
       } else {
         await updateProfile(
           { userId: event.data.id },
