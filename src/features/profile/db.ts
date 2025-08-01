@@ -88,38 +88,14 @@ export async function getMyWallet() {
       totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
         "totalAura",
       ),
-      events: sql<
-        Array<{
-          id: number;
-          aura: number;
-          title: string;
-          content: string;
-          explanation: string;
-          createdAt: string;
-        }>
-      >`
-        COALESCE(
-          json_agg(
-            json_build_object(
-              'id', ${eventsTable.id},
-              'aura', ${eventsTable.aura},
-              'title', ${eventsTable.title},
-              'content', ${eventsTable.content},
-              'explanation', ${eventsTable.explanation},
-              'createdAt', ${eventsTable.createdAt}
-            ) ORDER BY ${eventsTable.createdAt} DESC
-          ) FILTER (WHERE ${eventsTable.id} IS NOT NULL),
-          '[]'::json
-        )
-      `.as("events"),
+      eventsCount: sql<number>`COUNT(${eventsTable.id})`.as("eventsCount"),
     })
     .from(profilesTable)
     .where(eq(profilesTable.userId, userId))
-    .leftJoin(eventsTable, sql`${profilesTable.userId} = ${eventsTable.userId}`)
+    .leftJoin(eventsTable, eq(profilesTable.userId, eventsTable.userId))
     .groupBy(profilesTable.userId, profilesTable.username);
 
   if (!profile) throw new Error("Profile not found");
-
   return profile;
 }
 
