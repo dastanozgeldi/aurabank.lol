@@ -95,6 +95,7 @@ export async function getMyWallet() {
           title: string;
           content: string;
           explanation: string;
+          createdAt: string;
         }>
       >`
         COALESCE(
@@ -104,7 +105,8 @@ export async function getMyWallet() {
               'aura', ${eventsTable.aura},
               'title', ${eventsTable.title},
               'content', ${eventsTable.content},
-              'explanation', ${eventsTable.explanation}
+              'explanation', ${eventsTable.explanation},
+              'createdAt', ${eventsTable.createdAt}
             ) ORDER BY ${eventsTable.createdAt} DESC
           ) FILTER (WHERE ${eventsTable.id} IS NOT NULL),
           '[]'::json

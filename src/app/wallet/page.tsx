@@ -1,8 +1,8 @@
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -39,6 +39,11 @@ export default async function WalletPage() {
 async function SuspenseBoundary() {
   const profile = await getMyWallet();
 
+  const dtFormatter = Intl.DateTimeFormat(undefined, {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+
   return (
     <div className="my-6 h-full">
       <AuraCard totalAura={profile.totalAura} />
@@ -57,14 +62,21 @@ async function SuspenseBoundary() {
               <CardHeader>
                 <CardTitle>{event.title}</CardTitle>
                 <CardDescription>
-                  {event.aura > 0 && "+"}
-                  {event.aura} aura points
+                  {dtFormatter.format(new Date(event.createdAt))}
                 </CardDescription>
+                <CardAction className="text-muted-foreground text-sm">
+                  {event.aura > 0 && "+"}
+                  {event.aura} aura
+                </CardAction>
               </CardHeader>
-              <CardContent>{event.explanation}</CardContent>
-              <CardFooter className="text-muted-foreground">
-                {event.content}
-              </CardFooter>
+              <CardContent>
+                <div className="mb-3 rounded-sm border-l-4 border-yellow-400 bg-[#121212] px-2 py-1">
+                  {event.content}
+                </div>
+                <blockquote className="line-clamp-3">
+                  {event.explanation}
+                </blockquote>
+              </CardContent>
             </Card>
           ))}
         </ScrollArea>
