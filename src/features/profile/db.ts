@@ -77,7 +77,7 @@ export async function getMyProfileUsername() {
   return profile;
 }
 
-export async function getMyProfile() {
+export async function getMyWallet() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
@@ -105,7 +105,7 @@ export async function getMyProfile() {
               'title', ${eventsTable.title},
               'content', ${eventsTable.content},
               'explanation', ${eventsTable.explanation}
-            )
+            ) ORDER BY ${eventsTable.createdAt} DESC
           ) FILTER (WHERE ${eventsTable.id} IS NOT NULL),
           '[]'::json
         )

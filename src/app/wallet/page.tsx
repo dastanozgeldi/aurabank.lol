@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AuraCard } from "@/components/aura-card";
-import { getMyProfile } from "@/features/profile/db";
+import { getMyWallet } from "@/features/profile/db";
 import { Suspense } from "react";
 import { CreateEventDialog } from "@/features/event/components/create-event-dialog";
 import PageHeader from "@/components/page-header";
@@ -37,7 +37,7 @@ export default async function WalletPage() {
 }
 
 async function SuspenseBoundary() {
-  const profile = await getMyProfile();
+  const profile = await getMyWallet();
 
   return (
     <div className="my-6 h-full">
