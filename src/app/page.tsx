@@ -14,6 +14,7 @@ export default async function Home() {
       profile: {
         columns: {
           username: true,
+          imageUrl: true,
         },
       },
     },
@@ -35,6 +36,7 @@ export default async function Home() {
               username={event.profile?.username ?? ""}
               content={event.content}
               aura={event.aura}
+              imageUrl={event.profile.imageUrl}
             />
           ))}
         </Marquee>
@@ -45,6 +47,7 @@ export default async function Home() {
               username={event.profile?.username ?? ""}
               content={event.content}
               aura={event.aura}
+              imageUrl={event.profile.imageUrl}
             />
           ))}
         </Marquee>

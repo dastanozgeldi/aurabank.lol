@@ -22,6 +22,20 @@
       "when": 1753992960350,
       "tag": "0002_superb_darkstar",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1754038392379,
+      "tag": "0003_futuristic_quasar",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1754039133583,
+      "tag": "0004_cynical_tana_nile",
+      "breakpoints": true
     }
   ]
 }

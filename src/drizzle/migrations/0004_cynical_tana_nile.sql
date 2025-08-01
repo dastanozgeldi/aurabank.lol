@@ -1,0 +1,1 @@
+ALTER TABLE "profiles_table" ADD COLUMN "name" text;

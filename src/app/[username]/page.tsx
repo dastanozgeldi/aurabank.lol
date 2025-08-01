@@ -1,9 +1,7 @@
-import { auth } from "@clerk/nextjs/server";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { UpdateSettingsDialog } from "@/features/profile/components/update-settings-dialog";
 import {
   Card,
   CardContent,
@@ -15,8 +13,7 @@ import {
 import { getProfileByUsername } from "@/features/profile/db";
 import { getSnitches } from "@/features/snitch/db";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getUser } from "@/services/clerk";
-import { AuraCard, AuraCardSkeleton } from "@/components/aura-card";
+import { AuraCard } from "@/components/aura-card";
 
 export default async function ProfilePage({
   params,
@@ -25,65 +22,58 @@ export default async function ProfilePage({
 }) {
   const { username } = await params;
 
-  const profile = await getProfileByUsername(username);
-  if (!profile) notFound();
-
-  const { userId: myId } = await auth();
-
   return (
     <div className="my-4 flex flex-col items-center justify-center">
       <Suspense
         fallback={
           <>
             <Skeleton className="h-24 w-24 rounded-full" />
-            <Skeleton className="my-2 h-6 w-[200px]" />
+            <Skeleton className="my-3 h-6 w-[200px]" />
+            <Skeleton className="mb-3 h-4 w-[100px]" />
+            <Skeleton className="h-40 w-full" />
           </>
         }
       >
-        <UserInfo userId={profile.userId} />
-      </Suspense>
-      <p className="text-muted-foreground mb-3 text-center text-sm">
-        @{profile.username}
-      </p>
-
-      {profile.userId === myId && (
-        <div className="my-3 self-center">
-          <UpdateSettingsDialog userId={profile.userId} />
-        </div>
-      )}
-
-      <Suspense fallback={<AuraCardSkeleton />}>
-        <AuraCard totalAura={profile.totalAura} />
-      </Suspense>
-
-      <Suspense
-        fallback={
-          <div className="my-3 w-full">
-            <Skeleton className="mt-3 h-6 w-full" />
-            <Skeleton className="mt-3 h-24 w-full" />
-          </div>
-        }
-      >
-        <Snitches userId={profile.userId} />
+        <SuspenseBoundary username={username} />
       </Suspense>
     </div>
   );
 }
 
-async function UserInfo({ userId }: { userId: string }) {
-  const user = await getUser(userId);
+async function SuspenseBoundary({ username }: { username: string }) {
+  const profile = await getProfileByUsername(username);
+  if (!profile) notFound();
 
   return (
     <>
       <Avatar className="h-24 w-24">
-        <AvatarImage src={user.imageUrl} />
+        <AvatarImage
+          src={profile.imageUrl ?? undefined}
+          className="object-cover"
+        />
         <AvatarFallback>
-          {user.fullName?.slice(0, 2).toUpperCase()}
+          {profile.name?.slice(0, 2).toUpperCase()}
         </AvatarFallback>
       </Avatar>
       <div className="mt-3 text-center text-lg font-semibold">
-        {user.fullName}
+        {profile.name}
       </div>
+      <p className="text-muted-foreground mb-3 text-center text-sm">
+        @{profile.username}
+      </p>
+
+      <AuraCard totalAura={profile.totalAura} />
+
+      <Suspense
+        fallback={
+          <div className="my-4 w-full">
+            <Skeleton className="mt-3 h-6 w-full" />
+            <Skeleton className="mt-3 h-[300px] w-full" />
+          </div>
+        }
+      >
+        <Snitches userId={profile.userId} />
+      </Suspense>
     </>
   );
 }

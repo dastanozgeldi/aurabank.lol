@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CrownIcon, SparklesIcon, SwordsIcon, ZapIcon } from "lucide-react";
+import { CrownIcon, SwordsIcon, ZapIcon } from "lucide-react";
 import { env } from "@/data/env/server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

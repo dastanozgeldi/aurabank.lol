@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Skeleton } from "./ui/skeleton";
 
 export async function AuraCard({ totalAura }: { totalAura: number }) {
   return (
@@ -24,14 +23,5 @@ export async function AuraCard({ totalAura }: { totalAura: number }) {
         go to wallet to get aura.
       </CardFooter>
     </Card>
-  );
-}
-
-export function AuraCardSkeleton() {
-  return (
-    <div className="my-3 w-full">
-      <Skeleton className="mt-3 h-6 w-[200px]" />
-      <Skeleton className="mt-3 h-24 w-full" />
-    </div>
   );
 }

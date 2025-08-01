@@ -34,7 +34,9 @@ export async function getProfileByUsername(username: string) {
   const [profile] = await db
     .select({
       userId: profilesTable.userId,
+      name: profilesTable.name,
       username: profilesTable.username,
+      imageUrl: profilesTable.imageUrl,
       totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
         "totalAura",
       ),
@@ -75,7 +77,7 @@ export async function getMyProfileUsername() {
   return profile;
 }
 
-export async function getMyProfile() {
+export async function getMyWallet() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
@@ -103,7 +105,7 @@ export async function getMyProfile() {
               'title', ${eventsTable.title},
               'content', ${eventsTable.content},
               'explanation', ${eventsTable.explanation}
-            )
+            ) ORDER BY ${eventsTable.createdAt} DESC
           ) FILTER (WHERE ${eventsTable.id} IS NOT NULL),
           '[]'::json
         )
@@ -129,17 +131,46 @@ export async function updateSettings(
     .where(eq(profilesTable.userId, userId));
 }
 
-export async function insertProfile(userId: string, username: string) {
-  await db
+export async function insertProfile(data: typeof profilesTable.$inferInsert) {
+  const [newProfile] = await db
     .insert(profilesTable)
-    .values({
-      userId,
-      username,
-    })
-    // there are existing users with hardcoded profiles,
-    // so we need to update the username if it already exists
+    .values(data)
+    .returning()
     .onConflictDoUpdate({
       target: profilesTable.userId,
-      set: { username },
+      set: data,
     });
+
+  if (newProfile == null) throw new Error("Failed to create profile");
+  return newProfile;
+}
+
+export async function updateProfile(
+  { userId }: { userId: string },
+  data: Partial<typeof profilesTable.$inferInsert>,
+) {
+  const [updatedProfile] = await db
+    .update(profilesTable)
+    .set(data)
+    .where(eq(profilesTable.userId, userId))
+    .returning();
+
+  if (updatedProfile == null) throw new Error("Failed to update profile");
+  return updatedProfile;
+}
+
+export async function deleteProfile({ userId }: { userId: string }) {
+  const [deletedProfile] = await db
+    .update(profilesTable)
+    .set({
+      deletedAt: new Date(),
+      name: "Deleted User",
+      userId: "deleted-user",
+      imageUrl: null,
+    })
+    .where(eq(profilesTable.userId, userId))
+    .returning();
+
+  if (deletedProfile == null) throw new Error("Failed to delete profile");
+  return deletedProfile;
 }
