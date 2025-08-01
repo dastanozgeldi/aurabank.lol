@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function AuraMarqueeCard({
   imageUrl,
@@ -23,14 +24,10 @@ export function AuraMarqueeCard({
     >
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-2">
-          {/* TODO: display real imageUrls stored in profile schema */}
-          <img
-            className="rounded-full"
-            width="32"
-            height="32"
-            alt=""
-            src={imageUrl ?? `https://avatar.vercel.sh/${username}`}
-          />
+          <Avatar className="size-8">
+            <AvatarImage src={imageUrl ?? undefined} className="object-cover" />
+            <AvatarFallback>{username[0].toUpperCase()}</AvatarFallback>
+          </Avatar>
           <div className="flex flex-col">
             <figcaption className="text-sm font-medium dark:text-white">
               @{username}

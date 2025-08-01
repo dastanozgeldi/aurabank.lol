@@ -46,7 +46,7 @@ async function SuspenseBoundary({ username }: { username: string }) {
 
   return (
     <>
-      <Avatar className="h-24 w-24">
+      <Avatar className="size-24">
         <AvatarImage
           src={profile.imageUrl ?? undefined}
           className="object-cover"
