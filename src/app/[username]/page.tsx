@@ -76,7 +76,7 @@ async function UserInfo({ userId }: { userId: string }) {
   return (
     <>
       <Avatar className="h-24 w-24">
-        <AvatarImage src={user.imageUrl} />
+        <AvatarImage src={user.imageUrl} className="object-cover" />
         <AvatarFallback>
           {user.fullName?.slice(0, 2).toUpperCase()}
         </AvatarFallback>
