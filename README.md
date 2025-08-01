@@ -1,6 +1,7 @@
 ## TODO
 
 ### Third Sprint
+
 - [x] polar webhook: insert to subscriptions table on subscription active event
 - [x] put /snitch in a paywall
 - [x] "formula for aura points"
@@ -12,6 +13,7 @@
 - [x] clerk webhooks
 - [x] do something with clerk user metadata (removed completely)
 - [x] get rid of onboarding (replaced by clerk webhooks)
+- [ ] optimize get wallet query (limit events to 3)
 
 ### Second Sprint
 
