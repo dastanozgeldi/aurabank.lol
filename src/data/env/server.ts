@@ -9,7 +9,7 @@ export const env = createEnv({
     POLAR_PRODUCT_ID: z.string().min(1),
     POLAR_WEBHOOK_SECRET: z.string().min(1),
     POLAR_SERVER: z.enum(["sandbox", "production"]).default("production"),
-    CLERK_WEBHOOK_SECRET: z.string().min(1),
+    CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
   },
   experimental__runtimeEnv: process.env,
 });
