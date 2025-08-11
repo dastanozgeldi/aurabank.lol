@@ -1,17 +1,30 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { useActionState, useEffect } from "react";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { UsernameSelector } from "@/features/snitch/components/username-selector";
-import { useSnitch } from "@/features/snitch/hooks/use-snitch";
 import PageHeader from "@/components/page-header";
+import { Input } from "@/components/ui/input";
+import { createSnitchAction } from "@/features/snitch/actions";
+
+const initialState = {
+  message: "",
+};
 
 export default function SnitchPage() {
-  const { loading, profiles, onSubmit } = useSnitch();
-  const [selectedUsername, setSelectedUsername] = useState("");
+  const [state, formAction, pending] = useActionState(
+    createSnitchAction,
+    initialState,
+  );
+
+  useEffect(() => {
+    if (state?.message) {
+      toast.success(state.message);
+    }
+  }, [state?.message]);
 
   return (
     <>
@@ -20,35 +33,24 @@ export default function SnitchPage() {
         description="snitch events will be displayed on user's profile."
       />
 
-      <form
-        onSubmit={(event) =>
-          onSubmit(event, selectedUsername, setSelectedUsername)
-        }
-        className="space-y-3"
-      >
+      <form action={formAction} className="space-y-3">
         <div className="grid w-full gap-1.5">
           <Label htmlFor="username">victim username</Label>
-          <UsernameSelector
-            profiles={profiles}
-            selectedUsername={selectedUsername}
-            setSelectedUsername={setSelectedUsername}
-          />
+          <Input id="username" name="username" required />
         </div>
 
         <div className="grid w-full gap-1.5">
           <Label htmlFor="content">what happened</Label>
           <Textarea
-            required
-            minLength={10}
-            placeholder="he farted during the class"
             id="content"
             name="content"
+            placeholder="farted during the class"
+            required
           />
         </div>
-        <Button disabled={loading || !selectedUsername} className="w-full">
-          {loading && <Loader2 className="h-5 w-5 animate-spin" />}
-          Submit
-          {!loading && <ArrowRight className="h-4 w-4" />}
+        <Button disabled={pending}>
+          {pending && <Loader2 className="h-5 w-5 animate-spin" />}
+          Snitch
         </Button>
       </form>
     </>

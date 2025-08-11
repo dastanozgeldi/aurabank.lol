@@ -40,19 +40,6 @@ export async function getProfileByUsername(username: string) {
   return profile;
 }
 
-export async function getProfiles() {
-  return db
-    .select({
-      username: profilesTable.username,
-      totalAura: sql<number>`COALESCE(SUM(${eventsTable.aura}), 0)`.as(
-        "totalAura",
-      ),
-    })
-    .from(profilesTable)
-    .leftJoin(eventsTable, sql`${profilesTable.userId} = ${eventsTable.userId}`)
-    .groupBy(profilesTable.userId, profilesTable.username);
-}
-
 export async function getMyWallet() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
