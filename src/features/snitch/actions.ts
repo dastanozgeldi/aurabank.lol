@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
 import { generateEventAssessment } from "@/lib/generate-event-assessment";
 import { getProfileByUsername } from "@/features/profile/db";
@@ -29,6 +30,8 @@ export async function createSnitchAction(_: unknown, formData: FormData) {
     victimId: victim.userId,
     eventId: newEvent.id,
   });
+
+  revalidatePath(`/${username}`);
 
   return { message: "Snitch was created." };
 }

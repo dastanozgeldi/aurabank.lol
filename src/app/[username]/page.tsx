@@ -4,16 +4,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { getProfileByUsername } from "@/features/profile/db";
-import { getSnitches } from "@/features/snitch/db";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AuraCard } from "@/components/aura-card";
+import { CreateSnitchDialog } from "@/features/snitch/components/create-snitch-dialog";
+import { getSnitchesByVictimId } from "@/features/snitch/db";
 
 export default async function ProfilePage({
   params,
@@ -72,39 +73,41 @@ async function SuspenseBoundary({ username }: { username: string }) {
           </div>
         }
       >
-        <Snitches userId={profile.userId} />
+        <Snitches profile={profile} />
       </Suspense>
     </>
   );
 }
 
-async function Snitches({ userId }: { userId: string }) {
-  const snitches = await getSnitches(userId);
+async function Snitches({
+  profile,
+}: {
+  profile: { userId: string; username: string };
+}) {
+  const snitches = await getSnitchesByVictimId(profile.userId);
 
   return (
     <div className="my-4 w-full">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold">snitches</h1>
-        <span className="text-muted-foreground">
-          {snitches.length} in total
-        </span>
+        <h1 className="text-2xl font-extrabold">recent snitches</h1>
+        <CreateSnitchDialog username={profile.username} />
       </div>
 
       {snitches.length > 0 ? (
         <ScrollArea className="mt-3 h-[300px] w-full">
-          {snitches.map(({ event, culprit, createdAt }) => (
-            <Card key={event.id} className="mb-3">
+          {snitches.map(({ id, event, culprit, createdAt }) => (
+            <Card key={id} className="mb-3">
               <CardHeader>
-                <CardTitle>@{culprit?.username}</CardTitle>
-                <CardDescription className="flex items-center justify-between">
-                  {event.aura > 0 && "+"}
-                  {event.aura} aura points
+                <CardTitle>@{culprit.username}</CardTitle>
+                <CardDescription>
+                  {createdAt.toLocaleDateString()}
                 </CardDescription>
+                <CardAction className="text-muted-foreground text-sm">
+                  {event.aura > 0 && "+"}
+                  {event.aura} aura
+                </CardAction>
               </CardHeader>
               <CardContent>{event.content}</CardContent>
-              <CardFooter className="text-muted-foreground text-right text-sm">
-                {createdAt.toLocaleString()}
-              </CardFooter>
             </Card>
           ))}
         </ScrollArea>

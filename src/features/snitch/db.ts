@@ -1,15 +1,29 @@
 import { db } from "@/drizzle/db";
 import { snitchesTable } from "@/drizzle/schema";
-import { desc, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
-export async function getSnitches(userId: string) {
+export async function getSnitchesByVictimId(victimId: string) {
   return db.query.snitchesTable.findMany({
-    where: eq(snitchesTable.victimId, userId),
-    orderBy: [desc(snitchesTable.createdAt)],
-    with: {
-      event: true,
-      culprit: true,
+    where: eq(snitchesTable.victimId, victimId),
+    columns: {
+      id: true,
+      createdAt: true,
     },
+    with: {
+      event: {
+        columns: {
+          aura: true,
+          content: true,
+        },
+      },
+      culprit: {
+        columns: {
+          username: true,
+        },
+      },
+    },
+    orderBy: (snitches, { desc }) => [desc(snitches.createdAt)],
+    limit: 5,
   });
 }
 
