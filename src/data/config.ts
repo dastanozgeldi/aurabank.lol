@@ -8,10 +8,6 @@ export const links = [
     label: "wallet",
   },
   {
-    href: "/snitch",
-    label: "snitch",
-  },
-  {
     href: "/premium",
     label: "premium",
   },
