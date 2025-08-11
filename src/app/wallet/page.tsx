@@ -13,9 +13,8 @@ import { Suspense } from "react";
 import { CreateEventDialog } from "@/features/event/components/create-event-dialog";
 import PageHeader from "@/components/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
-import { db } from "@/drizzle/db";
-import { desc, eq } from "drizzle-orm";
-import { eventsTable } from "@/drizzle/schema";
+import { getWalletEvents } from "@/features/event/db";
+import { formatDate } from "@/lib/formatters";
 
 export default async function WalletPage() {
   return (
@@ -60,24 +59,7 @@ async function SuspenseBoundary() {
 }
 
 async function Events({ userId }: { userId: string }) {
-  const events = await db.query.eventsTable.findMany({
-    columns: {
-      id: true,
-      title: true,
-      content: true,
-      explanation: true,
-      aura: true,
-      createdAt: true,
-    },
-    where: eq(eventsTable.userId, userId),
-    limit: 2,
-    orderBy: desc(eventsTable.createdAt),
-  });
-
-  const dtFormatter = Intl.DateTimeFormat(undefined, {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
+  const events = await getWalletEvents(userId);
 
   if (!events.length) {
     return (
@@ -92,9 +74,7 @@ async function Events({ userId }: { userId: string }) {
         <Card key={event.id} className="mb-3">
           <CardHeader>
             <CardTitle>{event.title}</CardTitle>
-            <CardDescription>
-              {dtFormatter.format(new Date(event.createdAt))}
-            </CardDescription>
+            <CardDescription>{formatDate(event.createdAt)}</CardDescription>
             <CardAction className="text-muted-foreground text-sm">
               {event.aura > 0 && "+"}
               {event.aura} aura

@@ -1,26 +1,10 @@
 import { Marquee } from "@/components/magicui/marquee";
 import { AuraMarqueeCard } from "@/components/aura-marquee-card";
-import { db } from "@/drizzle/db";
 import Hero from "@/components/hero";
+import { getHomepageEvents } from "@/features/event/db";
 
 export default async function Home() {
-  const events = await db.query.eventsTable.findMany({
-    columns: {
-      id: true,
-      content: true,
-      aura: true,
-    },
-    with: {
-      profile: {
-        columns: {
-          username: true,
-          imageUrl: true,
-        },
-      },
-    },
-    orderBy: (events, { asc }) => [asc(events.aura)],
-    limit: 10,
-  });
+  const events = await getHomepageEvents();
 
   const firstRow = events.slice(0, 5);
   const secondRow = events.slice(5);

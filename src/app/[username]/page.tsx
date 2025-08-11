@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AuraCard } from "@/components/aura-card";
 import { CreateSnitchDialog } from "@/features/snitch/components/create-snitch-dialog";
 import { getSnitchesByVictimId } from "@/features/snitch/db";
+import { formatDate } from "@/lib/formatters";
 
 export default async function ProfilePage({
   params,
@@ -99,9 +100,7 @@ async function Snitches({
             <Card key={id} className="mb-3">
               <CardHeader>
                 <CardTitle>@{culprit.username}</CardTitle>
-                <CardDescription>
-                  {createdAt.toLocaleDateString()}
-                </CardDescription>
+                <CardDescription>{formatDate(createdAt)}</CardDescription>
                 <CardAction className="text-muted-foreground text-sm">
                   {event.aura > 0 && "+"}
                   {event.aura} aura
