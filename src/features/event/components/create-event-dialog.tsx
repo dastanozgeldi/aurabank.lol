@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Loader2, Plus } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,7 +23,7 @@ export function CreateEventDialog() {
       <DialogTrigger asChild>
         <Button>
           <Plus className="h-5 w-5" />
-          Add Event
+          New Event
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
@@ -48,7 +48,6 @@ export function CreateEventDialog() {
             <Button disabled={loading}>
               {loading && <Loader2 className="h-5 w-5 animate-spin" />}
               Submit
-              {!loading && <ArrowRight className="h-4 w-4" />}
             </Button>
           </DialogFooter>
         </form>

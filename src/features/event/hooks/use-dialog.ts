@@ -1,10 +1,8 @@
-import { useRouter } from "next/navigation";
 import { useState, FormEvent } from "react";
 import { toast } from "sonner";
 import { createEventAction } from "../actions";
 
 export const useDialog = () => {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -16,14 +14,12 @@ export const useDialog = () => {
     try {
       setLoading(true);
       await createEventAction(formData);
-
       toast.success("Event was created.");
     } catch {
       toast.error("Failed to create the event.");
     } finally {
       setLoading(false);
       setOpen(false);
-      router.refresh();
     }
   }
 
