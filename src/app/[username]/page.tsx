@@ -112,7 +112,7 @@ async function Snitches({
         </ScrollArea>
       ) : (
         <div className="text-muted-foreground mt-3 flex h-[300px] items-center justify-center rounded-lg border text-center">
-          snitches to your name will be displayed here.
+          snitches will be displayed here.
         </div>
       )}
     </div>
