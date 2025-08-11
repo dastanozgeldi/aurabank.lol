@@ -7,8 +7,8 @@ export const links = [
     href: "/wallet",
     label: "wallet",
   },
-  {
-    href: "/premium",
-    label: "premium",
-  },
+  // {
+  //   href: "/premium",
+  //   label: "premium",
+  // },
 ];
