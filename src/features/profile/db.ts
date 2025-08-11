@@ -21,15 +21,6 @@ export async function getLeaderboard() {
     .orderBy(desc(sql`COALESCE(SUM(${eventsTable.aura}), 0)`));
 }
 
-export async function getProfile(userId: string) {
-  const [profile] = await db
-    .select()
-    .from(profilesTable)
-    .where(eq(profilesTable.userId, userId));
-
-  return profile;
-}
-
 export async function getProfileByUsername(username: string) {
   const [profile] = await db
     .select({
@@ -62,21 +53,6 @@ export async function getProfiles() {
     .groupBy(profilesTable.userId, profilesTable.username);
 }
 
-export async function getMyProfileUsername() {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
-  const profile = await db.query.profilesTable.findFirst({
-    where: eq(profilesTable.userId, userId),
-    columns: {
-      username: true,
-    },
-  });
-
-  if (!profile) throw new Error("Profile not found");
-  return profile;
-}
-
 export async function getMyWallet() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
@@ -97,16 +73,6 @@ export async function getMyWallet() {
 
   if (!profile) throw new Error("Profile not found");
   return profile;
-}
-
-export async function updateSettings(
-  userId: string,
-  { username }: { username: string },
-) {
-  await db
-    .update(profilesTable)
-    .set({ username })
-    .where(eq(profilesTable.userId, userId));
 }
 
 export async function insertProfile(data: typeof profilesTable.$inferInsert) {
