@@ -3,7 +3,6 @@
 ### Third Sprint
 
 - [x] polar webhook: insert to subscriptions table on subscription active event
-- [x] put /snitch in a paywall
 - [x] "formula for aura points"
 - [x] update [logo](public/logo.png) and favicon
 - [x] update [og image](public/og-image.png)
@@ -13,7 +12,7 @@
 - [x] clerk webhooks
 - [x] do something with clerk user metadata (removed completely)
 - [x] get rid of onboarding (replaced by clerk webhooks)
-- [ ] optimize get wallet query (limit events to 2)
+- [x] optimize get wallet query (limit events to 5)
 
 ### Second Sprint
 
